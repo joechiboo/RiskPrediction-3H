@@ -1,0 +1,55 @@
+# Data Configuration for 3H Disease Risk Prediction
+
+# Data Paths
+data_paths:
+  raw: './data/raw/'
+  processed: './data/processed/'
+  external: './data/external/'
+
+# Target Diseases
+targets:
+  - 'hypertension'      # 高血壓
+  - 'hyperglycemia'     # 高血糖
+  - 'dyslipidemia'      # 高血脂
+
+# Data Preprocessing
+preprocessing:
+  # Missing Value Handling
+  missing_values:
+    strategy: 'median'  # 'mean', 'median', 'mode', 'drop'
+    threshold: 0.5      # Drop columns with >50% missing values
+    
+  # Feature Scaling
+  scaling:
+    method: 'standard'  # 'standard', 'minmax', 'robust'
+    
+  # Feature Selection
+  feature_selection:
+    method: 'mutual_info'  # 'mutual_info', 'chi2', 'f_classif'
+    k_features: 20         # Select top k features
+    
+  # Data Splitting
+  train_test_split:
+    test_size: 0.2
+    validation_size: 0.2
+    random_state: 42
+    stratify: true
+
+# Feature Categories (adjust based on your actual data)
+feature_categories:
+  demographic:
+    - 'age'
+    - 'gender'
+    - 'bmi'
+    
+  clinical:
+    - 'systolic_bp'
+    - 'diastolic_bp'
+    - 'glucose_level'
+    - 'cholesterol'
+    
+  lifestyle:
+    - 'smoking'
+    - 'alcohol'
+    - 'exercise'
+    - 'diet_pattern'

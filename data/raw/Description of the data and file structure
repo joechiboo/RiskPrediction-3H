@@ -1,0 +1,21 @@
+The dataset is structured in a tabular format with the following columns:
+
+ID: Unique identifier for each participant
+Age: Age of the participant in years
+Sex: Gender of the participant (1.Male /2.Female)
+BMI: Body Mass Index of the participant
+SBP/DBP: Blood pressure readings of the participant (Systolic/Diastolic)
+FBG: Fasting blood glucose of participants of the participant
+TC: Cholesterol level of the participant
+Cr: Serum creatinine of the participants
+GFR: Glomerular filtration rate of participants
+UA: Measurement of serum uric acid level in the participant's blood
+Times: Number of medical follow-up visits for participants
+-hypertension:Participants with or without hypertension(1.No/2.Yes)
+-hyperglycemia:Participants with or without hyperglycemia(1.No/2.Yes)
+-dyslipidemia:Participants with or without dyslipidemia(1.No/2.Yes)
+Potential consumers can utilize this dataset to study the relationship between serum uric acid levels and various cardiovascular disease risk factors. They can analyze the impact of serum uric acid on hypertension, hyperglycemia, and dyslipidemia. The dataset can be used for research, statistical analysis, and generating insights into the association between serum uric acid and cardiovascular disease.
+
+The dataset does not contain any missing data. All columns have complete information for all participants.
+
+Data for this dataset were derived from a large community-based survey conducted every two years from 2010 to 2018 on cardiovascular disease risk factors, involving the measurement of demographic information in participants.
