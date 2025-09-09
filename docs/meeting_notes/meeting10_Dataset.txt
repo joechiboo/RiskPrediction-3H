@@ -1,0 +1,28 @@
+四個使用的資料集：
+1. Chronic Kidney Disease (CKD)
+🔗 https://archive.ics.uci.edu/ml/datasets/chronic_kidney_disease
+
+📌 資料筆數：400
+
+📌 類別：CKD / not CKD（不平衡比約 27:73）
+
+2. Fertility Diagnosis
+🔗 https://archive.ics.uci.edu/ml/datasets/Fertility
+
+📌 資料筆數：100
+
+📌 類別：N（正常）/ O（異常），不平衡比約 88:12
+
+3. Wisconsin Diagnostic Breast Cancer (WDBC)
+🔗 https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)
+
+📌 資料筆數：569
+
+📌 類別：Benign / Malignant（良性 / 惡性）
+
+4. BUPA Liver Disorders
+🔗 https://archive.ics.uci.edu/ml/datasets/liver+disorders
+
+📌 資料筆數：345
+
+📌 類別：有肝病 / 無肝病（依 ALP、SGPT 等指標判斷）
