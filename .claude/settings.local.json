@@ -11,7 +11,9 @@
       "Bash(ssh:*)",
       "Bash(git remote set-url:*)",
       "Bash(git rm:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(find:*)",
+      "Bash(git reset:*)"
     ],
     "deny": [],
     "ask": []

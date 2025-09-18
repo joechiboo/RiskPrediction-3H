@@ -78,6 +78,14 @@ RiskPrediction-3H/
 
 ---
 
+## 📊 資料集 (Dataset)
+本研究使用 **Health and Retirement Study (HRS)** 縱貫性調查資料：
+- **2022 HRS Core** (Wave 15) - 最新橫斷面資料
+- **2020 HRS Core** (Wave 14) - 用於縱貫分析
+
+⚠️ **重要**：由於資料檔案過大（~2.x GB），不包含在此儲存庫中。
+請參考 [HRS Data Download Guide](docs/HRS_data_download_guide.md) 取得資料。
+
 ## ⚙️ 技術細節 (Technical Details)
 - **資料前處理**：缺失值處理、特徵選擇、標準化
 - **模型比較**：
@@ -100,7 +108,17 @@ RiskPrediction-3H/
    pip install -r requirements.txt
    ```
 
-3. **執行程式**：
+3. **下載資料**：
+   - 參考 [HRS Data Download Guide](docs/HRS_data_download_guide.md)
+   - 下載 2022 和 2020 HRS Core 資料
+   - 將資料放置於 `data/HRS_data/` 目錄
+
+4. **驗證資料**：
+   ```bash
+   python scripts/verify_hrs_data.py
+   ```
+
+5. **執行程式**：
    ```bash
    python code/train_models.py
    ```
