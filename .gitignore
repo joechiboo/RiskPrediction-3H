@@ -34,6 +34,14 @@ data/raw/*.xlsx
 data/processed/*.csv
 data/processed/*.pkl
 
+# HRS Data (Large files not included in repo)
+data/HRS_data/
+data/raw/other/
+*.sas7bdat
+*.dta
+*.sav
+*.dat
+
 # Model files
 results/models/*.pkl
 results/models/*.joblib

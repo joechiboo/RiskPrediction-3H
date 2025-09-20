@@ -12,7 +12,13 @@
       "Bash(git remote set-url:*)",
       "Bash(git rm:*)",
       "Bash(cat:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(find:*)",
+      "Bash(git reset:*)",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(dir:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []
