@@ -17,7 +17,11 @@
       "Bash(python:*)",
       "Bash(pip install:*)",
       "Bash(dir:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "WebFetch(domain:hrsdata.isr.umich.edu)",
+      "WebSearch",
+      "Bash(git pull:*)"
     ],
     "deny": [],
     "ask": []
