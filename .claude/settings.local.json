@@ -12,6 +12,7 @@
       "Bash(git remote set-url:*)",
       "Bash(git rm:*)",
       "Bash(cat:*)",
+      "Bash(git pull:*)",
       "Bash(find:*)",
       "Bash(git reset:*)",
       "Bash(python:*)",
