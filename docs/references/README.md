@@ -120,9 +120,9 @@
 
 ---
 
-## 🔬 中國東南部社區調查數據集（2010-2018）
+## 🔬 中國東南部社區調查數據集（2010-2018）⚠️ **與我們未來研究使用相同 Dataset**
 
-### 8. Lin et al. (2024) - 尿酸控制與高血壓風險 🎯 **相同 Dataset**
+### 8. Lin et al. (2024) - 尿酸控制與高血壓風險 🎯 **相同 Dataset (SUA → 高血壓)**
 - **檔名**: `fendo-15-1343998.pdf`
 - **標題**: Poor serum uric acid control increases risk for developing hypertension: a retrospective cohort study in China
 - **作者**: Lin Z, Wu S, Chen Z, Luo W, Lin Z, Su H, Guo D
@@ -138,7 +138,7 @@
 
 ---
 
-### 9. Guo et al. (2025) - 尿酸與總膽固醇的劑量反應關係 🎯 **相同 Dataset**
+### 9. Guo et al. (2025) - 尿酸與總膽固醇的劑量反應關係 🎯 **相同 Dataset (SUA → 膽固醇)**
 - **檔名**: `guo-et-al-2025-the-dose-response-relationship-and-gender-differences-of-serum-uric-acid-with-total-cholesterol-a-cross.pdf`
 - **標題**: The dose-response relationship and gender differences of serum uric acid with total cholesterol: a cross-sectional study
 - **作者**: Leilei Guo, Lina Cai, Li Hu, Yueshan Zhou
