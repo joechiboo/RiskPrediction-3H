@@ -1,9 +1,25 @@
 # Meeting 16 簡報大綱 - Taiwan MTL (2025) 論文閱讀
 
 **論文標題**: Multitask learning multimodal network for chronic disease prediction
-**期刊**: Scientific Reports (2025年5月)
-**作者**: Hsinhan Tsai et al., National Taiwan University
+**期刊**: Scientific Reports (2025年5月) - **SCI 期刊** (IF ~4.0, Q2)
+**DOI**: https://doi.org/10.1038/s41598-025-99554-z
 **連結**: https://www.nature.com/articles/s41598-025-99554-z
+
+**作者群**:
+- **Hsinhan Tsai¹** (第一作者 & 通訊作者) - 台大資工系
+- **Ta-Wei Yang²** - 台大網路與多媒體研究所
+- **Tien-Yi Wu²** - 台大網路與多媒體研究所
+- **Ya-Chi Tu¹,³** - 台大資工系 & 林口長庚醫院檢驗醫學科
+- **Cheng-Lung Chen⁴** - 國家太空中心
+- **Cheng-Fu Chou¹,²** (通訊作者) - 台大資工系 & 網路與多媒體研究所
+
+**機構**:
+1. 國立台灣大學 資訊工程學系
+2. 國立台灣大學 網路與多媒體研究所
+3. 林口長庚紀念醫院 檢驗醫學科
+4. 國家太空中心
+
+**研究特色**: 跨領域合作（資工 × 醫學 × 太空科技）
 
 ---
 
@@ -11,10 +27,15 @@
 
 ### Slide 1: 封面
 - 論文標題：Multitask learning multimodal network for chronic disease prediction
-- 期刊：Scientific Reports (2025年5月)
-- 作者：Tsai et al., National Taiwan University
+- 期刊：Scientific Reports (2025年5月) - **SCI 期刊** (IF ~4.0)
+- **作者群**：
+  - **第一作者**: Hsinhan Tsai (台大資工系)
+  - **通訊作者**: Cheng-Fu Chou (台大資工系)
+  - **合作團隊**: 台大 × 長庚醫院 × 國家太空中心
 - 報告人：紀伯喬
 - 日期：Meeting 16
+
+**亮點**: 跨領域合作（資工 × 臨床醫學 × 太空科技）
 
 ---
 
