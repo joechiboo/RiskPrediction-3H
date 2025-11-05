@@ -28,7 +28,38 @@ https://blog.csdn.net/qq_32892383/article/details/104424358
 不可下載 | 資料篩選
 欄位轉換
 資料分割 | LR、RF、XGBoost | Accuracy、Precision、Recall、F1-Score、AUC | 預測糖尿病風險 |  |
-| 16 (sci) |  |  |  |  |  |  |  |  |
+| 16 (sci)
+**Taiwan MTL (2025)**
+多慢性病預測 | 同時預測多種慢性病並探索疾病共病關係 | ICD診斷代碼序列（10年）
+個人資訊（年齡、性別、居住地、職業） | 台灣HWDC
+健保資料庫
+555,124樣本
+不可下載 | ICD Word2Vec Embedding
+每2月選3個最常見疾病
+缺失值用<PAD>
+排除已患病者 | **Multi-Task Learning**:
+MAND-LR
+MAND-MLP
+MAND-LSTM
+MAND-MHSA
+**CTR Models**:
+FM、DCN | Log Loss
+AUC
+BAC
+Precision、Recall
+F1-Score
+FPR、FNR | 同時預測：
+糖尿病(22.4%)
+心臟病(24.6%)
+中風(8.7%)
+高血壓(39.0%) | **MTL架構**:
+Hard parameter sharing
+**可解釋性**:
+Attention scores分析
+Permutation feature importance
+**發現**:
+MTL參數量僅STL的1/4
+高血脂為關鍵風險因子 |
 
 ### 表格 2
 
