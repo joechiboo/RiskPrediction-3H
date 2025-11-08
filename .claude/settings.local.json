@@ -23,7 +23,8 @@
       "WebFetch(domain:hrsdata.isr.umich.edu)",
       "WebSearch",
       "Bash(git pull:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(git mv:*)"
     ],
     "deny": [],
     "ask": []

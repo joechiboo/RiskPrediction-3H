@@ -22,7 +22,24 @@
   - 方便快速比對與參考
 
 ### 🎯 下一步研究方向
+
+#### 📚 文獻閱讀（多疾病同時預測）
+- [ ] **DHDIP (2022)** - 高血壓與高血脂聯合預測
+  - 標題：DHDIP: An interpretable model for hypertension and hyperlipidemia prediction based on EMR data
+  - 期刊：Computer Methods and Programs in Biomedicine
+  - 連結：https://www.sciencedirect.com/science/article/abs/pii/S0169260722004692
+  - 重點：Multi-objective learning + 高可解釋性
+
+- [ ] **Multi-Disease Prediction (2010)** - 高血壓與高血脂共同風險因子
+  - 標題：Using data mining techniques for multi-diseases prediction modeling of hypertension and hyperlipidemia by common risk factors
+  - 期刊：Expert Systems with Applications
+  - 連結：https://www.sciencedirect.com/science/article/abs/pii/S0957417410012303
+  - 重點：兩階段方法（個別風險因子 → 共同風險因子）
+
+#### 🔬 技術研究與實作
 - [ ] 開始實作 Multi-Task Learning 框架（參考 Taiwan MTL）
 - [ ] 研究 Attention 機制在三高預測中的應用
 - [ ] 設計 HRS 資料的 Feature Embedding 策略
-- [ ] 準備下次 Meeting（Liu 2024 糖尿病預測論文）
+
+#### 📊 下次 Meeting 準備
+- [ ] 準備 Liu 2024 糖尿病預測論文報告（已有深度解析）

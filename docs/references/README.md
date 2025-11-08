@@ -107,9 +107,9 @@
 ### 高優先級
 - [x] Liu et al. (2024) - 已下載 ✅
 - [x] Hung et al. (2021) - 已下載 ✅
+- [x] Taiwan MTL (2025) - 已下載 ✅
 
 ### 多疾病同時預測（極度相關）
-- [ ] Taiwan MTL (2025) - 待下載 🎯 **強烈建議優先下載**
 - [ ] DHDIP (2022) - 待下載
 - [ ] Multi-Disease Prediction (2010) - 待下載
 

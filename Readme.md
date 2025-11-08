@@ -32,37 +32,65 @@ RiskPrediction-3H/
 │   ├── guidelines/                 # 🎓 論文格式規範
 │   │   ├── 國立臺北教育大學學位論文格式規範.pdf
 │   │   ├── 論文封面套用檔.docx
-│   │   ├── 學位論文上傳與提交2024.pdf
 │   │   └── 文獻閱讀報告格式檢查清單.md
 │   │
-│   ├── references/                 # 📖 參考文獻與論文
+│   ├── references/                 # 📖 參考文獻 PDF 與翻譯
 │   │   ├── s41598-025-99554-z.pdf  (Taiwan MTL 2025)
 │   │   ├── Taiwan_MTL_2025_中文翻譯.md
 │   │   ├── attention_mechanism_guide.md
-│   │   └── [其他重要論文 PDF]
+│   │   ├── diagnostics-15-00072.pdf (Liu 2024)
+│   │   └── README.md               (參考文獻清單索引)
 │   │
-│   ├── literature_notes/           # 📝 文獻筆記與研究備忘錄
-│   │   ├── Systematic_Literature_Review.md  (系統性文獻回顧)
-│   │   ├── AUC_memo.md             (AUC/ROC 評估指標)
-│   │   ├── confusion_matrix_metrics.md  (混淆矩陣指標)
-│   │   └── literature_review_memo.md  (文獻回顧方法論)
+│   ├── literature_notes/           # 📝 文獻筆記與深度解析
+│   │   ├── Systematic_Literature_Review.md  (16+ 篇論文)
+│   │   ├── Liu_2024_TCVGH_Diabetes_Prediction_深度解析.md
+│   │   ├── AUC_memo.md
+│   │   ├── confusion_matrix_metrics.md
+│   │   └── README.md               (文獻筆記索引)
 │   │
-│   ├── concepts/                   # 💡 方法論概念說明
+│   ├── concepts/                   # 💡 方法論概念
 │   │   ├── AUC-ROC_詳細說明.md
 │   │   ├── Cross_Validation.md
 │   │   ├── Feature_Selection_Marginal_Utility.md
-│   │   ├── Class_Imbalance_in_Medical_Prediction.md
-│   │   └── [其他概念文件]
+│   │   └── Class_Imbalance_in_Medical_Prediction.md
 │   │
-│   └── meeting_notes/              # 📅 歷次會議記錄與簡報
-│       ├── meeting01-15_*.pptm     (會議簡報)
-│       ├── meeting16_21138X006_紀伯喬_wVBA.pptm
-│       ├── meeting16_taiwan_mtl_presentation_outline_10min.md
-│       └── 2025-01-08_domain_knowledge_prep.md
+│   ├── datasets/                   # 🗂️ 資料集文檔 🆕
+│   │   ├── HRS/                    # HRS 資料集文檔
+│   │   │   ├── HRS_data_download_guide.md
+│   │   │   ├── HRS_Variables_Reference.md
+│   │   │   └── HRS_Biomarker_Analysis_Update.md
+│   │   ├── Synthea/                # Synthea 資料集文檔
+│   │   │   ├── Synthea_Dataset_Summary.md
+│   │   │   └── Synthea_to_SUA_Format_Conversion.md
+│   │   └── comparison/             # 資料集比較分析
+│   │       ├── HRS_vs_NHANES_Comparison.md
+│   │       ├── dataset_comparison_NHANES.md
+│   │       └── longitudinal_datasets_for_3H.md
+│   │
+│   ├── research_plans/             # 📋 研究計畫 🆕
+│   │   ├── domain_knowledge_research_plan.md
+│   │   ├── Q1_Prediction_Problem_Definition.md
+│   │   └── Q2_Taiwan_Literature_Review.md
+│   │
+│   ├── analysis/                   # 🔬 研究分析 🆕
+│   │   ├── Why_Multifactor_Prediction_Matters.md
+│   │   └── Why_Not_Extend_Lin_Guo_Studies.md
+│   │
+│   ├── meeting_notes/              # 📅 會議記錄
+│   │   ├── Meeting_Summary_1-16.md (總結文檔)
+│   │   ├── meeting01-16_*.pptx/pptm
+│   │   └── meeting16_taiwan_mtl_presentation_outline_10min.md
+│   │
+│   ├── research_journey.md         # 📖 研究歷程記錄
+│   ├── research_methodology_guide.md  # 🔍 研究方法論指南
+│   ├── work_journal.md             # 📝 工作日誌
+│   └── README.md                   # 文檔導航索引 🆕
 │
+├── scripts/                        # Python 腳本 (規劃中)
 ├── notebooks/                      # Jupyter Notebooks (規劃中)
 ├── results/                        # 實驗結果 (規劃中)
-├── config/                         # 設定檔 (規劃中)
+├── config/                         # 設定檔
+├── todo.md                         # 📋 任務追蹤
 ├── requirements.txt                # Python 套件需求
 └── README.md                       # 專案說明
 ```
@@ -75,12 +103,18 @@ RiskPrediction-3H/
 - **2020 HRS Core** (Wave 14) - 用於縱貫分析
 
 ⚠️ **重要**：由於資料檔案過大（~2.x GB），不包含在此儲存庫中。
-請參考 [Data_Access_Guide.md](docs/Data_Access_Guide.md) 取得資料。
+請參考 [Data_Access_Guide.md](docs/datasets/comparison/Data_Access_Guide.md) 取得資料。
 
-### 資料集比較文件
-- [HRS vs NHANES 比較](docs/HRS_vs_NHANES_Comparison.md)
-- [縱貫性資料集選擇](docs/longitudinal_datasets_for_3H.md)
-- [Synthea 合成資料摘要](docs/Synthea_Dataset_Summary.md)
+### 資料集文檔
+- **HRS 資料集**: [文檔索引](docs/datasets/HRS/)
+  - [HRS 資料下載指南](docs/datasets/HRS/HRS_data_download_guide.md)
+  - [HRS 變數參考](docs/datasets/HRS/HRS_Variables_Reference.md)
+- **Synthea 合成資料**: [文檔索引](docs/datasets/Synthea/)
+  - [Synthea 資料摘要](docs/datasets/Synthea/Synthea_Dataset_Summary.md)
+  - [Synthea 轉 SUA 格式](docs/datasets/Synthea/Synthea_to_SUA_Format_Conversion.md)
+- **資料集比較**: [文檔索引](docs/datasets/comparison/)
+  - [HRS vs NHANES 比較](docs/datasets/comparison/HRS_vs_NHANES_Comparison.md)
+  - [縱貫性資料集選擇](docs/datasets/comparison/longitudinal_datasets_for_3H.md)
 
 ---
 
@@ -141,11 +175,12 @@ cd RiskPrediction-3H
 
 ### 2. 瀏覽文件
 - 📖 閱讀 [系統性文獻回顧](docs/literature_notes/Systematic_Literature_Review.md)
+- 📅 查看 [Meeting 總結 (1-16)](docs/meeting_notes/Meeting_Summary_1-16.md)
 - 💡 了解 [研究方法論](docs/concepts/)
 - 📋 查看 [論文格式規範](docs/guidelines/)
 
 ### 3. 資料準備（進行中）
-- 下載 HRS 資料：參考 [Data_Access_Guide.md](docs/Data_Access_Guide.md)
+- 下載 HRS 資料：參考 [Data_Access_Guide.md](docs/datasets/comparison/Data_Access_Guide.md)
 - 測試用合成資料：`data/raw/1000_synthea_sample_data/`
 
 ### 4. 模型開發（規劃中）
