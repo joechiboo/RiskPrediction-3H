@@ -268,7 +268,7 @@
 
 ---
 
-### Meeting 16 - Taiwan MTL (2025) 論文深度解析
+### Meeting 16 - Taiwan MTL (2025) 論文深度解析與未來研究方向
 **檔案**:
 - [meeting16_21138X006_紀伯喬_wVBA.pptm](meeting16_21138X006_紀伯喬_wVBA.pptm)
 - [meeting16_taiwan_mtl_presentation_outline.md](meeting16_taiwan_mtl_presentation_outline.md)
@@ -283,6 +283,94 @@
 - **DOI**: [10.1038/s41598-025-99554-z](https://doi.org/10.1038/s41598-025-99554-z)
 - **PDF位置**: [docs/references/s41598-025-99554-z.pdf](../references/s41598-025-99554-z.pdf)
 - **中文翻譯**: [Taiwan_MTL_2025_中文翻譯.md](../references/Taiwan_MTL_2025_中文翻譯.md)
+
+**Meeting 討論重點**:
+
+#### 1. 多資料集交叉驗證策略 🔄
+**研究問題**: 使用不同資料集驗證結論的可靠性
+
+**現有資料集**:
+- **中國東南部資料集** (2010-2018)
+  - 樣本數: 25,744 筆
+  - 完整特徵: 包含 11 項血液檢驗（含尿酸）
+  - 優勢: 資料完整度高
+
+- **加拿大 HRS 資料集**
+  - 樣本數: 待確認
+  - 特徵限制: ⚠️ 缺失值較多、無尿酸數據
+  - 挑戰: 需評估預測準確度
+
+**待解決問題**:
+- 比較兩個資料集的預測性能差異
+- 評估缺少尿酸特徵對模型的影響
+- 確定哪個資料集更適合作為主要研究對象
+
+#### 2. Meeting 17 準備：相似論文搜尋 📚
+**搜尋目標**: 尋找與本研究高度相關的論文
+
+**論文篩選條件**:
+- **輸入特徵**: 血液檢驗數據（理想為 11 項指標）
+- **輸出目標**: 三高風險預測（高血壓、高血糖、高血脂）
+- **替代目標**: 心臟病 / 糖尿病預測
+- **相似度要求**: 高度相關，可作為直接比較基準
+
+**搜尋策略**:
+- 關鍵字: blood test + cardiovascular risk / diabetes / hypertension
+- 資料類型: 臨床血液檢驗數據
+- 方法: 機器學習預測模型
+
+#### 3. 實驗環境建置：Anaconda + Python 🐍
+**決策**: 開始實際模型開發
+
+**開發環境**:
+- Python 環境管理: Anaconda
+- 主要套件: scikit-learn, pandas, numpy
+
+**實作計畫**:
+1. 基礎模型實作（sklearn 支援）:
+   - Logistic Regression (LR)
+   - Random Forest (RF)
+   - XGBoost
+   - Decision Tree
+   - Support Vector Machine (SVM)
+
+2. 進階模型實作（需自行實現）:
+   - **Genetic Programming (GP)** ⚠️
+   - 挑戰: sklearn 無內建套件
+   - 解決方案: 研究 GP 套件或自行實現
+
+#### 4. 模型理論深入學習 📖
+**重要提醒**: 必須深入理解所有模型的原理
+
+**需熟悉的模型**:
+1. **Logistic Regression (LR)**
+   - 原理: 線性回歸 + Sigmoid 函數
+   - 可解釋性: 高（係數直接對應特徵重要性）
+
+2. **Random Forest (RF)**
+   - 原理: 集成學習（Bagging + 決策樹）
+   - 優勢: 減少過擬合、特徵重要性分析
+
+3. **XGBoost**
+   - 原理: 梯度提升樹（Gradient Boosting）
+   - 優勢: 效能卓越、正則化、處理缺失值
+
+4. **Decision Tree**
+   - 原理: 遞迴分割（CART、ID3、C4.5）
+   - 優勢: 高度可解釋
+
+5. **Support Vector Machine (SVM)**
+   - 原理: 最大間隔分類器 + 核函數
+   - 優勢: 非線性決策邊界
+
+6. **Genetic Programming (GP)**
+   - 原理: 演化計算 + 符號回歸
+   - 優勢: 自動特徵工程、可解釋性
+
+**學習重點**:
+- 理解數學原理與推導
+- 掌握超參數調優策略
+- 理解模型優缺點與適用場景
 
 **簡報架構**（10分鐘精簡版）:
 

@@ -1,0 +1,19 @@
+{
+  "dataset_name": "SUA_CVDs_risk_factors",
+  "total_samples": 25744,
+  "total_features": 15,
+  "blood_test_columns": [
+    "FBG",
+    "TC",
+    "Cr",
+    "UA",
+    "GFR"
+  ],
+  "target_columns": [
+    "hypertension",
+    "hyperglycemia",
+    "dyslipidemia"
+  ],
+  "completeness_pct": 100.0,
+  "analysis_date": "2025-11-11"
+}
