@@ -142,7 +142,7 @@
 
 **詳細文檔**：
 - [深度解析](../literature_notes/Liu_2024_TCVGH_Diabetes_Prediction_深度解析.md)
-- [演講稿 10頁](../literature_notes/Liu_2024_演講稿_10頁.md)
+- 簡報檔：meeting15_21138X006_紀伯喬_wVBA.pptm (已報告完成)
 
 ---
 

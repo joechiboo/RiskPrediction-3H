@@ -71,8 +71,9 @@ docs/
 
 ### 深度解析
 - [Liu 2024 台中榮總糖尿病預測深度解析](literature_notes/Liu_2024_TCVGH_Diabetes_Prediction_深度解析.md)
-- [Liu 2024 演講稿 10 頁](literature_notes/Liu_2024_演講稿_10頁.md)
-- [Liu 2024 演講稿精簡版](literature_notes/Liu_2024_演講稿_10頁_精簡版.md)
+- [文獻總覽索引](literature_notes/Literature_Master_Index.md) ⭐ 新增
+- [Meeting 15-16 論文總結](literature_notes/Meeting_15-16_Papers_Summary.md) ⭐ 新增
+- [過去 Meeting 論文總結](literature_notes/Past_Meetings_Papers_Summary.md) ⭐ 新增
 
 ### 研究備忘錄
 - [AUC 備忘錄](literature_notes/AUC_memo.md)
