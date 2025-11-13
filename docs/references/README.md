@@ -31,7 +31,7 @@
 ### 🎯 多疾病同時預測論文（Multi-Disease / Multi-Task Learning）
 
 #### 3. Taiwan MTL (2025) - 台灣多任務學習預測慢性病 ⭐ 極度相關
-- **檔名**: （待下載）
+- **檔名**: `s41598-025-99554-z.pdf`
 - **標題**: Multitask learning multimodal network for chronic disease prediction
 - **期刊**: Scientific Reports (2025年5月)
 - **連結**: https://www.nature.com/articles/s41598-025-99554-z
@@ -105,16 +105,16 @@
 ## 下載狀態
 
 ### 高優先級
-- [x] Liu et al. (2024) - 已下載 ✅
+- [x] meeting15 Liu et al. (2024) - 已下載 ✅
 - [x] Hung et al. (2021) - 已下載 ✅
-- [x] Taiwan MTL (2025) - 已下載 ✅
+- [x] meeting16 Taiwan MTL (2025) - 已下載 ✅
+- [x] meeting17 Dual Framework (2025) - 已下載 ✅
 
 ### 多疾病同時預測（極度相關）
 - [ ] DHDIP (2022) - 待下載
 - [ ] Multi-Disease Prediction (2010) - 待下載
 
 ### 中優先級
-- [ ] Dual Framework (2025) - 待下載
 - [ ] Chen & Huang (2023) - 待下載
 
 
