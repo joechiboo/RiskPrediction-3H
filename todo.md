@@ -77,9 +77,54 @@
   - 查看「這些論文引用」的經典研究
 
 #### 🔬 技術研究與實作
-- [ ] 開始實作 Multi-Task Learning 框架（參考 Taiwan MTL）
-- [ ] 研究 Attention 機制在三高預測中的應用
-- [ ] 設計 HRS 資料的 Feature Embedding 策略
+
+**已完成** (2025-11-19):
+- [x] ✅ **03_ModelBuilding.ipynb** - LR, RF, MTL 模型建立
+  - 發現並修復嚴重 bug（資料錯位導致 AUC=0.5）
+  - 修復後：高血糖 AUC 0.507→0.929 (+83%), 高血脂 AUC 0.567→0.888 (+57%)
+  - 實作 MTL (MultiOutputClassifier, ClassifierChain)
+  - 處理資料不平衡 (class_weight='balanced', SMOTE)
+  - 最佳模型：MTL LR (balanced) - AUC >0.88 for all diseases
+
+- [x] ✅ **04_XGBoost.ipynb** - XGBoost 進階模型
+  - 單任務 XGBoost with scale_pos_weight
+  - MTL XGBoost
+  - 與 MTL LR 比較：F1 提升 9-39%
+  - 特徵重要性：SBP (收縮壓) 最重要 (34.6%)
+
+**明天計畫** (2025-11-20, 可跑到 19:00):
+- [ ] 🔥 **05_NeuralNetworks.ipynb** - ANN (淺層神經網路)
+  - 1-2 隱藏層
+  - class_weight 處理不平衡
+  - 與 XGBoost 比較
+  - 預計時間：30-40 分鐘
+
+- [ ] 🔥 **06_SVM.ipynb** - Support Vector Machine
+  - RBF kernel
+  - class_weight='balanced'
+  - 可能較慢（1-2 小時）
+  - 預計時間：1-2 小時
+
+- [ ] 📊 **07_GeneticProgramming.ipynb** (時間允許的話)
+  - 實驗性質
+  - 演化式特徵選擇
+  - 預計時間：1 小時
+
+**優先順序**:
+1. ANN（快速，30 分鐘）
+2. SVM（慢，1-2 小時）
+3. GP（選做，1 小時）
+
+**時間規劃**:
+- 14:00-14:40: ANN (40 分鐘)
+- 14:40-16:40: SVM (2 小時)
+- 16:40-17:40: GP (1 小時，如果時間夠)
+- 17:40-19:00: 總結與文檔整理
+
+**今天 19:00 後**: 鋼琴課 🎹
+
+---
 
 #### 📊 下次 Meeting 準備
 - [ ] 準備 Liu 2024 糖尿病預測論文報告（已有深度解析）
+- [ ] 整理 03-07 實驗結果總結（模型比較表）
