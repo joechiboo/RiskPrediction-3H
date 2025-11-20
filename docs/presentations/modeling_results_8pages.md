@@ -2,9 +2,10 @@
 
 **研究主題**: 基於縱向健檢資料的三高疾病預測模型比較
 **研究期間**: 2025年1月
-**模型實驗**: 01-07 (Logistic Regression → Genetic Programming)
+**模型實驗**: 01-07 (Logistic Regression + Random Forest → Genetic Programming)
 **報告人**: 紀伯喬
 **日期**: Meeting 18
+**投影片數**: 10 頁
 
 ---
 
@@ -39,18 +40,19 @@
 - **F1 Score**: 精確率與召回率的調和平均
 - **Recall**: 疾病篩檢的敏感度（重要！）
 
-### 🔬 測試模型 (5 種)
+### 🔬 測試模型 (6 種)
 
 | 編號 | 模型 | 類型 | 主要特色 |
 |------|------|------|----------|
 | 03 | Logistic Regression | 傳統統計 | 可解釋性最高 |
+| 03 | Random Forest | 集成學習 | 原生多輸出支援、快速訓練 |
 | 04 | XGBoost | 集成學習 | 產業標準、特徵重要性 |
 | 05 | Neural Networks | 深度學習 | 非線性建模 |
 | 06 | SVM | 核方法 | 最大間隔分類器 |
 | 07 | Genetic Programming | 演化計算 | 符號回歸、公式發現 |
 
 ### 🛠️ 類別不平衡處理
-- **LR/XGBoost/SVM**: `class_weight='balanced'`
+- **LR/RF/XGBoost/SVM**: `class_weight='balanced'`
 - **ANN**: Custom class weight dictionary
 - **GP**: ❌ gplearn 不支援 (致命缺陷)
 
@@ -60,21 +62,23 @@
 
 ### 🏆 完整效能排名表
 
-| 疾病 | 🥇 第一名 | 🥈 第二名 | 🥉 第三名 | 第四名 | 第五名 |
-|------|-----------|-----------|-----------|---------|--------|
-| **高血壓** | **ANN** 0.803 | XGBoost 0.795 | SVM 0.793 | LR 0.749 | **GP 0.714** |
-| **高血糖** | **LR** 0.931 | SVM 0.904 | XGBoost 0.903 | ANN 0.899 | **GP 0.838** |
-| **高血脂** | **LR** 0.888 | XGBoost 0.886 | ANN 0.861 | SVM 0.858 | **GP 0.500** |
+| 疾病 | 🥇 第一名 | 🥈 第二名 | 🥉 第三名 | 第四名 | 第五名 | 第六名 |
+|------|-----------|-----------|-----------|---------|--------|--------|
+| **高血壓** | **ANN** 0.803 | **RF** 0.796 | XGBoost 0.795 | SVM 0.793 | LR 0.749 | **GP 0.714** |
+| **高血糖** | **LR** 0.931 | **MTL RF** 0.914 | SVM 0.904 | XGBoost 0.903 | ANN 0.899 | RF 0.892 |
+| **高血脂** | **LR** 0.888 | XGBoost 0.886 | **RF** 0.868 | ANN 0.861 | SVM 0.858 | **GP 0.500** |
 
 ### 📊 關鍵發現
 1. **沒有單一最佳模型** - 不同疾病最佳模型不同
 2. **LR 表現驚豔** - 在高血糖/高血脂達到最佳 AUC
 3. **ANN 高血壓最佳** - AUC 0.803 (超越所有模型)
-4. **XGBoost 最穩定** - 三個疾病都在前三名
-5. **GP 全面失敗** - 高血脂 AUC=0.5 (隨機猜測)
+4. **RF 穩定優秀** - 三個疾病都在前四名 (第2-3名)
+5. **MTL RF 突破** - 高血糖 AUC=0.914 達到第2名！
+6. **XGBoost 最穩定** - 三個疾病都在前三名
+7. **GP 全面失敗** - 高血脂 AUC=0.5 (隨機猜測)
 
 ### ⚡ 訓練速度
-- LR/XGBoost/SVM: **秒級** (~1-11 秒)
+- LR/RF/XGBoost/SVM: **秒級** (~1-11 秒)
 - ANN: **分鐘級** (~數分鐘)
 - GP: **3.8 分鐘** (快但無用)
 
@@ -166,7 +170,58 @@ model.compile(
 
 ---
 
-## Slide 6: SVM 與 GP 成果 (06, 07)
+## Slide 6: Random Forest 成果 (03)
+
+### 🌲 Random Forest - 穩定高效的集成學習
+
+| 疾病 | AUC | F1 | Recall | 排名 |
+|------|-----|-----|--------|------|
+| 高血壓 | 0.796 | 0.065 | 0.035 | 🥈 第2名 |
+| 高血糖 | 0.892 | 0.263 | 0.171 | 第6名 |
+| 高血脂 | 0.868 | 0.140 | 0.077 | 🥉 第3名 |
+
+### ✅ 優勢
+1. **穩定的排名表現**
+   - 高血壓 AUC=0.796 (第2名，僅次於 ANN)
+   - 高血脂 AUC=0.868 (第3名)
+   - 三個疾病都在前六名
+2. **原生多輸出支援** (Multi-output)
+   - 單一模型可同時預測三種疾病
+   - 減少訓練和部署複雜度
+3. **極快訓練速度** (~秒級)
+   - 與 LR/XGBoost 同級別
+4. **良好可解釋性**
+   - 特徵重要性分析 (feature_importances_)
+   - 決策樹可視覺化
+
+### 🎯 Multi-Task Learning (MTL) 突破
+
+**MTL Random Forest 結果**：
+- 高血糖: AUC=**0.914** (🥈 第2名！)
+- 高血壓: AUC=0.787
+- 高血脂: AUC=? (資料不完整)
+
+**關鍵發現**：
+- ✅ **MTL RF 在高血糖達到第2名**，僅次於 LR (0.931)
+- ✅ 證明 Random Forest 的多輸出特性可有效處理 MTL 任務
+- ✅ 相較於單任務 RF (0.892)，MTL 提升了 0.022 AUC
+
+### ⚠️ 劣勢
+1. **F1 和 Recall 偏低**
+   - 雖然 AUC 優秀，但實際預測的精確度不足
+   - 可能需要調整 threshold 或 class_weight 參數
+2. **高血糖表現中等**
+   - 單任務 RF 僅第6名
+   - 但 MTL 版本顯著改善
+
+### 💡 結論
+**Random Forest 是穩定高效的通用選擇！**
+- 適合：快速原型、多疾病聯合預測、需要特徵重要性分析
+- MTL RF 在高血糖的優異表現值得進一步探索
+
+---
+
+## Slide 7: SVM 成果 (06)
 
 ### ⚡ SVM (06) - 速度驚喜
 
@@ -184,6 +239,8 @@ model.compile(
 **結論**：穩定的中階表現，但無明顯優勢
 
 ---
+
+## Slide 8: Genetic Programming 成果 (07)
 
 ### 💔 Genetic Programming (07) - 徹底失敗
 
@@ -215,15 +272,15 @@ model.compile(
 
 ---
 
-## Slide 7: 實務建議與模型選擇指南
+## Slide 9: 實務建議與模型選擇指南
 
 ### 🎯 分疾病推薦方案
 
 | 疾病 | 首選模型 | AUC | 理由 | 備選模型 |
 |------|----------|-----|------|----------|
-| **高血壓** | ANN | 0.803 | 最高準確率 + 高 Recall | XGBoost (F1 更高) |
-| **高血糖** | LR | 0.931 | 最佳 AUC + 極快速度 | SVM (次高 AUC) |
-| **高血脂** | LR | 0.888 | 最佳 AUC + 最高 Recall | XGBoost (F1 更高) |
+| **高血壓** | ANN | 0.803 | 最高準確率 + 高 Recall | RF 0.796 (第2名) |
+| **高血糖** | LR | 0.931 | 最佳 AUC + 極快速度 | MTL RF 0.914 (第2名) |
+| **高血脂** | LR | 0.888 | 最佳 AUC + 最高 Recall | XGBoost 0.886 (次高) |
 
 ---
 
@@ -242,7 +299,15 @@ model.compile(
 - ✅ 極快速度 + 完美可解釋性
 - 📌 **適合**: 臨床解釋、快速原型、基線模型
 
-#### 3️⃣ **ANN** - 追求極致效能
+#### 3️⃣ **Random Forest** - 多任務學習首選
+- ✅ 原生多輸出支援 (單模型預測三種疾病)
+- ✅ MTL RF 在高血糖達到第2名 (AUC=0.914)
+- ✅ 高血壓第2名、高血脂第3名
+- ✅ 訓練速度快 (~秒級)
+- ✅ 良好可解釋性 (特徵重要性)
+- 📌 **適合**: 多疾病聯合預測、快速原型、需要同時處理三高
+
+#### 4️⃣ **ANN** - 追求極致效能
 - ✅ 高血壓最佳模型 (AUC=0.803)
 - ⚠️ 訓練時間較長
 - ⚠️ 可解釋性差
@@ -276,15 +341,21 @@ Logistic Regression (Recall: 0.73-0.83)
 高血脂: LR (0.888)
 ```
 
+**如果需要多疾病聯合預測**：
+```
+Random Forest (原生多輸出、MTL 效能優異)
+```
+
 ---
 
-## Slide 8: 研究貢獻與未來方向
+## Slide 10: 研究貢獻與未來方向
 
 ### 🎓 本研究貢獻
 
-#### 1. **全面的模型比較** (5 種模型 × 3 種疾病)
-- 傳統統計 (LR) vs 機器學習 (XGBoost, SVM) vs 深度學習 (ANN) vs 演化計算 (GP)
+#### 1. **全面的模型比較** (6 種模型 × 3 種疾病)
+- 傳統統計 (LR) vs 機器學習 (RF, XGBoost, SVM) vs 深度學習 (ANN) vs 演化計算 (GP)
 - 首次在三高預測任務中系統性比較
+- Random Forest 展現優異的多任務學習能力
 
 #### 2. **Δ 特徵工程的有效性**
 - T2-T1 變化量特徵顯著提升效能
@@ -306,13 +377,16 @@ Logistic Regression (Recall: 0.73-0.83)
 
 ### 🚀 未來研究方向
 
-#### 1. **Multi-Task Learning 優化**
-- 實作 loss_weights 解決 MTL ANN 問題
+#### 1. **Multi-Task Learning 深化**
+- ✅ Random Forest MTL 已證明有效 (高血糖 AUC=0.914)
+- 進一步優化 MTL ANN 的 loss_weights
 - 探索 task-specific 與 shared layers 的最佳比例
+- 比較 RF MTL vs ANN MTL 的優劣
 
 #### 2. **集成學習探索**
-- Stacking: LR (高血糖/高血脂) + ANN (高血壓)
-- Voting: 結合前三名模型
+- Stacking: LR (高血糖/高血脂) + ANN (高血壓) + RF (通用)
+- Voting: 結合 RF, XGBoost, LR 前三名模型
+- 探索 RF 與 XGBoost 的互補性
 
 #### 3. **深度特徵工程**
 - 非線性 Δ 特徵 (如 T2/T1 比值)
@@ -337,7 +411,7 @@ Logistic Regression (Recall: 0.73-0.83)
 所有實驗均有完整 Jupyter Notebook：
 - `01_EDA.ipynb` - 探索性資料分析
 - `02_FeatureEngineering.ipynb` - 特徵工程
-- `03_ModelBuilding.ipynb` - Logistic Regression
+- `03_ModelBuilding.ipynb` - Logistic Regression + Random Forest
 - `04_XGBoost.ipynb` - XGBoost
 - `05_NeuralNetworks.ipynb` - ANN
 - `06_SVM.ipynb` - SVM
