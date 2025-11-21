@@ -24,7 +24,11 @@
       "WebSearch",
       "Bash(git pull:*)",
       "Bash(findstr:*)",
-      "Bash(git mv:*)"
+      "Bash(git mv:*)",
+      "Bash(git checkout:*)",
+      "Bash(git restore:*)",
+      "Bash(del:*)",
+      "Bash(iconv:*)"
     ],
     "deny": [],
     "ask": []
