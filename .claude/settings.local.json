@@ -28,7 +28,10 @@
       "Bash(git checkout:*)",
       "Bash(git restore:*)",
       "Bash(del:*)",
-      "Bash(iconv:*)"
+      "Bash(iconv:*)",
+      "Bash(if not exist \"results\\mtl_efficiency\" mkdir \"results\\mtl_efficiency\")",
+      "Bash(jupyter nbconvert:*)",
+      "Bash(where:*)"
     ],
     "deny": [],
     "ask": []

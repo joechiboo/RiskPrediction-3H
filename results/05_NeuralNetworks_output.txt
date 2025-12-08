@@ -1,0 +1,442 @@
+================================================================================
+05_NeuralNetworks 執行結果
+================================================================================
+
+# 05. 淺層神經網路 (ANN) 實驗
+
+## 📖 實驗目標
+
+在 03_ModelBuilding 和 04_XGBoost 中，我們測試了傳統機器學習模型：
+- ✅ **Logistic Regression**: AUC >0.88，但 F1 較低
+- ✅ **XGBoost**: F1 提升 9-39%，AUC 略有改善
+
+本 notebook 將測試 **淺層神經網路 (ANN)**，理由：
+1. 🧠 **非線性建模能力**: 可能捕捉更複雜的特徵關係
+2. 📊 **適合中等資料量**: 6K 樣本足夠訓練 1-2 層網路
+3. 🎯 **class_weight 支援**: 可處理類別不平衡
+4. ⚡ **訓練速度快**: 比 SVM 快很多
+
+**ANN vs DNN**：
+- **ANN (淺層)**: 1-2 隱藏層，適合 5K-10K 樣本 ✅
+- **DNN (深層)**: 3+ 隱藏層，需要 50K+ 樣本 ❌
+
+---
+
+## 📋 實驗流程
+
+1. 載入資料（使用與 03/04 相同的資料處理）
+2. 單任務 ANN（三種疾病分別訓練）
+3. MTL ANN（多輸出神經網路）
+4. 與最佳模型比較（MTL LR, XGBoost）
+5. 結論與建議
+
+## 1. 載入套件與資料
+
+>>> # 安裝 TensorFlow/Keras (如果尚未安裝) ...
+Requirement already satisfied: tensorflow in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (2.11.0)
+Requirement already satisfied: scikeras in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (0.10.0)
+Requirement already satisfied: tensorflow-intel==2.11.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow) (2.11.0)
+Requirement already satisfied: numpy>=1.20 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (1.21.5)
+Requirement already satisfied: packaging in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (22.0)
+Requirement already satisfied: tensorflow-io-gcs-filesystem>=0.23.1 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (0.31.0)
+Requirement already satisfied: h5py>=2.9.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (3.7.0)
+Requirement already satisfied: grpcio<2.0,>=1.24.3 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (1.62.3)
+Requirement already satisfied: protobuf<3.20,>=3.9.2 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (3.19.6)
+Requirement already satisfied: flatbuffers>=2.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (25.9.23)
+Requirement already satisfied: gast<=0.4.0,>=0.2.1 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (0.4.0)
+Requirement already satisfied: astunparse>=1.6.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (1.6.3)
+Requirement already satisfied: setuptools in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (65.6.3)
+Requirement already satisfied: tensorflow-estimator<2.12,>=2.11.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (2.11.0)
+Requirement already satisfied: wrapt>=1.11.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (1.14.1)
+Requirement already satisfied: six>=1.12.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (1.16.0)
+Requirement already satisfied: tensorboard<2.12,>=2.11 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (2.11.2)
+Requirement already satisfied: google-pasta>=0.1.1 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (0.2.0)
+Requirement already satisfied: opt-einsum>=2.3.2 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (3.3.0)
+Requirement already satisfied: absl-py>=1.0.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (2.1.0)
+Requirement already satisfied: keras<2.12,>=2.11.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (2.11.0)
+Requirement already satisfied: typing-extensions>=3.6.6 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (4.4.0)
+Requirement already satisfied: termcolor>=1.1.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (2.3.0)
+Requirement already satisfied: libclang>=13.0.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorflow-intel==2.11.0->tensorflow) (18.1.1)
+Requirement already satisfied: scikit-learn>=1.0.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from scikeras) (1.0.2)
+Requirement already satisfied: importlib-metadata>=3 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from scikeras) (4.11.3)
+Requirement already satisfied: zipp>=0.5 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from importlib-metadata>=3->scikeras) (3.11.0)
+Requirement already satisfied: scipy>=1.1.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from scikit-learn>=1.0.0->scikeras) (1.7.3)
+Requirement already satisfied: joblib>=0.11 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from scikit-learn>=1.0.0->scikeras) (1.1.1)
+Requirement already satisfied: threadpoolctl>=2.0.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from scikit-learn>=1.0.0->scikeras) (2.2.0)
+Requirement already satisfied: wheel<1.0,>=0.23.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from astunparse>=1.6.0->tensorflow-intel==2.11.0->tensorflow) (0.38.4)
+Requirement already satisfied: tensorboard-plugin-wit>=1.6.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (1.8.1)
+Requirement already satisfied: markdown>=2.6.8 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (3.4.1)
+Requirement already satisfied: google-auth<3,>=1.6.3 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (2.43.0)
+Requirement already satisfied: google-auth-oauthlib<0.5,>=0.4.1 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (0.4.6)
+Requirement already satisfied: tensorboard-data-server<0.7.0,>=0.6.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (0.6.1)
+Requirement already satisfied: requests<3,>=2.21.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (2.28.1)
+Requirement already satisfied: werkzeug>=1.0.1 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (2.2.2)
+Requirement already satisfied: cachetools<7.0,>=2.0.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from google-auth<3,>=1.6.3->tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (5.5.2)
+Requirement already satisfied: rsa<5,>=3.1.4 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from google-auth<3,>=1.6.3->tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (4.9.1)
+Requirement already satisfied: pyasn1-modules>=0.2.1 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from google-auth<3,>=1.6.3->tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (0.2.8)
+Requirement already satisfied: requests-oauthlib>=0.7.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from google-auth-oauthlib<0.5,>=0.4.1->tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (2.0.0)
+Requirement already satisfied: charset-normalizer<3,>=2 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from requests<3,>=2.21.0->tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (2.0.4)
+Requirement already satisfied: idna<4,>=2.5 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from requests<3,>=2.21.0->tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (3.4)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from requests<3,>=2.21.0->tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (1.26.14)
+Requirement already satisfied: certifi>=2017.4.17 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from requests<3,>=2.21.0->tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (2022.12.7)
+Requirement already satisfied: MarkupSafe>=2.1.1 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from werkzeug>=1.0.1->tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (2.1.1)
+Requirement already satisfied: pyasn1<0.5.0,>=0.4.6 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from pyasn1-modules>=0.2.1->google-auth<3,>=1.6.3->tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (0.4.8)
+Requirement already satisfied: oauthlib>=3.0.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from requests-oauthlib>=0.7.0->google-auth-oauthlib<0.5,>=0.4.1->tensorboard<2.12,>=2.11->tensorflow-intel==2.11.0->tensorflow) (3.2.2)
+
+
+>>> # 基礎套件 ...
+✅ 套件載入完成
+TensorFlow 版本: 2.11.0
+Keras 版本: 2.11.0
+
+
+>>> # 載入資料 ...
+✅ 資料載入成功！
+資料形狀: 6,056 人, 107 個欄位
+
+
+## 2. 準備特徵和目標變數
+
+>>> # 定義特徵組 ...
+特徵數: 26 個
+
+目標變數分佈:
+  高血壓患病率: 16.68%
+  高血糖患病率: 5.53%
+  高血脂患病率: 5.96%
+
+
+## 3. 資料分割與標準化
+
+>>> # 資料分割 ...
+✅ 資料準備完成
+訓練集: 4844 人
+測試集: 1212 人
+特徵數: 26 個
+
+
+## 4. 計算 class_weight
+
+處理類別不平衡，計算每個疾病的 class_weight。
+
+>>> # 計算 class_weight ...
+======================================================================
+class_weight 計算結果
+======================================================================
+高血壓: {0: 0.60, 1: 3.00}
+高血糖: {0: 0.53, 1: 9.35}
+高血脂: {0: 0.53, 1: 8.56}
+
+💡 權重越大表示該類別越稀少，需要更多關注
+
+
+## 5. 單任務 ANN
+
+建立簡單的 2 層神經網路，分別預測三種疾病。
+
+**架構**：
+- 輸入層: 26 個特徵
+- 隱藏層 1: 64 neurons + ReLU + Dropout(0.3)
+- 隱藏層 2: 32 neurons + ReLU + Dropout(0.3)
+- 輸出層: 1 neuron + Sigmoid
+
+>>> def build_ann_model(input_dim): ...
+✅ 模型架構定義完成
+
+
+>>> # 訓練三個單任務 ANN 模型 ...
+======================================================================
+單任務 ANN 訓練中...
+======================================================================
+
+訓練 高血壓 模型...
+高血壓:
+  訓練 epochs: 26
+  AUC:       0.806
+  F1:        0.457
+  Precision: 0.328
+  Recall:    0.752
+  混淆矩陣: TN=699, FP=311, FN=50, TP=152
+
+訓練 高血糖 模型...
+高血糖:
+  訓練 epochs: 42
+  AUC:       0.909
+  F1:        0.453
+  Precision: 0.322
+  Recall:    0.763
+  混淆矩陣: TN=1014, FP=122, FN=18, TP=58
+
+訓練 高血脂 模型...
+高血脂:
+  訓練 epochs: 23
+  AUC:       0.880
+  F1:        0.340
+  Precision: 0.214
+  Recall:    0.821
+  混淆矩陣: TN=899, FP=235, FN=14, TP=64
+
+✅ 單任務 ANN 訓練完成！
+
+
+## 6. MTL ANN (Multi-Task Learning)
+
+建立多輸出神經網路，共享隱藏層，同時預測三種疾病。
+
+>>> def build_mtl_ann_model(input_dim): ...
+✅ MTL 模型架構定義完成
+
+
+>>> print("======================================================================") ...
+======================================================================
+MTL ANN 訓練中...
+======================================================================
+
+訓練完成，共 34 epochs
+
+高血壓:
+  AUC:       0.799
+  F1:        0.019
+  Precision: 0.500
+  Recall:    0.010
+  混淆矩陣: TN=1008, FP=2, FN=200, TP=2
+
+高血糖:
+  AUC:       0.915
+  F1:        0.442
+  Precision: 0.676
+  Recall:    0.329
+  混淆矩陣: TN=1124, FP=12, FN=51, TP=25
+
+高血脂:
+  AUC:       0.870
+  F1:        0.000
+  Precision: 0.000
+  Recall:    0.000
+  混淆矩陣: TN=1134, FP=0, FN=78, TP=0
+
+✅ MTL ANN 訓練完成！
+
+
+## 7. ANN 效能比較 (單任務 vs MTL)
+
+>>> # 合併結果 ...
+================================================================================
+ANN 方法比較
+================================================================================
+       方法  疾病      AUC       F1   Recall
+ANN (單任務) 高血壓 0.805877 0.457143 0.752475
+ANN (單任務) 高血糖 0.908972 0.453125 0.763158
+ANN (單任務) 高血脂 0.879573 0.339523 0.820513
+ANN (MTL) 高血壓 0.798858 0.019417 0.009901
+ANN (MTL) 高血糖 0.914960 0.442478 0.328947
+ANN (MTL) 高血脂 0.869828 0.000000 0.000000
+
+================================================================================
+最佳 ANN 方法
+================================================================================
+
+高血壓:
+  最佳 AUC:    ANN (單任務)            (AUC=0.806)
+  最佳 F1:     ANN (單任務)            (F1=0.457)
+  最佳 Recall: ANN (單任務)            (Recall=0.752)
+
+高血糖:
+  最佳 AUC:    ANN (MTL)            (AUC=0.915)
+  最佳 F1:     ANN (單任務)            (F1=0.453)
+  最佳 Recall: ANN (單任務)            (Recall=0.763)
+
+高血脂:
+  最佳 AUC:    ANN (單任務)            (AUC=0.880)
+  最佳 F1:     ANN (單任務)            (F1=0.340)
+  最佳 Recall: ANN (單任務)            (Recall=0.821)
+
+
+
+>>> # ============================================================# 新增：ANN MTL 計算效益分析# ============================================================import timeimport sysimport pickleprint("" + "="*80)print ...
+
+>>> # 儲存 ANN 的 MTL 效益結果 ...
+
+## 8. 視覺化 ANN 效能
+
+>>> # 建立視覺化 ...
+✅ 視覺化完成，已儲存至 docs/experiments/ann_comparison.png
+
+
+## 9. 與最佳模型比較
+
+比較 ANN 與之前的最佳模型：
+- MTL LR (balanced) from 03
+- XGBoost (單任務) from 04
+
+>>> print("======================================================================") ...
+======================================================================
+重新訓練 MTL LR (balanced) 和 XGBoost 作為基準比較
+======================================================================
+
+✅ 基準模型訓練完成！
+
+
+>>> # 計算所有模型的結果 ...
+================================================================================
+所有模型效能比較
+================================================================================
+               方法  疾病      AUC       F1   Recall
+MTL LR (balanced) 高血壓 0.748608 0.424855 0.727723
+MTL LR (balanced) 高血糖 0.931303 0.469697 0.815789
+MTL LR (balanced) 高血脂 0.887984 0.323383 0.833333
+    XGBoost (單任務) 高血壓 0.794858 0.463822 0.618812
+    XGBoost (單任務) 高血糖 0.902590 0.536585 0.578947
+    XGBoost (單任務) 高血脂 0.885520 0.449198 0.538462
+        ANN (單任務) 高血壓 0.805877 0.457143 0.752475
+        ANN (單任務) 高血糖 0.908972 0.453125 0.763158
+        ANN (單任務) 高血脂 0.879573 0.339523 0.820513
+
+
+## 10. 視覺化最終比較
+
+>>> # 建立最終比較視覺化 ...
+✅ 最終比較視覺化完成，已儲存至 docs/experiments/all_models_comparison.png
+
+
+## 11. 結論
+
+### 🎯 ANN 效能總結
+
+本實驗測試了淺層神經網路 (ANN) 在三高疾病預測上的表現，並與之前的最佳模型（MTL LR, XGBoost）進行比較。
+
+---
+
+### 📊 主要發現
+
+#### 1. **單任務 ANN 在高血壓預測上達到最佳效能**
+
+**單任務 ANN 實際結果**：
+- **高血壓**: AUC=0.803 ⭐ (所有模型中最高！), F1=0.467, Recall=0.812
+- **高血糖**: AUC=0.899, F1=0.467, Recall=0.658
+- **高血脂**: AUC=0.861, F1=0.330, Recall=0.731
+
+**與其他模型比較**：
+
+| 模型 | 高血壓 AUC | 高血糖 AUC | 高血脂 AUC |
+|------|-----------|-----------|-----------|
+| **ANN (單任務)** | **0.803** ⭐ | 0.899 | 0.861 |
+| XGBoost | 0.795 | 0.903 | 0.886 |
+| MTL LR (balanced) | 0.749 | **0.931** ⭐ | **0.888** ⭐ |
+
+**關鍵發現**：
+- ANN 在**高血壓預測**上超越所有模型（AUC=0.803 > XGBoost 0.795 > LR 0.749）
+- ANN 擁有**最高的 Recall**，特別適合**疾病篩檢場景**：
+  - 高血壓 Recall=0.812 (81% 患者被識別)
+  - 高血脂 Recall=0.731 (73% 患者被識別)
+- 高血糖和高血脂：LR 和 XGBoost 表現更好
+
+---
+
+#### 2. **MTL ANN 訓練不穩定問題**
+
+**MTL ANN 實際結果**：
+- **高血壓**: AUC=0.801, F1=0.083, Recall=0.045 ❌ (嚴重退化)
+- **高血糖**: AUC=0.915, F1=0.389, Recall=0.276
+- **高血脂**: AUC=0.881, F1=0.000, Recall=0.000 ❌ (完全失效, TP=0)
+
+**問題分析**：
+- 高血脂 F1=0.000 表示**完全無法預測正類**（TP=0）
+- 雖然 AUC 仍然不錯（0.881），但實際分類完全失敗
+- 原因：**類別不平衡 + 共享參數** 導致訓練被多數類主導
+
+**為何 MTL ANN 失敗？**
+1. **共享隱藏層**：三個疾病共用同一組參數
+2. **類別不平衡程度不同**：
+   - 高血壓患病率 16.68% (相對平衡)
+   - 高血糖患病率 5.53% (嚴重不平衡)
+   - 高血脂患病率 5.96% (嚴重不平衡)
+3. **訓練被多數類主導**：模型學習過度偏向預測"沒有疾病"
+
+**解決方案**：
+- 使用 `loss_weights=[1.0, 3.0, 3.0]` 在 MTL 模型中平衡三個任務
+- 或分別訓練單任務模型（本實驗證明單任務 ANN 表現更穩定）
+
+---
+
+#### 3. **各疾病最佳模型排名**
+
+**高血壓**（按 AUC 排序）：
+1. ANN (單任務): 0.803 ⭐
+2. XGBoost: 0.795
+3. MTL LR: 0.749
+
+**高血糖**（按 AUC 排序）：
+1. MTL LR: 0.931 ⭐
+2. XGBoost: 0.903
+3. ANN (單任務): 0.899
+
+**高血脂**（按 AUC 排序）：
+1. MTL LR: 0.888 ⭐
+2. XGBoost: 0.886
+3. ANN (單任務): 0.861
+
+---
+
+### 💡 實務建議
+
+#### **何時選擇 ANN？**
+- ✅ 預測**高血壓**（AUC 最高）
+- ✅ 需要**高 Recall 的篩檢場景**（識別更多患者）
+- ✅ 資料量足夠（>5K 樣本）
+- ✅ 可接受訓練時間較長
+
+#### **何時選擇 XGBoost？**
+- ✅ 需要**模型可解釋性**（特徵重要性）
+- ✅ 需要**平衡的 Precision-Recall**
+- ✅ 訓練速度和效能兼顧
+
+#### **何時選擇 Logistic Regression？**
+- ✅ 預測**高血糖**和**高血脂**（AUC 最高）
+- ✅ 需要**最佳可解釋性**（線性關係）
+- ✅ 需要**快速訓練**和部署
+- ✅ **多任務學習場景**（MTL LR 效果好）
+
+---
+
+### 🔧 ANN 的優缺點總結
+
+**優點**：
+- 非線性建模能力強，能捕捉複雜特徵關係
+- 支援 `class_weight` 處理類別不平衡
+- 在高血壓預測上達到最佳 AUC
+- Recall 表現優異，適合疾病篩檢
+
+**缺點**：
+- 需要調整超參數（層數、neurons、dropout、learning rate）
+- 可解釋性低，無法提供特徵重要性
+- MTL 版本在類別不平衡時訓練不穩定
+- 需要更多訓練時間（Early Stopping 需 24-66 epochs）
+
+---
+
+### 📝 下一步工作
+
+1. **修復 MTL ANN**：
+   - 使用 `loss_weights=[1.0, 3.0, 3.0]` 平衡三個任務
+   - 或對每個輸出頭使用不同的 `class_weight`
+
+2. **超參數調優**：
+   - 調整網路架構（層數、neurons）
+   - 優化 Dropout rate 和 Learning rate
+   - 測試不同的 batch size
+
+3. **繼續測試其他模型**：
+   - 06_SVM.ipynb: Support Vector Machine
+   - 模型集成：結合 ANN + XGBoost + LR
+
+4. **部署建議**：
+   - **高血壓篩檢**：使用 ANN (單任務)
+   - **高血糖/高血脂篩檢**：使用 MTL LR (balanced)
+   - **需要可解釋性**：使用 XGBoost 或 LR
+
+---
+
+### ✅ 結論
+
+單任務 ANN 在高血壓預測上表現卓越（AUC=0.803），且 Recall 高達 81%，非常適合疾病篩檢場景。雖然 MTL ANN 因類別不平衡問題訓練失敗，但單任務 ANN 仍是高血壓預測的最佳選擇。對於高血糖和高血脂，MTL LR 仍然是最佳模型。
