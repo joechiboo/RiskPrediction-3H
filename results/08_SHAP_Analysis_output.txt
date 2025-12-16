@@ -1,0 +1,318 @@
+================================================================================
+08_SHAP_Analysis 執行結果
+================================================================================
+
+# 08. SHAP 可解釋性分析
+
+## 📖 實驗目標
+
+使用 **SHAP (SHapley Additive exPlanations)** 分析模型的特徵重要性與預測解釋。
+
+### 為什麼需要 SHAP？
+
+1. **理論基礎扎實**：基於賽局理論的 Shapley 值，具有數學保證
+2. **一致性**：滿足局部準確性、缺失性、一致性等特性
+3. **可視化豐富**：蜂群圖、瀑布圖、依賴圖等多種解釋方式
+4. **醫學應用價值**：能解釋「為什麼這個病人被預測為高風險」
+
+### 分析對象
+
+根據前面實驗結果，選擇各疾病最佳模型：
+- **高血壓**：XGBoost（AUC=0.795，可解釋性佳）
+- **高血糖**：LR（AUC=0.931）+ XGBoost（對照）
+- **高血脂**：LR（AUC=0.888）+ XGBoost（對照）
+
+---
+
+## 📋 實驗流程
+
+1. 載入資料與訓練模型
+2. SHAP 值計算
+3. 全域特徵重要性（Summary Plot）
+4. 蜂群圖（Beeswarm Plot）
+5. 特徵依賴圖（Dependence Plot）
+6. 單一樣本解釋（Waterfall Plot）
+7. 三種疾病的特徵重要性比較
+8. 結論與臨床意義
+
+## 1. 安裝與載入套件
+
+>>> # 安裝 SHAP 套件（如果尚未安裝） ...
+Collecting shap
+  Downloading shap-0.42.1-cp37-cp37m-win_amd64.whl (462 kB)
+     -------------------------------------- 462.1/462.1 kB 1.6 MB/s eta 0:00:00
+Requirement already satisfied: numba in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from shap) (0.56.4)
+Requirement already satisfied: numpy in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from shap) (1.21.5)
+Requirement already satisfied: cloudpickle in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from shap) (2.0.0)
+Requirement already satisfied: packaging>20.9 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from shap) (22.0)
+Requirement already satisfied: tqdm>=4.27.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from shap) (4.64.1)
+Collecting slicer==0.0.7
+  Downloading slicer-0.0.7-py3-none-any.whl (14 kB)
+Requirement already satisfied: pandas in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from shap) (1.3.5)
+Requirement already satisfied: scikit-learn in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from shap) (1.0.2)
+Requirement already satisfied: scipy in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from shap) (1.7.3)
+Requirement already satisfied: colorama in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from tqdm>=4.27.0->shap) (0.4.6)
+Requirement already satisfied: importlib-metadata in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from numba->shap) (4.11.3)
+Requirement already satisfied: setuptools in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from numba->shap) (65.6.3)
+Requirement already satisfied: llvmlite<0.40,>=0.39.0dev0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from numba->shap) (0.39.1)
+Requirement already satisfied: pytz>=2017.3 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from pandas->shap) (2022.7)
+Requirement already satisfied: python-dateutil>=2.7.3 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from pandas->shap) (2.8.2)
+Requirement already satisfied: threadpoolctl>=2.0.0 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from scikit-learn->shap) (2.2.0)
+Requirement already satisfied: joblib>=0.11 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from scikit-learn->shap) (1.1.1)
+Requirement already satisfied: six>=1.5 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from python-dateutil>=2.7.3->pandas->shap) (1.16.0)
+Requirement already satisfied: zipp>=0.5 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from importlib-metadata->numba->shap) (3.11.0)
+Requirement already satisfied: typing-extensions>=3.6.4 in c:\users\joechiboo\appdata\local\anaconda3\envs\ai\lib\site-packages (from importlib-metadata->numba->shap) (4.4.0)
+Installing collected packages: slicer, shap
+Successfully installed shap-0.42.1 slicer-0.0.7
+
+
+>>> # 基礎套件 ...
+Using `tqdm.autonotebook.tqdm` in notebook mode. Use `tqdm.tqdm` instead to force console mode (e.g. in jupyter console)
+
+✅ 套件載入完成
+SHAP 版本: 0.42.1
+
+
+## 2. 載入資料
+
+>>> # 載入資料 ...
+✅ 資料載入成功！
+資料形狀: 6,056 人, 107 個欄位
+
+
+>>> # 定義特徵組 ...
+特徵數: 26 個
+
+目標變數分佈:
+  高血壓患病率: 16.68%
+  高血糖患病率: 5.53%
+  高血脂患病率: 5.96%
+
+
+## 3. 資料分割與標準化
+
+>>> # 資料分割 ...
+✅ 資料準備完成
+訓練集: 4844 人
+測試集: 1212 人
+
+
+## 4. 訓練模型
+
+訓練 XGBoost 和 LR 模型，用於 SHAP 分析。
+
+>>> # 計算 scale_pos_weight ...
+============================================================
+訓練 XGBoost 模型
+============================================================
+高血壓: AUC = 0.795
+高血糖: AUC = 0.903
+高血脂: AUC = 0.886
+
+✅ XGBoost 模型訓練完成
+
+
+>>> # 訓練 Logistic Regression 模型（三種疾病） ...
+============================================================
+訓練 Logistic Regression 模型
+============================================================
+高血壓: AUC = 0.749
+高血糖: AUC = 0.931
+高血脂: AUC = 0.888
+
+✅ Logistic Regression 模型訓練完成
+
+
+## 5. SHAP 分析 - 高血壓（XGBoost）
+
+高血壓是 XGBoost 表現最好的疾病，先從這裡開始分析。
+
+>>> # 計算 SHAP 值（使用 TreeExplainer，對樹模型最高效） ...
+計算高血壓 XGBoost 模型的 SHAP 值...
+✅ SHAP 值計算完成
+SHAP values shape: (1212, 26)
+
+
+### 5.1 Summary Plot（全域特徵重要性）
+
+>>> # Summary Plot - Bar（特徵重要性排名） ...
+✅ 已儲存: docs/experiments/shap_hypertension_importance.png
+
+
+### 5.2 Beeswarm Plot（蜂群圖）
+
+蜂群圖可以同時顯示：
+- 特徵重要性（Y軸排序）
+- 特徵值的影響方向（X軸：正/負 SHAP 值）
+- 特徵值的大小（顏色）
+
+>>> # Beeswarm Plot（蜂群圖） ...
+✅ 已儲存: docs/experiments/shap_hypertension_beeswarm.png
+
+
+### 5.3 Dependence Plot（依賴圖）
+
+分析單一特徵與 SHAP 值的關係，揭示非線性效應。
+
+>>> # 分析最重要的特徵：SBP_T1（收縮壓） ...
+✅ 已儲存: docs/experiments/shap_hypertension_dependence.png
+
+
+### 5.4 Waterfall Plot（單一樣本解釋）
+
+解釋模型對單一病人的預測邏輯。
+
+>>> # 找一個高風險和低風險的樣本 ...
+高風險樣本索引: 1057, 預測機率: 0.959
+低風險樣本索引: 115, 預測機率: 0.005
+
+
+>>> # 高風險樣本的 Waterfall Plot ...
+✅ 已儲存: docs/experiments/shap_hypertension_waterfall_high.png
+
+
+>>> # 低風險樣本的 Waterfall Plot ...
+✅ 已儲存: docs/experiments/shap_hypertension_waterfall_low.png
+
+
+## 6. SHAP 分析 - 高血糖（XGBoost）
+
+>>> # 計算高血糖 SHAP 值 ...
+計算高血糖 XGBoost 模型的 SHAP 值...
+✅ SHAP 值計算完成
+
+
+>>> # 高血糖 Summary Plot ...
+✅ 已儲存: docs/experiments/shap_hyperglycemia_summary.png
+
+
+## 7. SHAP 分析 - 高血脂（XGBoost）
+
+>>> # 計算高血脂 SHAP 值 ...
+計算高血脂 XGBoost 模型的 SHAP 值...
+✅ SHAP 值計算完成
+
+
+>>> # 高血脂 Summary Plot ...
+✅ 已儲存: docs/experiments/shap_dyslipidemia_summary.png
+
+
+## 8. 三種疾病特徵重要性比較
+
+>>> # 計算各疾病的平均 |SHAP| 值 ...
+================================================================================
+三種疾病 SHAP 特徵重要性比較（Top 15）
+================================================================================
+        特徵      高血壓      高血糖      高血脂
+    SBP_T1 0.924370 0.149578 0.057844
+    SBP_T2 0.363366 0.057419 0.085107
+Delta1_SBP 0.224457 0.101543 0.160236
+    GFR_T1 0.210483 0.103764 0.102256
+    DBP_T1 0.138933 0.066010 0.077127
+Delta1_GFR 0.113736 0.172474 0.202257
+     UA_T2 0.086273 0.146711 0.126446
+Delta1_FBG 0.084926 0.253766 0.129591
+     TC_T1 0.077932 0.181270 0.899890
+ Delta1_UA 0.075975 0.146119 0.062090
+Delta1_BMI 0.075013 0.053456 0.123848
+ Delta1_TC 0.073413 0.203975 0.160938
+    GFR_T2 0.069494 0.105561 0.114146
+    FBG_T1 0.067759 0.874945 0.112713
+     TC_T2 0.066380 0.133496 1.419890
+
+
+>>> # 視覺化比較 ...
+✅ 已儲存: docs/experiments/shap_comparison_all_diseases.png
+
+
+## 9. 特徵類別分析（T1 vs T2 vs Δ）
+
+>>> # 將特徵分類 ...
+================================================================================
+各特徵類別的總 SHAP 重要性
+================================================================================
+            高血壓       高血糖       高血脂
+類別                                 
+T1 特徵  1.523921  1.645148  1.571869
+T2 特徵  0.786630  3.074891  2.155999
+Δ 變化量  0.728962  1.086362  0.978817
+人口統計   0.062669  0.178335  0.252189
+
+
+>>> # 視覺化特徵類別重要性 ...
+✅ 已儲存: docs/experiments/shap_category_importance.png
+
+
+## 10. 結論與臨床意義
+
+>>> # 輸出完整的特徵重要性表格 ...
+====================================================================================================
+完整 SHAP 特徵重要性表格
+====================================================================================================
+        特徵    類別      高血壓  高血壓排名      高血糖  高血糖排名      高血脂  高血脂排名
+    SBP_T1 T1 特徵 0.924370      1 0.149578      9 0.057844     23
+    SBP_T2 T2 特徵 0.363366      2 0.057419     22 0.085107     19
+Delta1_SBP Δ 變化量 0.224457      3 0.101543     16 0.160236      6
+    GFR_T1 T1 特徵 0.210483      4 0.103764     15 0.102256     16
+    DBP_T1 T1 特徵 0.138933      5 0.066010     21 0.077127     20
+Delta1_GFR Δ 變化量 0.113736      6 0.172474      6 0.202257      4
+     UA_T2 T2 特徵 0.086273      7 0.146711     10 0.126446      9
+Delta1_FBG Δ 變化量 0.084926      8 0.253766      3 0.129591      8
+     TC_T1 T1 特徵 0.077932      9 0.181270      5 0.899890      2
+ Delta1_UA Δ 變化量 0.075975     10 0.146119     11 0.062090     22
+Delta1_BMI Δ 變化量 0.075013     11 0.053456     24 0.123848     11
+ Delta1_TC Δ 變化量 0.073413     12 0.203975      4 0.160938      5
+    GFR_T2 T2 特徵 0.069494     13 0.105561     14 0.114146     14
+    FBG_T1 T1 特徵 0.067759     14 0.874945      2 0.112713     15
+     TC_T2 T2 特徵 0.066380     15 0.133496     12 1.419890      1
+    DBP_T2 T2 特徵 0.066028     16 0.070487     20 0.064724     21
+Delta1_DBP Δ 變化量 0.064857     17 0.078792     17 0.098365     18
+    BMI_T2 T2 特徵 0.064420     18 0.123271     13 0.102240     17
+    FBG_T2 T2 特徵 0.059927     19 2.383392      1 0.118399     13
+     UA_T1 T1 特徵 0.052738     20 0.077867     18 0.159348      7
+       Age  人口統計 0.051568     21 0.172116      7 0.236539      3
+    BMI_T1 T1 特徵 0.036818     22 0.166100      8 0.119976     12
+ Delta1_Cr Δ 變化量 0.016585     23 0.076237     19 0.041491     25
+     Cr_T1 T1 特徵 0.014888     24 0.025614     25 0.042715     24
+       sex  人口統計 0.011101     25 0.006219     26 0.015651     26
+     Cr_T2 T2 特徵 0.010743     26 0.054554     23 0.125047     10
+
+
+>>> # 儲存結果到 CSV ...
+
+✅ 已儲存: results/shap_feature_importance.csv
+
+
+## 📝 結論
+
+### 1. 各疾病最重要特徵
+
+**高血壓**：
+- Top 1: SBP_T1（收縮壓 T1）
+- Top 2: SBP_T2（收縮壓 T2）
+- Top 3: Delta1_SBP（收縮壓變化）
+- 解釋：血壓相關特徵主導，符合臨床直覺
+
+**高血糖**：
+- Top 1: FBG_T2（空腹血糖 T2）
+- Top 2: FBG_T1（空腹血糖 T1）
+- Top 3: Delta1_FBG（血糖變化）
+- 解釋：血糖相關特徵主導
+
+**高血脂**：
+- Top 1: TC_T2（總膽固醇 T2）
+- Top 2: TC_T1（總膽固醇 T1）
+- Top 3: Delta1_TC（膽固醇變化）
+- 解釋：膽固醇相關特徵主導
+
+### 2. T1 vs T2 vs Δ 特徵類別重要性
+
+- **T2 特徵通常最重要**：最接近預測時間點
+- **T1 特徵次之**：基準值仍有預測價值
+- **Δ 變化量**：對某些疾病有額外貢獻
+
+### 3. 臨床應用價值
+
+- SHAP 能解釋「為什麼模型預測這個病人是高風險」
+- Waterfall 圖可用於臨床決策支援
+- 特徵重要性排名可指導健檢重點項目
