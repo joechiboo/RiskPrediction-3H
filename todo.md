@@ -30,6 +30,7 @@
 **短期（Meeting 18 後）**：
 - [ ] 5-fold CV：提高結果穩定性
 - [ ] 特徵選擇實驗：前 N 個特徵是否足夠？（參考 Wang et al.）
+- [ ] 不平衡處理方法消融實驗：比較 Baseline / class_weight / SMOTE / ADASYN / UnderSampling（驗證方法選擇依據，看 SMOTE 能否改善 RF）
 
 **中期（論文撰寫期間）**：
 - [ ] 健檢頻率分析：用年齡差（Age_T2 - Age_T1）分組比較 1/2/3 年間隔
