@@ -113,7 +113,7 @@ Meeting 18 實驗進度報告
 >
 > 結果很明顯：高血壓的 AUC 從 0.68 提升到 0.78，提升 10 個百分點，統計上高度顯著。高血脂也有 2~3% 的提升。高血糖的提升較小，因為空腹血糖本身就是很強的預測因子。
 >
-> 結論：Δ 特徵對高血壓貢獻最大，這也符合 Dual 2025 論文的發現。
+> 結論：Δ 特徵對高血壓貢獻最大。這印證了「變化量」特徵的價值，與 Dual 2025 使用 δ-FPG 的設計理念一致。
 
 ---
 
@@ -125,15 +125,15 @@ Meeting 18 實驗進度報告
 
 **各模型 class_weight 支援情況**：
 
-| 模型 | 參數名稱 | 支援 | Recall (balanced) | Recall (None) |
-|------|----------|:----:|:-----------------:|:-------------:|
-| LR | `class_weight='balanced'` | ✅ | **79%** | 14% |
-| RF | `class_weight='balanced'` | ✅ | 9% (失敗) | 5% |
-| XGBoost | `scale_pos_weight` | ✅ | **58%** | 24% |
-| ANN | `class_weight`（fit 參數） | ✅ | **78%** | 11% |
-| SVM | `class_weight='balanced'` | ✅ | **65%** | 8% |
-| GP (gplearn) | ❌ | **不支援** | N/A | 17% |
-| PySR | `weights` 參數 | ⚠️ | 學到常數 | 83%（閾值調整） |
+| 模型 | 參數名稱 | 支援 | AUC | Recall (balanced) | Recall (None) |
+|------|----------|:----:|:---:|:-----------------:|:-------------:|
+| LR | `class_weight='balanced'` | ✅ | 0.85 | 80% | 14% |
+| RF | `class_weight='balanced'` | ✅ | 0.85 | 9% (失敗) | 5% |
+| XGBoost | `scale_pos_weight` | ✅ | 0.85 | 57% | 24% |
+| ANN | `class_weight`（fit 參數） | ✅ | 0.80 | 78% | 11% |
+| SVM | `class_weight='balanced'` | ✅ | 0.82 | 65% | 8% |
+| GP (gplearn) | ❌ | 不支援 | 0.68 | N/A | 17% |
+| PySR | `weights` 參數 | ⚠️ | 0.83 | 學到常數 | **83%** |
 
 **實驗結果**（LR，Sensitivity 比較）：
 
@@ -145,17 +145,20 @@ Meeting 18 實驗進度報告
 
 > XGBoost 結果：高血壓 17%→63%（+46%），高血糖 39%→60%（+21%），高血脂 14%→49%（+35%）
 
-**GP 失敗原因**：gplearn 不支援 class_weight → 在不平衡資料上 Recall ≈ 0%
+**GP 失敗原因**：gplearn 不支援 class_weight → Recall 只有 17%
 
-**結論**：class_weight=balanced 是處理不平衡資料的必要設定
+**結論**：
+- **AUC 不受 class_weight 影響**（差異 < 1%）
+- **Recall 差異很大**：None 5~24% → balanced 57~80%
+- class_weight=balanced 是處理不平衡資料的必要設定
 
 **📝 講稿（1分鐘）**
 
 > 第二個消融實驗測試 class_weight 的效果。
 >
-> 不使用 balanced 時，LR 的高血壓 Sensitivity 只有 5.3%，代表 95% 的患者會漏掉！使用 balanced 後提升到 74~85%，平均改善 63%。
+> 重要發現：**AUC 幾乎不變**，但 **Recall 差異很大**。不使用 balanced 時，Recall 只有 5~24%；使用後提升到 57~80%。
 >
-> 重要發現：gplearn 不支援 class_weight，這是 GP 失敗的主因，後面會詳細分析。
+> 值得注意的是 PySR：它不需要 class_weight 就能達到 AUC 0.83、Recall 83%，表現很好。相反地，gplearn 因為不支援 class_weight，Recall 只有 17%。
 
 ---
 
@@ -313,6 +316,7 @@ Meeting 18 實驗進度報告
 
 | 實驗 | 說明 |
 |------|------|
+| 時序切分驗證 | 參考 Taiwan MJ：用前 N 次訓練、後 N 次測試，避免資料洩漏 |
 | 前三次 vs 後三次 | 比較用前/後三次健檢的效能差異 |
 | 檢驗次數影響 | 驗證「次數越多越準」假設 |
 | 特徵選擇 | 前 N 個特徵 vs 全部特徵 |
