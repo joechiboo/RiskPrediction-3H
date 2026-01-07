@@ -108,8 +108,15 @@
 ### 實驗任務
 - [ ] Decision Tree (DT) 模型
 - [ ] MTL vs STL 完整比較
+- [ ] PySR 參數調整實驗（先調參，再做 5-fold CV）
 - [ ] PySR 樹深度實驗
 - [ ] 健檢次數與預測準確度（可選）
+
+### 待處理備忘
+- **PySR 5-fold CV**：目前參數（niterations=100, timeout=300）會導致 AUC=0.5（常數解）
+  - 需要先用 notebook 12 的參數做調整實驗
+  - 確認最佳參數後再執行 5-fold CV
+  - 參考成功設定：niterations=200, timeout=1200, maxsize=25
 
 ### 必做
 - [x] 5-fold CV（所有模型）✅ 2026-01-07 完成
