@@ -1,0 +1,8 @@
+模型,AUC,可解釋性,公式長度
+Logistic Regression,0.7478433486913046,高,-
+Random Forest,0.7879840211743947,低,-
+XGBoost,0.7542201744926967,低,-
+PySR (maxsize=10),0.7136530732281148,高,29
+PySR (maxsize=25),0.5,高,17
+PySR (maxsize=40),0.7111533183021272,高,42
+PySR (maxsize=60),0.5,高,17
