@@ -78,9 +78,32 @@
 
 ---
 
+### 方法論參考論文
+
+#### 6. SMOTE + SHAP Framework (2025) - 糖尿病預測可解釋框架 🆕
+- **檔名**: `SMOTE_SHAP_Diabetes_2025.pdf`
+- **標題**: Interpretable Machine Learning Framework for Diabetes Prediction: Integrating SMOTE Balancing with SHAP Explainability for Clinical Decision Support
+- **期刊**: Healthcare (MDPI), 13(20), 2588
+- **連結**: https://www.mdpi.com/2227-9032/13/20/2588
+- **DOI**: 10.3390/healthcare13202588
+- **發表日期**: 2025年10月
+- **關鍵字**: SMOTE, SHAP, Class Imbalance, Interpretability, Random Forest
+- **重要性**: ⭐⭐⭐⭐ 方法論參考，SMOTE + SHAP 整合框架
+- **關鍵發現**:
+  - Random Forest + SMOTE: AUC 0.998, Accuracy 96.91%
+  - SHAP 特徵重要性：Glucose > BMI > Age
+  - SMOTE 只在訓練集內使用（避免 data leakage）
+  - 5-fold stratified CV
+- **與本研究關聯**:
+  - 我們也用 class_weight 處理不平衡
+  - 可參考 SHAP 分析方法
+  - 我們有縱貫性資料（優勢）
+
+---
+
 ### 中優先級論文
 
-#### 6. Dual Machine Learning Framework (2025) - 台灣前驅糖尿病預測
+#### 7. Dual Machine Learning Framework (2025) - 台灣前驅糖尿病預測
 - **檔名**: `Dual_Framework_2025_Taiwan_Prediabetes.pdf`（待下載）
 - **標題**: Dual Machine Learning Framework for Predicting Long-Term Glycemic Change and Prediabetes Risk in Young Taiwanese Men
 - **期刊**: Diagnostics, 15(19), 2507
@@ -109,6 +132,9 @@
 - [x] Hung et al. (2021) - 已下載 ✅
 - [x] meeting16 Taiwan MTL (2025) - 已下載 ✅
 - [x] meeting17 Dual Framework (2025) - 已下載 ✅
+
+### 方法論參考
+- [x] SMOTE + SHAP Framework (2025) - 已下載 ✅
 
 ### 多疾病同時預測（極度相關）
 - [ ] DHDIP (2022) - 待下載
