@@ -24,6 +24,7 @@
 | 18 | Taiwan MJ Hypertension 2024 (#5) | ✅ 已簡報 |
 | 19 | SMOTE+SHAP 2025 (#9) | 📋 已閱讀（評估為參考價值有限）|
 | 19 | Prediabetes TaiwanMJ 2024 (#1) | 📋 已閱讀摘要 |
+| 19 | **China Prediabetes→Diabetes 2025 (#2)** | ✅ **選定為 Meeting 19 論文** |
 
 ---
 
@@ -136,6 +137,34 @@
   - 多指標報告（Sensitivity, Specificity, NPV）
 - **相關文檔**：[Paper_SMOTE_SHAP_2025.md](../memos/Paper_SMOTE_SHAP_2025.md)
 
+#### ✅ China Prediabetes→Diabetes (2025) - 5 年縱向預測 ⭐⭐⭐⭐⭐【Meeting 19 選定】
+
+- **標題**：Development of a 5-Year Risk Prediction Model for Transition From Prediabetes to Diabetes Using Machine Learning
+- **期刊**：JMIR (Journal of Medical Internet Research)
+- **DOI**：[10.2196/73190](https://doi.org/10.2196/73190)
+- **PDF位置**：[JMIR_Prediabetes_Diabetes_2025.pdf](../references/JMIR_Prediabetes_Diabetes_2025.pdf)
+- **資料**：
+  - 主要隊列：山東第一醫科大學附屬醫院，6,270 人
+  - 外部驗證：濱州醫學院附屬醫院，2,157 人
+  - 追蹤期：5 年，**每年一次健檢**
+  - 進展率：41.6%（主要）/ 35.2%（外部）
+- **方法**：7 種 ML 模型比較（LR, RF, SVM, MLP, XGBoost, LightGBM, **CatBoost**）
+- **最佳模型**：**CatBoost** (AUC 0.819 Test / 0.807 External)
+- **特徵選擇**：RFE-Logistic，從 42 個選出 14 個特徵
+- **SHAP Top 6**：FBG, HDL, ALT/AST, BMI, Age, MONO
+- **狀態**：✅ **選定為 Meeting 19 論文**
+- **與本研究關聯度**：⭐⭐⭐⭐⭐
+  - 資料規模相近（~6,000 + ~2,000 vs ~6,000 + ~1,000）
+  - 縱向多次健檢設計
+  - 有外部驗證（我們也有 CLSA）
+  - **CatBoost 是我們沒試過的模型**
+  - **他們沒用 Δ 特徵，這是我們的優勢**
+- **可借鏡之處**：
+  - 考慮加入 CatBoost 模型
+  - Calibration curves + DCA 評估
+  - DeLong test 統計檢定
+- **相關文檔**：[Paper_China_Prediabetes_Diabetes_2025.md](../memos/Paper_China_Prediabetes_Diabetes_2025.md)
+
 ---
 
 ### 高血脂（Dyslipidemia）
@@ -202,10 +231,11 @@
 
 ### Meeting 19 待完成任務
 
-1. **論文選讀**
+1. **論文選讀** ✅
    - [x] 閱讀 SMOTE+SHAP 2025（已評估為參考價值有限）
    - [x] 閱讀 Prediabetes TaiwanMJ 2024 摘要
-   - [ ] 考慮選擇其他更相關的論文
+   - [x] **選定 China Prediabetes→Diabetes 2025 (#2)**
+   - [x] 深度解析並建立 memo
 
 2. **實驗任務**（來自 Meeting 18 Action Items）
    - [ ] 5-fold CV（所有模型重新跑交叉驗證）
@@ -300,3 +330,4 @@
 - 📑 [論文候選清單](../memos/論文候選清單_從Dual2025延伸.md)
 - 📝 [Paper_SMOTE_SHAP_2025 筆記](../memos/Paper_SMOTE_SHAP_2025.md)
 - 📝 [Paper_Prediabetes_TaiwanMJ_2024 筆記](../memos/Paper_Prediabetes_TaiwanMJ_2024.md)
+- 📝 [Paper_China_Prediabetes_Diabetes_2025 筆記](../memos/Paper_China_Prediabetes_Diabetes_2025.md) ⭐ Meeting 19 選定
