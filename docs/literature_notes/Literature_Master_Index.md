@@ -1,6 +1,6 @@
 # 文獻總覽索引
 
-**最後更新**：2025-11-13
+**最後更新**：2026-01-09
 **用途**：統整所有已讀論文的狀態與分類
 
 ---
@@ -9,9 +9,21 @@
 
 | 狀態 | 數量 | 說明 |
 |------|------|------|
-| ✅ 已完整分析（有深度解析） | 1 | Liu et al. 2024 |
-| 📌 高優先級待深入分析 | 2 | Dual Framework 2025, Hung et al. 2021 |
+| ✅ 已完整分析（有深度解析＋簡報） | 5 | Meeting 15-18 論文 |
+| 📋 已閱讀摘要與方法 | 2 | SMOTE+SHAP 2025, Prediabetes 2024 |
+| 📌 待深入分析 | 1 | Hung et al. 2021 |
 | 📋 基本資訊已整理 | 多篇 | 見系統性文獻回顧 |
+
+### 按 Meeting 進度
+
+| Meeting | 論文 | 狀態 |
+|---------|------|------|
+| 15 | Liu et al. 2024 (台中榮總糖尿病預測) | ✅ 已簡報 |
+| 16 | Taiwan MTL 2025 (多任務學習) | ✅ 已簡報 |
+| 17 | Dual Framework 2025 (δ-FPG) | ✅ 已簡報 |
+| 18 | Taiwan MJ Hypertension 2024 (#5) | ✅ 已簡報 |
+| 19 | SMOTE+SHAP 2025 (#9) | 📋 已閱讀（評估為參考價值有限）|
+| 19 | Prediabetes TaiwanMJ 2024 (#1) | 📋 已閱讀摘要 |
 
 ---
 
@@ -19,7 +31,23 @@
 
 ### 高血壓（Hypertension）
 
-#### ✅ Hung et al. (2021) - 隱匿性高血壓預測
+#### ✅ Taiwan MJ Hypertension (2024) - 下次健檢高血壓預測 ⭐⭐⭐⭐⭐【Meeting 18】
+- **標題**：Next-visit prediction and prevention of hypertension using large-scale routine health checkup data
+- **期刊**：PLoS ONE
+- **DOI**：[10.1371/journal.pone.0312370](https://doi.org/10.1371/journal.pone.0312370)
+- **PMC**：[PMC11560048](https://pmc.ncbi.nlm.nih.gov/articles/PMC11560048/)
+- **資料**：Taiwan MJ Cohort（美兆健檢資料），大規模健檢資料
+- **方法**：RF, XGBoost, LightGBM 等
+- **核心發現**：
+  - **訪問次數越多，預測越準**（4+ 次最佳）
+  - 多時間點特徵串接（T1 + T2 + ... + TN）
+  - 與本研究的縱向設計概念一致
+- **狀態**：✅ 已簡報完成（Meeting 18）
+- **相關文檔**：
+  - [Meeting_18_Notes.md](../meeting_notes/Meeting_18_Notes.md)
+  - [論文候選清單 #5](../memos/論文候選清單_從Dual2025延伸.md)
+
+#### 📌 Hung et al. (2021) - 隱匿性高血壓預測
 - **期刊**：Frontiers in Cardiovascular Medicine, 8:778306
 - **DOI**：[10.3389/fcvm.2021.778306](https://doi.org/10.3389/fcvm.2021.778306)
 - **PDF位置**：[fcvm-08-778306.pdf](../references/fcvm-08-778306.pdf)
@@ -27,7 +55,7 @@
 - **方法**：LR, RF, XGBoost, ANN + SMOTE-NC
 - **最佳模型**：RF (AUC 0.851/0.837)
 - **關鍵特徵**：DBP, MAP, SBP, PP, beta-blocker, HDL-C
-- **狀態**：📌 有PDF，高優先級待深入分析
+- **狀態**：📌 有PDF，待深入分析
 - **相關文檔**：[Q2_Taiwan_Literature_Review.md](../research_plans/Q2_Taiwan_Literature_Review.md)
 
 #### 📋 Lin et al. (2024) - 血清尿酸與高血壓關係
@@ -56,7 +84,7 @@
   - [Liu_2024_TCVGH_Diabetes_Prediction_深度解析.md](Liu_2024_TCVGH_Diabetes_Prediction_深度解析.md)
   - 簡報檔：meeting15_21138X006_紀伯喬_wVBA.pptm (已報告完成)
 
-#### 📌 Dual Framework (2025) - 台灣青年男性前驅糖尿病預測 ⭐⭐⭐⭐⭐
+#### ✅ Dual Framework (2025) - 台灣青年男性前驅糖尿病預測 ⭐⭐⭐⭐⭐【Meeting 17】
 - **期刊**：Diagnostics, 15(19), 2507
 - **DOI**：[10.3390/diagnostics15192507](https://doi.org/10.3390/diagnostics15192507)
 - **PDF位置**：[diagnostics-15-02507.pdf](../references/diagnostics-15-02507.pdf) (3.5 MB)
@@ -64,17 +92,49 @@
 - **方法**：雙框架 (連續值δ-FPG + 二元分類) | RF, SGB, XGBoost, Elastic Net
 - **可解釋性**：SHAP
 - **關鍵發現**：δ-FPG (血糖變化量) 預測，與本研究的 Δ 特徵概念相同
-- **狀態**：📌 **高優先級待深入分析（Meeting 17 重點）**
+- **狀態**：✅ 已簡報完成（Meeting 17）
 - **與本研究關聯度**：⭐⭐⭐⭐⭐ (最高)
   - 縱向變化量特徵（δ-FPG = Δ特徵）
   - 雙框架設計（連續值 + 分類）
   - SHAP 可解釋性
   - 台灣本土資料
   - 血液檢驗項目完整（含尿酸）
-- **相關文檔**：[Meeting_17_Preparation_Plan.md](../meeting_notes/Meeting_17_Preparation_Plan.md)
-- **計畫建立文檔**：
-  - [ ] `Dual_2025_深度解析.md`
-  - [ ] `Dual_2025_演講稿_10頁.md`
+- **相關文檔**：
+  - [Meeting_17_Preparation_Plan.md](../meeting_notes/Meeting_17_Preparation_Plan.md)
+  - [Dual_2025_深度解析.md](Dual_2025_深度解析.md)
+  - [Meeting_15-17_Papers_Summary.md](Meeting_15-17_Papers_Summary.md)
+
+#### 📋 Prediabetes TaiwanMJ (2024) - Dual 2025 前作【Meeting 19 候選】
+- **標題**：Machine Learning Prediction of Prediabetes in a Young Male Chinese Cohort with 5.8-Year Follow-Up
+- **期刊**：Diagnostics (MDPI)
+- **DOI**：[10.3390/diagnostics14100979](https://doi.org/10.3390/diagnostics14100979)
+- **PMC**：[PMC11119884](https://pmc.ncbi.nlm.nih.gov/articles/PMC11119884/)
+- **資料**：Taiwan MJ Cohort，6,247 男性，5.8 年追蹤
+- **方法**：RF, SGB, XGBoost, Elastic Net（無 SMOTE）
+- **關鍵特徵**：FPGbase (100%), Body Fat (28%), Creatinine, TSH, WBC
+- **狀態**：📋 已閱讀摘要與方法
+- **與 Dual 2025 關係**：同一研究團隊的前作，單任務 → 雙任務演進
+- **相關文檔**：[Paper_Prediabetes_TaiwanMJ_2024.md](../memos/Paper_Prediabetes_TaiwanMJ_2024.md)
+
+#### 📋 SMOTE+SHAP Framework (2025) - 可解釋性框架【Meeting 19 候選】
+- **標題**：Interpretable Machine Learning Framework for Diabetes Prediction: Integrating SMOTE Balancing with SHAP Explainability
+- **期刊**：Healthcare (MDPI)
+- **DOI**：[10.3390/healthcare13202588](https://doi.org/10.3390/healthcare13202588)
+- **PMC**：[PMC12563896](https://pmc.ncbi.nlm.nih.gov/articles/PMC12563896/)
+- **資料**：Kaggle 公開資料集，100,000 筆（橫斷面）
+- **方法**：RF, GB, SVM, LR, XGBoost + SMOTE (k=5) + SHAP
+- **最佳結果**：RF (AUC 0.998)，Recall 99.5%
+- **狀態**：📋 已閱讀全文
+- **評估**：⚠️ **參考價值有限**
+  - 橫斷面設計（非縱向追蹤）
+  - 用 glucose 預測 diabetes（近乎 tautological）
+  - AUC 0.998 過高，可能資料特性造成
+  - 主要貢獻為整合框架，技術創新有限
+- **可借鏡之處**：
+  - SMOTE 在 CV fold 內執行（防止 data leakage）
+  - SHAP interaction analysis
+  - 多指標報告（Sensitivity, Specificity, NPV）
+- **相關文檔**：[Paper_SMOTE_SHAP_2025.md](../memos/Paper_SMOTE_SHAP_2025.md)
 
 ---
 
@@ -129,23 +189,33 @@
 
 ---
 
-## 🎯 Meeting 17 準備重點
+## 🎯 Meeting 19 準備重點
 
-### 優先任務
+### 已完成的 Meeting
 
-1. **深入研究 Dual Framework 2025** 📌
-   - [x] 下載並初步閱讀完整論文（2025-11-13已完成）
-   - [ ] 建立深度解析文檔
-   - [ ] 分析 δ-FPG 特徵工程方法
-   - [ ] 研究雙框架設計
-   - [ ] 學習 SHAP 應用
-   - [ ] 製作10頁簡報
+| Meeting | 論文主題 | 狀態 |
+|---------|----------|------|
+| 15 | Liu 2024 - 台中榮總糖尿病 10 年預測 | ✅ 已簡報 |
+| 16 | Taiwan MTL 2025 - 多任務學習慢性病預測 | ✅ 已簡報 |
+| 17 | Dual Framework 2025 - δ-FPG 雙框架 | ✅ 已簡報 |
+| 18 | Taiwan MJ Hypertension 2024 - 多次健檢預測 | ✅ 已簡報 |
 
-2. **深入分析 Hung et al. 2021** ⚠️
-   - [ ] 閱讀已下載的 PDF
-   - [ ] 分析特徵選擇方法
-   - [ ] 研究外部驗證策略
-   - [ ] 整理高血壓預測關鍵特徵
+### Meeting 19 待完成任務
+
+1. **論文選讀**
+   - [x] 閱讀 SMOTE+SHAP 2025（已評估為參考價值有限）
+   - [x] 閱讀 Prediabetes TaiwanMJ 2024 摘要
+   - [ ] 考慮選擇其他更相關的論文
+
+2. **實驗任務**（來自 Meeting 18 Action Items）
+   - [ ] 5-fold CV（所有模型重新跑交叉驗證）
+   - [ ] Decision Tree (DT) 模型實驗
+   - [ ] MTL vs STL 完整比較實驗
+   - [ ] PySR 樹深度實驗
+
+3. **文件任務**
+   - [ ] 撰寫 Problem Definition（含數學公式）
+   - [ ] 整理實驗/假說列表（Variations）
 
 ---
 
@@ -215,8 +285,8 @@
 ---
 
 **文檔建立日期**：2025-11-13
+**最後更新**：2026-01-09（新增 Meeting 18-19 論文）
 **維護者**：紀伯喬
-**下次更新**：完成 Dual 2025 深度解析後
 
 ---
 
@@ -225,5 +295,8 @@
 - 📂 [返回 Literature Notes 目錄](.)
 - 📊 [查看 Q2 台灣文獻回顧](../research_plans/Q2_Taiwan_Literature_Review.md)
 - 📋 [查看系統性文獻回顧](Systematic_Literature_Review.md)
-- 🎯 [查看 Meeting 17 準備計畫](../meeting_notes/Meeting_17_Preparation_Plan.md)
-- 📖 [查看 Meeting 1-16 總結](../meeting_notes/Meeting_Summary_1-16.md)
+- 📖 [Meeting 15-17 論文總結](Meeting_15-17_Papers_Summary.md)
+- 🎯 [Meeting 18 會議紀錄](../meeting_notes/Meeting_18_Notes.md)
+- 📑 [論文候選清單](../memos/論文候選清單_從Dual2025延伸.md)
+- 📝 [Paper_SMOTE_SHAP_2025 筆記](../memos/Paper_SMOTE_SHAP_2025.md)
+- 📝 [Paper_Prediabetes_TaiwanMJ_2024 筆記](../memos/Paper_Prediabetes_TaiwanMJ_2024.md)
