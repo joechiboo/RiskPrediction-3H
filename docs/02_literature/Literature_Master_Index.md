@@ -1,6 +1,6 @@
 # 文獻總覽索引
 
-**最後更新**：2026-01-09
+**最後更新**：2026-01-10
 **用途**：統整所有已讀論文的狀態與分類
 
 ---
@@ -24,13 +24,35 @@
 | 18 | Taiwan MJ Hypertension 2024 (#5) | ✅ 已簡報 |
 | 19 | SMOTE+SHAP 2025 (#9) | 📋 已閱讀（評估為參考價值有限）|
 | 19 | Prediabetes TaiwanMJ 2024 (#1) | 📋 已閱讀摘要 |
-| 19 | **China Prediabetes→Diabetes 2025 (#2)** | ✅ **選定為 Meeting 19 論文** |
+| 19 | China Prediabetes→Diabetes 2025 (#2) | 📋 已閱讀（備選論文） |
+| 19 | **Kanegae Hypertension 2020** | ✅ **選定為 Meeting 19 論文** |
 
 ---
 
 ## 🎯 按疾病分類
 
 ### 高血壓（Hypertension）
+
+#### ✅ Kanegae et al. (2020) - 使用 AI 的高精度高血壓預測 ⭐⭐⭐⭐⭐【Meeting 19 選定】
+
+- **標題**：Highly precise risk prediction model for new-onset hypertension using artificial intelligence techniques
+- **期刊**：The Journal of Clinical Hypertension
+- **DOI**：[10.1111/jch.13759](https://doi.org/10.1111/jch.13759)
+- **PMC**：[PMC8029685](https://pmc.ncbi.nlm.nih.gov/articles/PMC8029685/)
+- **資料**：日本職場健康檢查，18,258 人，2005-2016
+- **方法**：XGBoost, Ensemble, Logistic Regression
+- **最佳模型**：Ensemble (AUC 0.881)
+- **核心創新**：
+  - **縱向變化量特徵**：Year(-2) → Year(-1) → Year(0)
+  - **Δ 特徵**：Changes from Year(-2) to Year(-1) ← 與我們的 Delta1 相同！
+- **狀態**：✅ **選定為 Meeting 19 論文**
+- **與本研究關聯度**：⭐⭐⭐⭐⭐ (最高)
+  - 時間架構幾乎相同（Year(-2), Year(-1), Year(0) vs T1, T2, T3）
+  - 同樣使用縱向變化量特徵
+  - 證明 Δ 特徵在高血壓預測上有效
+- **相關文檔**：
+  - [Paper_Kanegae_Hypertension_2020.md](summaries/Paper_Kanegae_Hypertension_2020.md)
+  - [Kanegae_Hypertension_2020_中文翻譯.md](translations/Kanegae_Hypertension_2020_中文翻譯.md)
 
 #### ✅ Taiwan MJ Hypertension (2024) - 下次健檢高血壓預測 ⭐⭐⭐⭐⭐【Meeting 18】
 - **標題**：Next-visit prediction and prevention of hypertension using large-scale routine health checkup data
@@ -137,7 +159,7 @@
   - 多指標報告（Sensitivity, Specificity, NPV）
 - **相關文檔**：[Paper_SMOTE_SHAP_2025.md](../memos/Paper_SMOTE_SHAP_2025.md)
 
-#### ✅ China Prediabetes→Diabetes (2025) - 5 年縱向預測 ⭐⭐⭐⭐⭐【Meeting 19 選定】
+#### 📋 China Prediabetes→Diabetes (2025) - 5 年縱向預測【Meeting 19 備選】
 
 - **標題**：Development of a 5-Year Risk Prediction Model for Transition From Prediabetes to Diabetes Using Machine Learning
 - **期刊**：JMIR (Journal of Medical Internet Research)
@@ -152,18 +174,20 @@
 - **最佳模型**：**CatBoost** (AUC 0.819 Test / 0.807 External)
 - **特徵選擇**：RFE-Logistic，從 42 個選出 14 個特徵
 - **SHAP Top 6**：FBG, HDL, ALT/AST, BMI, Age, MONO
-- **狀態**：✅ **選定為 Meeting 19 論文**
-- **與本研究關聯度**：⭐⭐⭐⭐⭐
+- **狀態**：📋 已閱讀（備選論文）
+- **與本研究關聯度**：⭐⭐⭐⭐
   - 資料規模相近（~6,000 + ~2,000 vs ~6,000 + ~1,000）
   - 縱向多次健檢設計
   - 有外部驗證（我們也有 CLSA）
   - **CatBoost 是我們沒試過的模型**
-  - **他們沒用 Δ 特徵，這是我們的優勢**
+  - ⚠️ **他們沒用 Δ 特徵**（Kanegae 2020 有，更適合作為方法論驗證）
 - **可借鏡之處**：
   - 考慮加入 CatBoost 模型
   - Calibration curves + DCA 評估
   - DeLong test 統計檢定
-- **相關文檔**：[Paper_China_Prediabetes_Diabetes_2025.md](../memos/Paper_China_Prediabetes_Diabetes_2025.md)
+- **相關文檔**：
+  - [Paper_China_Prediabetes_Diabetes_2025.md](summaries/Paper_China_Prediabetes_Diabetes_2025.md)
+  - [JMIR_Prediabetes_Diabetes_2025_中文翻譯.md](translations/JMIR_Prediabetes_Diabetes_2025_中文翻譯.md)
 
 ---
 
@@ -234,8 +258,9 @@
 1. **論文選讀** ✅
    - [x] 閱讀 SMOTE+SHAP 2025（已評估為參考價值有限）
    - [x] 閱讀 Prediabetes TaiwanMJ 2024 摘要
-   - [x] **選定 China Prediabetes→Diabetes 2025 (#2)**
-   - [x] 深度解析並建立 memo
+   - [x] 閱讀 China Prediabetes→Diabetes 2025（備選，未使用 Δ 特徵）
+   - [x] **選定 Kanegae Hypertension 2020** ← 使用 Δ 特徵，驗證我們的方法論
+   - [x] 深度解析並建立 memo + 中文翻譯
 
 2. **實驗任務**（來自 Meeting 18 Action Items）
    - [ ] 5-fold CV（所有模型重新跑交叉驗證）
@@ -330,4 +355,5 @@
 - 📑 [論文候選清單](../memos/論文候選清單_從Dual2025延伸.md)
 - 📝 [Paper_SMOTE_SHAP_2025 筆記](../memos/Paper_SMOTE_SHAP_2025.md)
 - 📝 [Paper_Prediabetes_TaiwanMJ_2024 筆記](../memos/Paper_Prediabetes_TaiwanMJ_2024.md)
-- 📝 [Paper_China_Prediabetes_Diabetes_2025 筆記](../memos/Paper_China_Prediabetes_Diabetes_2025.md) ⭐ Meeting 19 選定
+- 📝 [Paper_China_Prediabetes_Diabetes_2025 筆記](summaries/Paper_China_Prediabetes_Diabetes_2025.md)
+- 📝 [Paper_Kanegae_Hypertension_2020 筆記](summaries/Paper_Kanegae_Hypertension_2020.md) ⭐ **Meeting 19 選定**
