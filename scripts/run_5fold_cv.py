@@ -111,7 +111,7 @@ def get_models(random_state=42):
             probability=True,
             random_state=random_state
         ),
-        'NN': MLPClassifier(
+        'MLP': MLPClassifier(
             hidden_layer_sizes=(64, 32, 16),
             activation='relu',
             solver='adam',
