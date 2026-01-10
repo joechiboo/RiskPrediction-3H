@@ -43,7 +43,21 @@
       "Bash(\"C:\\Users\\joechiboo\\AppData\\Local\\anaconda3\\envs\\ai\\python.exe\" -m jupyter nbconvert:*)",
       "Bash(\"C:\\Users\\joechiboo\\AppData\\Local\\anaconda3\\envs\\ai\\python.exe\" -c:*)",
       "Bash(\"C:\\\\Users\\\\joechiboo\\\\AppData\\\\Local\\\\anaconda3\\\\envs\\\\ai\\\\python.exe\" -m jupyter nbconvert --to notebook --execute \"d:\\\\Personal\\\\Project\\\\RiskPrediction-3H\\\\notebooks\\\\experiments\\\\09_Delta_Ablation.ipynb\" --output 09_Delta_Ablation.ipynb --ExecutePreprocessor.timeout=600)",
-      "Bash(\"C:\\\\Users\\\\joechiboo\\\\AppData\\\\Local\\\\anaconda3\\\\envs\\\\ai\\\\python.exe\" -c:*)"
+      "Bash(\"C:\\\\Users\\\\joechiboo\\\\AppData\\\\Local\\\\anaconda3\\\\envs\\\\ai\\\\python.exe\" -c:*)",
+      "Bash(systeminfo:*)",
+      "Bash(wmic cpu:*)",
+      "Bash(wmic memorychip:*)",
+      "Bash(wmic path win32_videocontroller get name:*)",
+      "Bash(pandoc:*)",
+      "Bash(git stash:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr view:*)",
+      "Bash(python3:*)",
+      "Bash(wc:*)",
+      "Bash(\"C:\\\\Users\\\\joechiboo\\\\AppData\\\\Local\\\\anaconda3\\\\envs\\\\ai\\\\python.exe\" -m jupyter nbconvert --to notebook --execute \"d:\\\\Personal\\\\Project\\\\RiskPrediction-3H\\\\notebooks\\\\experiments\\\\13_5FoldCV_Model_Comparison.ipynb\" --output 13_5FoldCV_Model_Comparison.ipynb --ExecutePreprocessor.timeout=1200)",
+      "Bash(\"C:\\\\Users\\\\joechiboo\\\\AppData\\\\Local\\\\anaconda3\\\\envs\\\\ai\\\\python.exe\" \"d:\\\\Personal\\\\Project\\\\RiskPrediction-3H\\\\scripts\\\\run_5fold_cv.py\")",
+      "Bash(C:Python310python.exe -c \"import pandas; import sklearn; import xgboost; import lightgbm; print\\(''All packages available''\\)\")",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []
