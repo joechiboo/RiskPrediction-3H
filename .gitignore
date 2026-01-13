@@ -34,25 +34,32 @@ data/raw/*.xlsx
 data/processed/*.csv
 data/processed/*.pkl
 
-# Synthea Data (Large files - see docs/01_data/Synthea_README.md for source)
-data/01_primary/Synthea/
+# Synthea Data (Large CSV files only)
+data/01_primary/Synthea/**/*.csv
+data/01_primary/Synthea/**/*.json
 data/raw/synthea_sample_data/
 data/raw/1000_synthea_sample_data/
 data/raw/100_synthea_sample_data/
 
-# HRS Data (Large files - see docs/01_data/HRS_README.md for source)
-data/02_reference/HRS/
+# HRS Data (Large data files only, keep README)
+data/02_reference/HRS/**/*.sas7bdat
+data/02_reference/HRS/**/*.dta
+data/02_reference/HRS/**/*.sav
+data/02_reference/HRS/**/*.dat
+data/02_reference/HRS/**/h22da/
+data/02_reference/HRS/**/h22sas/
+data/02_reference/HRS/**/h22sps/
+data/02_reference/HRS/**/h22sta/
 data/HRS_data/
 data/raw/other/
+
+# Large data file extensions
 *.sas7bdat
 *.dta
 *.sav
-*.dat
 
-# DGA Reference (PDF - see docs/01_data/references.md for source)
-data/02_reference/DGA/
-
-# Claude temp files
+# Claude Code
+.claude/
 tmpclaude-*
 temp_good_nb.json
 
