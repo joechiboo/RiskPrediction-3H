@@ -34,18 +34,30 @@ data/raw/*.xlsx
 data/processed/*.csv
 data/processed/*.pkl
 
-# Synthea Data (Large files not included in repo)
+# Synthea Data (Large files - see docs/01_data/Synthea_README.md for source)
+data/01_primary/Synthea/
 data/raw/synthea_sample_data/
 data/raw/1000_synthea_sample_data/
 data/raw/100_synthea_sample_data/
 
-# HRS Data (Large files not included in repo)
+# HRS Data (Large files - see docs/01_data/HRS_README.md for source)
+data/02_reference/HRS/
 data/HRS_data/
 data/raw/other/
 *.sas7bdat
 *.dta
 *.sav
 *.dat
+
+# DGA Reference (PDF - see docs/01_data/references.md for source)
+data/02_reference/DGA/
+
+# Claude temp files
+tmpclaude-*
+temp_good_nb.json
+
+# PySR temp files
+notebooks/experiments/pysr_temp/
 
 # Model files
 results/models/*.pkl
