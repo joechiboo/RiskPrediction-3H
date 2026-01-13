@@ -1,6 +1,6 @@
-# TODO - 1/8 前完整 Meeting 準備
+# TODO - 研究進度追蹤
 
-> ⚠️ **重要**：教授 1/8 後不在 10 天，之前需完成完整 Meeting
+> 📅 最後更新：2026-01-13
 
 ---
 
@@ -14,26 +14,42 @@
 
 ## 🧪 核心實驗
 
-- [x] SHAP 可解釋性分析
-- [x] Δ 消融實驗（有 Δ vs 無 Δ）
-- [x] class_weight 消融實驗
+- [x] SHAP 可解釋性分析（notebook 08）
+- [x] Δ 消融實驗（有 Δ vs 無 Δ）（notebook 09）
+- [x] class_weight 消融實驗（notebook 10）
 - [x] 混淆矩陣評估指標補充（教授建議）
-- [x] GP 參數調整（generations=100, tournament=2）+ PySR 替代方案實驗
-- [x] MTL 計算效益（訓練時間比較）
+- [x] GP 參數調整 + PySR 替代方案（notebook 11, 12, 15, 16）
+- [x] MTL 計算效益（訓練時間比較）（notebook 20）
+- [x] 5-Fold CV 模型比較（notebook 13）- 7 models × 3 diseases
+- [x] Sliding Window + GroupKFold（notebook 17）- 防止 data leakage
+- [x] SHAP Sliding Window 分析（notebook 19）
 
-> ✅ **GP/PySR 結論**：非 bug，是方法本身限制。gplearn 不支援 class_weight，PySR 雖可學到公式但 AUC 仍低於 LR/XGBoost。建議：論文以 LR/XGBoost 為主，PySR 公式作為附錄補充。
+> ✅ **GP/PySR 結論**：
+> - gplearn 不支援 class_weight
+> - PySR 5-Fold CV 結果：高血壓 0.684、高血糖 0.899、高血脂 0.795
+> - PySR 公式深度低（depth=1），但符合醫學直覺
+> - 建議：論文以 LR/XGBoost 為主，PySR 公式作為可解釋性補充
+
+---
+
+## 🔬 進行中實驗
+
+- [ ] 🔥 PySR 複雜公式實驗（notebook 18）- parsimony=0, maxsize=50
+  - 目標：尋找 depth ≥ 2 的複雜公式以提升 AUC
+  - 預計執行時間：1.5-2 小時
 
 ---
 
 ## 🔬 待做實驗（Future Work）
 
-**短期（Meeting 18 後）**：
-- [ ] 5-fold CV：提高結果穩定性
+**短期**：
+
 - [ ] 特徵選擇實驗：前 N 個特徵是否足夠？（參考 Wang et al.）
-- [ ] 不平衡處理方法消融實驗：比較 Baseline / class_weight / SMOTE / ADASYN / UnderSampling（驗證方法選擇依據，看 SMOTE 能否改善 RF）
+- [ ] 不平衡處理消融：Baseline / class_weight / SMOTE / ADASYN
 
 **中期（論文撰寫期間）**：
-- [ ] 健檢頻率分析：用年齡差（Age_T2 - Age_T1）分組比較 1/2/3 年間隔
+
+- [ ] 健檢頻率分析：用年齡差分組比較 1/2/3 年間隔
 - [ ] 外部驗證：尋找其他健檢資料集測試泛化能力
 
 ---
@@ -48,6 +64,7 @@
 - [ ] 論述「核心指標主導」vs「共享風險因子」現象（Discussion 章節素材）
 
 **長期（未來展望）**：
+
 - [ ] 健檢頻率優化實驗（需要有時間戳記的資料集）
 - [ ] 虛擬健檢概念（參考 Wang et al.）
 
