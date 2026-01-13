@@ -57,7 +57,14 @@
       "Bash(\"C:\\\\Users\\\\joechiboo\\\\AppData\\\\Local\\\\anaconda3\\\\envs\\\\ai\\\\python.exe\" -m jupyter nbconvert --to notebook --execute \"d:\\\\Personal\\\\Project\\\\RiskPrediction-3H\\\\notebooks\\\\experiments\\\\13_5FoldCV_Model_Comparison.ipynb\" --output 13_5FoldCV_Model_Comparison.ipynb --ExecutePreprocessor.timeout=1200)",
       "Bash(\"C:\\\\Users\\\\joechiboo\\\\AppData\\\\Local\\\\anaconda3\\\\envs\\\\ai\\\\python.exe\" \"d:\\\\Personal\\\\Project\\\\RiskPrediction-3H\\\\scripts\\\\run_5fold_cv.py\")",
       "Bash(C:Python310python.exe -c \"import pandas; import sklearn; import xgboost; import lightgbm; print\\(''All packages available''\\)\")",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(if not exist \"d:\\\\Personal\\\\Project\\\\RiskPrediction-3H\\\\data\\\\02_reference\\\\papers\" mkdir \"d:\\\\Personal\\\\Project\\\\RiskPrediction-3H\\\\data\\\\02_reference\\\\papers\")",
+      "Bash(\"C:\\\\Users\\\\joechiboo\\\\AppData\\\\Local\\\\anaconda3\\\\envs\\\\ai\\\\python.exe\" -m jupyter nbconvert:*)",
+      "Bash(\"C:\\\\Users\\\\joechiboo\\\\AppData\\\\Local\\\\anaconda3\\\\envs\\\\ai\\\\python.exe\" -c \"\nimport pandas as pd\ndf = pd.read_csv\\(''d:/Personal/Project/RiskPrediction-3H/data/01_primary/SUA/processed/SUA_CVDs_wide_format.csv''\\)\n\nprint\\(''=== 目標變數的值分佈 ===''\\)\nfor col in [''hypertension_T3'', ''hyperglycemia_T3'', ''dyslipidemia_T3'']:\n    if col in df.columns:\n        print\\(f''\\\\n{col}:''\\)\n        print\\(df[col].value_counts\\(dropna=False\\)\\)\n\")",
+      "Bash(\"C:\\\\Users\\\\joechiboo\\\\AppData\\\\Local\\\\anaconda3\\\\envs\\\\ai\\\\python.exe\" -m jupyter nbconvert --to notebook --execute \"d:\\\\Personal\\\\Project\\\\RiskPrediction-3H\\\\notebooks\\\\experiments\\\\13_5FoldCV_Model_Comparison.ipynb\" --output 13_5FoldCV_Model_Comparison.ipynb --ExecutePreprocessor.timeout=36000 --allow-errors)",
+      "Bash(C:Python310python.exe:*)",
+      "Bash(\"C:\\\\Users\\\\joechiboo\\\\AppData\\\\Local\\\\anaconda3\\\\envs\\\\ai\\\\python.exe\" \"d:\\\\Personal\\\\Project\\\\RiskPrediction-3H\\\\scripts\\\\create_sliding_window_dataset.py\")",
+      "Bash(\"C:\\\\Users\\\\joechiboo\\\\AppData\\\\Local\\\\anaconda3\\\\envs\\\\ai\\\\python.exe\":*)"
     ],
     "deny": [],
     "ask": []

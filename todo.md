@@ -4,85 +4,15 @@
 
 ---
 
-## 📖 Meeting 18 論文閱讀
+## 待處理：
 
-- [x] 🔥🔥 #5 Taiwan MJ 高血壓預測（最優先）
-- [ ] 🔥 #1 Dual 2025 前作
-- [ ] 🔥 #9 SMOTE + SHAP Framework
-
----
-
-## 🧪 核心實驗
-
-- [x] SHAP 可解釋性分析（notebook 08）
-- [x] Δ 消融實驗（有 Δ vs 無 Δ）（notebook 09）
-- [x] class_weight 消融實驗（notebook 10）
-- [x] 混淆矩陣評估指標補充（教授建議）
-- [x] GP 參數調整 + PySR 替代方案（notebook 11, 12, 15, 16）
-- [x] MTL 計算效益（訓練時間比較）（notebook 20）
-- [x] 5-Fold CV 模型比較（notebook 13）- 7 models × 3 diseases
-- [x] Sliding Window + GroupKFold（notebook 17）- 防止 data leakage
-- [x] SHAP Sliding Window 分析（notebook 19）
-
-> ✅ **GP/PySR 結論**：
-> - gplearn 不支援 class_weight
-> - PySR 5-Fold CV 結果：高血壓 0.684、高血糖 0.899、高血脂 0.795
-> - PySR 公式深度低（depth=1），但符合醫學直覺
-> - 建議：論文以 LR/XGBoost 為主，PySR 公式作為可解釋性補充
-
----
-
-## 🔬 進行中實驗
-
-- [ ] 🔥 PySR 複雜公式實驗（notebook 18）- parsimony=0, maxsize=50
-  - 目標：尋找 depth ≥ 2 的複雜公式以提升 AUC
-  - 預計執行時間：1.5-2 小時
-
----
-
-## 🔬 待做實驗（Future Work）
-
-**短期**：
-
-- [ ] 特徵選擇實驗：前 N 個特徵是否足夠？（參考 Wang et al.）
-- [ ] 不平衡處理消融：Baseline / class_weight / SMOTE / ADASYN
-
-**中期（論文撰寫期間）**：
-
-- [ ] 健檢頻率分析：用年齡差分組比較 1/2/3 年間隔
-- [ ] 外部驗證：尋找其他健檢資料集測試泛化能力
-
----
-
-## 📚 文獻補充（三高關聯性）
-
-> **背景**：目前 SHAP 分析顯示各疾病由「核心指標」主導（血壓→高血壓、血糖→糖尿病、TC→高血脂），但缺乏跨疾病關聯的文獻支持。
-
-- [ ] 🔥 搜尋高血壓與糖尿病雙向關聯的文獻（流行病學研究）
-- [ ] 分析 SHAP 結果中的跨疾病共享特徵（Age, BMI, UA, GFR）
-- [ ] 補充代謝症候群共病性的文獻支持（為 MTL 架構提供理論依據）
-- [ ] 論述「核心指標主導」vs「共享風險因子」現象（Discussion 章節素材）
-
-**長期（未來展望）**：
-
-- [ ] 健檢頻率優化實驗（需要有時間戳記的資料集）
-- [ ] 虛擬健檢概念（參考 Wang et al.）
-
----
-
-## ✍️ 論文撰寫
-
-- [ ] 第三章：研究方法初稿
-
----
-
-## 📊 Meeting 18 簡報
-
-- [ ] 撰寫簡報 page 0 / 20
-- [ ] 演練簡報
-- [ ] 約教授 meeting
-
----
+實驗23
+論文閱讀
+  深度解析：docs/02_literature/summaries/Paper_Kanegae_Hypertension_2020
+  中文翻譯：docs/02_literature/translations/Kanegae_Hypertension_2020_中文翻譯.md
+簡報準備
+  整合實驗成果
+論文撰寫
 
 ## 📝 完成的 Memos
 
