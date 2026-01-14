@@ -10,9 +10,9 @@
 
 | 狀態 | 數量 |
 |------|------|
-| ✅ 已完成 | 14 |
-| 🔄 進行中 | 1 |
-| 📋 待執行 | 1 |
+| ✅ 已完成 | 15 |
+| 🔄 進行中 | 0 |
+| 📋 待執行 | 0 |
 | 🗄️ 已封存 | 6 |
 
 ---
@@ -32,8 +32,8 @@
 | 21_Delta_Ablation | Delta 特徵消融 | ✅ |
 | 22_Feature_Selection_Ablation | 特徵選擇消融 | ✅ |
 | 23_PySR_SlidingWindow | PySR 滑動窗口版本 | ✅ |
-| 24_SMOTE_vs_ClassWeight | SMOTE vs class_weight 比較 | 📋 待執行 |
-| 25_PySR_Depth_Experiment | PySR 樹深度實驗 | 🔄 進行中 |
+| 24_SMOTE_Comparison | SMOTE vs class_weight 比較 | ✅ |
+| 25_PySR_Depth_Experiment | PySR 樹深度實驗 | ✅ |
 
 ### 已封存（archive/）
 
@@ -236,21 +236,32 @@
 
 ---
 
-## 🔄 進行中實驗
-
 ### E14. PySR 樹深度實驗
 
 | 項目 | 內容 |
 |------|------|
 | **假說** | 使用 Top 5 特徵可產生更深（depth ≥ 2）的公式 |
-| **狀態** | 🔄 進行中 |
-| **Notebook** | [24_PySR_Depth_Experiment.ipynb](../../notebooks/experiments/24_PySR_Depth_Experiment.ipynb) |
-| **設計** | 對比：Top 5 特徵 vs 全部特徵，parsimony=0.0001 vs 0 |
-| **預估時間** | 約 3 小時 |
+| **完成日期** | 2026-01-14 |
+| **Notebook** | [25_PySR_Depth_Experiment.ipynb](../../notebooks/experiments/25_PySR_Depth_Experiment.ipynb) |
+| **執行時間** | 140 分鐘（3 個實驗 × 3-Fold CV） |
+| **結論** | ❌ **未驗證**：高血壓 PySR 搜索容易陷入常數解（6/9 folds 退化），複雜公式 AUC 僅提升 1-2% |
+
+**結果**：
+
+| 實驗 | 設定 | AUC | 公式穩定性 |
+|------|------|-----|-----------|
+| A | Top 5 + parsimony=0.0001 | 0.566 ± 0.114 | 2/3 常數 |
+| B | Top 5 + parsimony=0 | 0.500 ± 0.000 | 3/3 常數 |
+| C | All 26 + parsimony=0 | 0.571 ± 0.123 | 2/3 常數 |
+
+**複雜公式 vs 簡單公式**：
+
+- depth=1 `0.10*SBP_T2` → AUC ≈ 0.70
+- depth=2 `0.065*(SBP_T1+SBP_T2)` → AUC ≈ 0.71（僅 +1%）
+
+**建議**：論文以高血糖公式 `0.12*FBG_T2`（AUC=0.918）為主要範例
 
 ---
-
-## ✅ 已完成實驗（續）
 
 ### E15. SMOTE vs class_weight 比較
 
@@ -295,4 +306,4 @@
 
 ---
 
-**最後更新**：2026-01-13
+**最後更新**：2026-01-14
