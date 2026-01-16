@@ -8,7 +8,13 @@
 
 ### 簡報準備
 - [x] Kanegae2020 Paper 整理簡報（Slide 1-10 完成）
-- [ ] Meeting19 簡報 Slide 11-20（實驗成果）- 已完成到 Slide 16
+- [ ] Meeting19 簡報 Slide 11-20（實驗成果）
+  - [ ] Slide 11 Problem Definition（待處理，下次優先）
+  - [x] Slide 12-16 完成
+  - [x] Slide 17 SHAP 完成
+  - [x] Slide 18 PySR 完成
+  - [x] Slide 19 機率 vs 二元 完成
+  - [x] Slide 20 假說驗證總結 完成
 - [ ] Meeting 20 準備
 
 ### Related Work 表格
