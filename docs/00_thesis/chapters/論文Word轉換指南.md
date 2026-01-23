@@ -109,9 +109,22 @@ docs/00_thesis/figures/
 └── 論文流程圖.pptx                   # 原始 PPT 檔案
 ```
 
-實驗結果圖片存放於：`docs/03_experiments/figures/`
+實驗結果圖片存放於：`docs/03_experiments/figures/` 與 `results/`
 
 命名格式：`fig{章}-{編號}_{描述}.png`
+
+## 第四章圖片規劃
+
+| 節 | 圖編號 | 來源檔案 | 說明 |
+|----|--------|----------|------|
+| 4.1 模型性能 | 圖 4-1 | `results/5fold_cv_auc_comparison.png` | 各模型 AUC 比較長條圖 |
+| 4.1 模型性能 | 圖 4-2 | `results/5fold_cv_roc_curves.png` | ROC 曲線比較 |
+| 4.2 特徵重要性 | 圖 4-3 | `results/shap_sliding_window_importance.png` | SHAP 特徵重要性 |
+| 4.2 特徵重要性 | 圖 4-4 | `results/shap_sliding_window_beeswarm.png` | SHAP Beeswarm Plot |
+| 4.3 Δ 特徵消融 | 圖 4-5 | `docs/03_experiments/figures/delta_ablation_comparison.png` | Δ 消融實驗比較 |
+| 4.4 特徵選擇 | 圖 4-6 | `results/feature_selection_ablation.png` | Top-K 特徵效能比較 |
+| 4.5 類別不平衡 | 圖 4-7 | `docs/03_experiments/figures/class_weight_auc_sensitivity.png` | class_weight 影響 |
+| 4.6 符號回歸 | 圖 4-8 | `results/figures/pysr_sliding_window_comparison.png` | PySR 公式效能比較 |
 
 ## Markdown 撰寫規範
 
