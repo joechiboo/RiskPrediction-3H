@@ -79,12 +79,13 @@ Category: Multidisciplinary Sciences
 
 ---
 
-## 方法 3：LetPub 中國學術期刊查詢（中文友善）
+## 方法 3：LetPub 中國學術期刊查詢（中文友善）⭐ 教授推薦
 
 ### 說明
 - LetPub 提供中文界面的期刊查詢服務
 - 免費且無需登入
 - 適合快速查詢 SCI 分區與 Impact Factor
+- **教授推薦**：大陸網站會直接標示「是否 SCI」，查詢最快速
 
 ### 步驟
 1. 前往 LetPub 網站
@@ -382,19 +383,20 @@ Indexing Information:
    ✅ 確認為 SCI/SCIE 期刊
 ```
 
-### 快速流程（時間有限時）
+### 快速流程（教授推薦）⭐
 ```
-1. Google 搜尋：
-   "期刊名稱" + "impact factor SCIE 2024"
+1. 直接前往 LetPub（最快）
+   - 網址：http://www.letpub.com.cn/index.php?page=journalapp
+   - 輸入期刊名稱
+   - 直接看「是否 SCI」欄位 → 一目了然
 
-2. 查看前 3 個結果
-   - 期刊官網
-   - LetPub
-   - SCImago
+2. 若需交叉驗證
+   - 期刊官網（查 Indexing 區塊）
+   - SCImago（https://www.scimagojr.com/）
 
-3. 確認一致性
-   ✅ 3 個來源都顯示 SCIE 收錄 → 可信
-   ⚠️ 資訊不一致 → 使用標準流程再次確認
+3. 結論
+   ✅ LetPub 顯示「是」→ 確認為 SCI
+   ⚠️ 若有疑慮 → 使用標準流程再次確認
 ```
 
 ---
@@ -439,10 +441,10 @@ Indexing Information:
 
 ## 更新記錄
 
-**最後更新**：2025-01-14
-**確認期刊**：
-- Diagnostics (SCIE ✓, IF 3.3-3.64, Q1)
-- Scientific Reports (SCIE ✓, IF 3.9, Q1)
+| 日期       | 更新內容                                     |
+|------------|----------------------------------------------|
+| 2026-01-28 | 新增教授推薦：LetPub 快速查詢法              |
+| 2025-01-14 | 確認 Diagnostics、Scientific Reports 為 SCIE |
 
 ---
 
