@@ -1,6 +1,6 @@
 # 文獻總覽索引
 
-**最後更新**：2026-01-10
+**最後更新**：2026-01-29
 **用途**：統整所有已讀論文的狀態與分類
 
 ---
@@ -11,7 +11,7 @@
 |------|------|------|
 | ✅ 已完整分析（有深度解析＋簡報） | 5 | Meeting 15-18 論文 |
 | 📋 已閱讀摘要與方法 | 2 | SMOTE+SHAP 2025, Prediabetes 2024 |
-| 📌 待深入分析 | 1 | Hung et al. 2021 |
+| 📌 待深入分析 | 3 | Hung 2021, Sun 2017, Ye 2018 |
 | 📋 基本資訊已整理 | 多篇 | 見系統性文獻回顧 |
 
 ### 按 Meeting 進度
@@ -26,6 +26,8 @@
 | 19 | Prediabetes TaiwanMJ 2024 (#1) | 📋 已閱讀摘要 |
 | 19 | China Prediabetes→Diabetes 2025 (#2) | 📋 已閱讀（備選論文） |
 | 19 | **Kanegae Hypertension 2020** | ✅ **選定為 Meeting 19 論文** |
+| 20 | **Ye et al. 2018 (JMIR) - ML + EHR 高血壓預測** | 📌 **Meeting 20 候選論文** |
+| - | Sun et al. 2017 (Systematic Review) - 高血壓預測模型回顧 | 📌 深度解析用（寫第二章） |
 
 ---
 
@@ -69,6 +71,35 @@
 - **相關文檔**：
   - [Meeting_18_Notes.md](../meeting_notes/Meeting_18_Notes.md)
   - [論文候選清單 #5](../memos/論文候選清單_從Dual2025延伸.md)
+
+#### 📌 Sun et al. (2017) - 高血壓預測模型系統性回顧【深度解析 → 第二章】
+
+- **標題**：Recent development of risk-prediction models for incident hypertension: An updated systematic review
+- **期刊**：PLoS ONE (SCIE, IF 2.6, Q1/Q2)
+- **DOI**：[10.1371/journal.pone.0187240](https://doi.org/10.1371/journal.pone.0187240)
+- **PMC**：[PMC5662179](https://pmc.ncbi.nlm.nih.gov/articles/PMC5662179/)
+- **PDF位置**：[Sun_Hypertension_SystematicReview_2017.pdf](papers/Sun_Hypertension_SystematicReview_2017.pdf)
+- **內容**：系統性回顧 26 篇研究、48 個高血壓預測模型
+- **常見風險因子**：BMI, Age, 血壓, 吸菸, 家族史, 生化指標
+- **統計方法**：Logistic (12篇), COX (7篇), Weibull (6篇)
+- **狀態**：📌 已下載，待深度解析
+- **用途**：寫第二章文獻探討的重要參考
+- **來源**：Kanegae 2020 參考文獻 #12
+
+#### 📌 Ye et al. (2018) - ML + EHR 高血壓預測【Meeting 20 候選】
+
+- **標題**：Prediction of Incident Hypertension Within the Next Year: Prospective Study Using Statewide Electronic Health Records and Machine Learning
+- **期刊**：JMIR (SCIE, IF 5.8, Q1)
+- **DOI**：[10.2196/jmir.9268](https://doi.org/10.2196/jmir.9268)
+- **PMC**：[PMC5811646](https://pmc.ncbi.nlm.nih.gov/articles/PMC5811646/)
+- **PDF位置**：[Ye_JMIR_Hypertension_ML_2018.pdf](papers/Ye_JMIR_Hypertension_ML_2018.pdf)
+- **資料**：美國 Maine 州 EHR，823,627 人（回顧）/ 680,810 人（前瞻）
+- **方法**：XGBoost（特徵選擇 + 模型建構）
+- **最佳結果**：AUC 0.917（回顧）/ 0.870（前瞻）
+- **注意**：有後續評論指出可能存在 data leakage（前 5 重要特徵為降壓藥）
+- **狀態**：📌 已下載，待閱讀
+- **用途**：Meeting 20 報告論文
+- **來源**：Kanegae 2020 參考文獻 #30
 
 #### 📌 Hung et al. (2021) - 隱匿性高血壓預測
 - **期刊**：Frontiers in Cardiovascular Medicine, 8:778306
@@ -246,8 +277,10 @@
 
 | 優先度 | 論文 | 原因 |
 |--------|------|------|
-| 🔥 | Dual 2025 前作 (Prediabetes TaiwanMJ 2024) | 了解演進脈絡 |
-| 🔥 | SMOTE + SHAP Framework 2025 | 方法論參考 |
+| 🔥 | **Ye 2018 (JMIR) - ML+EHR 高血壓預測** | **Meeting 20 報告** |
+| 🔥 | **Sun 2017 (PLoS ONE) - 高血壓預測系統性回顧** | **深度解析 → 第二章** |
+| 🔶 | Dual 2025 前作 (Prediabetes TaiwanMJ 2024) | 了解演進脈絡 |
+| 🔶 | SMOTE + SHAP Framework 2025 | 方法論參考 |
 
 ---
 
@@ -336,6 +369,8 @@
 - [diagnostics-15-00072.pdf](../references/diagnostics-15-00072.pdf) → Liu 2024 (糖尿病) ✅
 - [diagnostics-15-02507.pdf](../references/diagnostics-15-02507.pdf) → Dual 2025 (前驅糖尿病) 📌
 - [fcvm-08-778306.pdf](../references/fcvm-08-778306.pdf) → Hung 2021 (高血壓) ⚠️
+- [Sun_Hypertension_SystematicReview_2017.pdf](papers/Sun_Hypertension_SystematicReview_2017.pdf) → Sun 2017 (高血壓系統性回顧) 📌
+- [Ye_JMIR_Hypertension_ML_2018.pdf](papers/Ye_JMIR_Hypertension_ML_2018.pdf) → Ye 2018 (ML+EHR 高血壓) 📌
 
 ### 按關鍵詞查找
 
@@ -349,7 +384,7 @@
 ---
 
 **文檔建立日期**：2025-11-13
-**最後更新**：2026-01-09（新增 Meeting 18-19 論文）
+**最後更新**：2026-01-29（新增 Sun 2017、Ye 2018，從 Kanegae 2020 參考文獻延伸）
 **維護者**：紀伯喬
 
 ---
