@@ -26,12 +26,41 @@
 | 19 | Prediabetes TaiwanMJ 2024 (#1) | 📋 已閱讀摘要 |
 | 19 | China Prediabetes→Diabetes 2025 (#2) | 📋 已閱讀（備選論文） |
 | 19 | **Kanegae Hypertension 2020** | ✅ **選定為 Meeting 19 論文** |
-| 20 | **Ye et al. 2018 (JMIR) - ML + EHR 高血壓預測** | 📌 **Meeting 20 候選論文** |
+| 20 | **Luo et al. 2024 (BMJ Open) - SUA 與心血管風險因子（資料集原始論文）** | 📌 **Meeting 20 候選論文** |
+| - | Ye et al. 2018 (JMIR) - ML + EHR 高血壓預測 | 📌 原 Meeting 20 候選 |
 | - | Sun et al. 2017 (Systematic Review) - 高血壓預測模型回顧 | 📌 深度解析用（寫第二章） |
 
 ---
 
 ## 🎯 按疾病分類
+
+### 📦 資料集原始論文（Dataset Source）
+
+#### 📌 Luo et al. (2024) - SUA 與心血管疾病風險因子 ⭐⭐⭐⭐⭐【資料集來源】【Meeting 20 候選】
+
+- **標題**：Associations of serum uric acid with cardiovascular disease risk factors: a retrospective cohort study in southeastern China
+- **期刊**：BMJ Open, 13(9):e073930
+- **DOI**：[10.1136/bmjopen-2023-073930](https://doi.org/10.1136/bmjopen-2023-073930)
+- **PDF位置**：[Luo_BMJOpen_SUA_CVD_2024.pdf](papers/Luo_BMJOpen_SUA_CVD_2024.pdf)
+- **資料**：杭州社區健檢，2010-2018，6,119 人（男 2,041、女 4,078），≥40 歲，≥3 次健檢
+- **追蹤期**：中位數 6.18 年
+- **方法**：回顧性世代研究，Cox proportional hazards model
+- **確診定義**：
+  - 高血壓：SBP ≥ 140 或 DBP ≥ 90，**或已確診且正在服用降壓藥物**
+  - 高血糖：FBG ≥ 7.0，**或自我報告糖尿病**
+  - 高血脂：TC ≥ 6.22
+- **核心發現**：
+  - SUA 升高增加兩性高血脂風險
+  - 高血糖、高血壓的關聯僅出現在女性（尤其是停經後女性）
+  - 肥胖族群中關聯不顯著
+- **排除條件**：基線已有高血壓、高血糖、高血脂者
+- **限制**：缺乏吸菸、飲酒、運動、飲食資料；單中心設計
+- **狀態**：📌 已下載，待深度解析
+- **與本研究關聯度**：⭐⭐⭐⭐⭐ (最高)
+  - **本研究使用的資料集即來自此論文**
+  - 確診定義包含用藥者（見 [Memo 22](../06_memos/22_資料集確診定義包含用藥者.md)）
+
+---
 
 ### 高血壓（Hypertension）
 
@@ -277,7 +306,8 @@
 
 | 優先度 | 論文 | 原因 |
 |--------|------|------|
-| 🔥 | **Ye 2018 (JMIR) - ML+EHR 高血壓預測** | **Meeting 20 報告** |
+| 🔥 | **Luo 2024 (BMJ Open) - SUA 與心血管風險因子（資料集原始論文）** | **Meeting 20 報告** |
+| 🔶 | Ye 2018 (JMIR) - ML+EHR 高血壓預測 | 原 Meeting 20 候選 |
 | 🔥 | **Sun 2017 (PLoS ONE) - 高血壓預測系統性回顧** | **深度解析 → 第二章** |
 | 🔶 | Dual 2025 前作 (Prediabetes TaiwanMJ 2024) | 了解演進脈絡 |
 | 🔶 | SMOTE + SHAP Framework 2025 | 方法論參考 |
@@ -369,6 +399,7 @@
 - [diagnostics-15-00072.pdf](../references/diagnostics-15-00072.pdf) → Liu 2024 (糖尿病) ✅
 - [diagnostics-15-02507.pdf](../references/diagnostics-15-02507.pdf) → Dual 2025 (前驅糖尿病) 📌
 - [fcvm-08-778306.pdf](../references/fcvm-08-778306.pdf) → Hung 2021 (高血壓) ⚠️
+- [Luo_BMJOpen_SUA_CVD_2024.pdf](papers/Luo_BMJOpen_SUA_CVD_2024.pdf) → Luo 2024 (資料集原始論文) 📌
 - [Sun_Hypertension_SystematicReview_2017.pdf](papers/Sun_Hypertension_SystematicReview_2017.pdf) → Sun 2017 (高血壓系統性回顧) 📌
 - [Ye_JMIR_Hypertension_ML_2018.pdf](papers/Ye_JMIR_Hypertension_ML_2018.pdf) → Ye 2018 (ML+EHR 高血壓) 📌
 
