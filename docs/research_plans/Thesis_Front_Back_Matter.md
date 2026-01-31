@@ -494,6 +494,84 @@ Liu, Y. C., et al. (2024). Diabetes prediction using machine learning:
 
 ---
 
+## 🔗 重要下載連結與系統
+
+> 來源：研究生相關網址及資料（114.09.18 版）+ 圖書館論文繳交頁面
+
+### 論文格式相關
+
+| 編號 | 項目 | 連結 |
+|------|------|------|
+| 10 | 學位論文格式規範 | [PDF](https://ndltdcc.ncl.edu.tw/userfiles/NTPTC/files/01＿國立臺北教育大學學位論文格式規範_1101222教務會議修正通過1110912).pdf) |
+| 11 | 本校浮水印 | [JPG](https://ndltdcc.ncl.edu.tw/userfiles/NTPTC/files/watermark_ntue.jpg) |
+| 12 | 封面/書名頁套用檔（11212版） | [下載](https://cloud.ncl.edu.tw/ntue/download.php) |
+| 13 | 論文檔案製作說明 | [PDF](https://ndltdcc.ncl.edu.tw/userfiles/NTPTC/files/論文檔案製作說明(1091116).pdf) |
+| 14 | 論文檔案製作（線上課程） | [YouTube](https://www.youtube.com/watch?v=Fj_jVE8fcA4) |
+
+### 論文上傳與授權
+
+| 編號 | 項目 | 連結 |
+|------|------|------|
+| 15 | 博碩士論文系統（建檔/上傳） | [入口](https://cloud.ncl.edu.tw/ntue/in.php?school_id=272) |
+| 15 | 論文系統操作手冊 | [PDF](https://cloud.ncl.edu.tw/manual/manual_student_3.pdf) |
+| 16 | 學位論文上傳與提交說明 | [PDF](https://ndltdcc.ncl.edu.tw/userfiles/NTPTC/files/學位論文上傳與提交2024.pdf) |
+| 17 | 上傳與提交（線上課程） | [YouTube](https://www.youtube.com/watch?v=XwNP7Dua8oI) |
+
+### 論文比對
+
+| 編號 | 項目 | 連結 |
+|------|------|------|
+| 19 | 比對帳號申請系統 | [入口](https://papercheck.ntue.edu.tw) |
+| 20 | Turnitin 比對系統 | [入口](https://www.turnitin.com/login_page.asp?lang=zh_tw) |
+
+### 口試申請文件（依本系套用檔，在助教懶人包中）
+
+| 文件 | 格式來源 | 取得方式 |
+|------|----------|----------|
+| 口試委員審定書 | 本系套用檔 | ❌ 等助教懶人包 |
+| 指導教授推薦函 | 本系套用檔 | ❌ 等助教懶人包 |
+| 論文考試申請書 | 懶人包 | ❌ 等助教懶人包 |
+| 考試委員建議名冊 | 懶人包 | ❌ 等助教懶人包 |
+
+> **懶人包發送時間**：上學期 10 月初 / 下學期 4 月初
+> **助教 mail**：changhf@tea.ntue.edu.tw
+
+### 離校相關
+
+| 編號 | 項目 | 連結 |
+|------|------|------|
+| 28 | 離校程序單（要用最新版） | [PDF](https://dicentue.ntue.edu.tw/var/file/12/1012/img/717/881961648.pdf) |
+| 29 | 畢業生離校問卷 | [入口](https://orad.ntue.edu.tw/p/412-1011-2592.php?Lang=zh-tw) |
+
+---
+
+## 📋 離校論文繳交流程
+
+> 來源：[圖書館 - 論文繳交及離校手續](https://lib.ntue.edu.tw/p/412-1045-4358.php?Lang=zh-tw)
+
+### 四大步驟
+
+| 步驟 | 內容 | 說明 |
+|------|------|------|
+| 1 | **論文檔案製作** | 轉檔、合併、加浮水印、設定保全（圖書館 4F 有 Adobe Acrobat） |
+| 2 | **論文上傳與提交** | 登入論文系統 → 建檔 → 上傳全文 → 列印授權書 → 送出審核 |
+| 3 | **論文審核** | 系所助教審核，email 通知結果；未通過需修正重新提交 |
+| 4 | **圖書館離校** | 系所核章 → 繳交紙本 3 冊 → 繳交授權書正本各 1 份 |
+
+### 紙本論文規格
+
+- 碩士封面：**天空藍色**，200 磅銅西卡紙或雲彩紙
+- A4 平裝上光
+- 繳交 **3 冊**
+
+### 授權書
+
+- **本校授權書** + **國家圖書館授權書** 各 1 份正本
+- 從論文系統上傳後自行列印
+- 需**親筆簽名**
+
+---
+
 **建立日期**: 2025-11-24
-**最後更新**: 2025-11-24
+**最後更新**: 2026-01-31
 **預計完成**: 2025年6月
