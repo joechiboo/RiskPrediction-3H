@@ -96,6 +96,33 @@
 
 ---
 
+## 📋 Ch3-Ch4 Review 待修（2026-02-01）
+
+> 詳見 [Memo 24](docs/06_memos/24_Ch3_Ch4_Review_Findings.md)
+
+### 🔴 高優先（影響論文完整性）
+
+- [ ] Ch4 補 NB/LDA 實驗結果（Ch3 有描述但 Ch4 無對應）
+- [ ] Ch4 補健檢次數實驗結果（Ch1 Q6 有提，目前 Ch4 完全沒呈現）
+- [ ] Ch4 補 MTL vs STL 結果（Ch1 Q3 有提）
+- [ ] Ch3 vs Ch4 類別不平衡實驗對齊（Ch3 寫 5 種方法，Ch4 只比了 class_weight 權重）
+- [ ] 資料集作者名統一（Luo vs Zhu，需確認原始論文作者）
+
+### 🟡 中優先（一致性）
+
+- [ ] Ch1 參考文獻補入清單（8 篇：WHF, 國健署×2, WHO, JACC:Asia, Kim, Jacobs, Patti, Alberti）
+- [ ] 特徵名稱統一：ΔeGFR vs ΔGFR（全文統一）
+- [ ] 修正 MLP 輸出層描述（Sigmoid → 二元分類）
+- [ ] gplearn 描述加註「初步實驗後改用 PySR」
+
+### 🟢 低優先（細節）
+
+- [ ] Ch4 開頭補滑動窗口後各疾病正樣本比例
+- [ ] 4.1.5 模型比較小結措辭精修（RF 高血壓 AUC > LR）
+- [ ] 確認圖片檔案（已確認 ✅ 皆存在）
+
+---
+
 ## 📋 Meeting 20 待辦（2026-01-27）
 
 ### 教授提問
