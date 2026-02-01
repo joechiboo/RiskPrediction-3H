@@ -1,0 +1,51 @@
+🎯 建議方案
+方案1: 使用 SPSS 格式轉換 ⭐⭐⭐⭐
+
+下載: TRK2022TR_R.sav (SPSS 格式)
+轉換工具:
+
+用 SPSS 開啟後另存為 Excel
+或用 R/Python 讀取 .sav 檔轉成 Excel
+
+
+
+方案2: 使用 R 轉換 ⭐⭐⭐⭐⭐ (推薦)
+r# 安裝必要套件
+install.packages(c("haven", "openxlsx"))
+library(haven)
+library(openxlsx)
+
+# 讀取 SPSS 檔案
+data <- read_sav("TRK2022TR_R.sav")
+
+# 轉存為 Excel
+write.xlsx(data, "HRS_Tracker_2022.xlsx")
+方案3: 使用 Python 轉換 ⭐⭐⭐⭐
+pythonimport pandas as pd
+import pyreadstat
+
+# 讀取 SPSS 檔案
+df, meta = pyreadstat.read_sav("TRK2022TR_R.sav")
+
+# 轉存為 Excel
+df.to_excel("HRS_Tracker_2022.xlsx", index=False)
+📋 必須下載的檔案
+基本組合：
+
+trk2022_DataDescription_V2.pdf - 資料說明書（必讀）
+TRK2022TR_R.sav - 主要資料檔案
+TRK2022TR_R.txt - 備用文字格式
+
+⚠️ 重要提醒
+HRS 資料的特性：
+
+檔案很大: 通常有數萬筆記錄
+變數很多: 可能有數百個欄位
+Excel 限制: Excel 最多104萬行，可能不夠用
+
+🚀 建議工作流程
+
+先下載 PDF 說明書 - 了解資料結構
+下載 .sav 檔案
+用 R 或 Python 轉換 - 可以同時篩選需要的欄位
+如果檔案太大 - 分批轉成多個 Excel 檔
