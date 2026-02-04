@@ -2,6 +2,8 @@
 
 > **日期**：2026-01-27
 > **狀態**：整理中
+> **論文**：Majcherek et al. (2025) — AI-driven analysis of diabetes risk determinants in U.S. adults. *PLoS ONE*, 20(9), e0328655. [DOI](https://doi.org/10.1371/journal.pone.0328655)
+> **深度解析**：[Majcherek_PLOSONE_Diabetes_2025_深度解析.md](../02_literature/reviews/Majcherek_PLOSONE_Diabetes_2025_深度解析.md)
 
 ---
 

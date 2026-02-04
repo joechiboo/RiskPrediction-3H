@@ -9,8 +9,9 @@
 
 | 狀態 | 數量 | 說明 |
 |------|------|------|
-| ✅ 已完整分析（有深度解析＋簡報） | 5 | Meeting 15-18 論文 |
-| 📋 已閱讀摘要與方法 | 2 | SMOTE+SHAP 2025, Prediabetes 2024 |
+| ✅ 已完整分析（有深度解析＋簡報） | 6 | Meeting 15-19 論文 + Luo 2024 |
+| ✅ 已深度解析（尚未簡報） | 2 | SMOTE+SHAP 2025, Majcherek 2025 |
+| 📋 已閱讀摘要與方法 | 2 | Prediabetes 2024, China Prediabetes 2025 |
 | 📌 待深入分析 | 3 | Hung 2021, Sun 2017, Ye 2018 |
 | 📋 基本資訊已整理 | 多篇 | 見系統性文獻回顧 |
 
@@ -26,7 +27,8 @@
 | 19 | Prediabetes TaiwanMJ 2024 (#1) | 📋 已閱讀摘要 |
 | 19 | China Prediabetes→Diabetes 2025 (#2) | 📋 已閱讀（備選論文） |
 | 19 | **Kanegae Hypertension 2020** | ✅ **選定為 Meeting 19 論文** |
-| 20 | **Luo et al. 2024 (BMJ Open) - SUA 與心血管風險因子（資料集原始論文）** | 📌 **Meeting 20 候選論文** |
+| 20 | **Majcherek et al. 2025 (PLOS ONE) - 18 種模型糖尿病風險預測** | ✅ **選定為 Meeting 20 論文** |
+| - | Luo et al. 2024 (BMJ Open) - SUA 與心血管風險因子（資料集原始論文） | 📌 待讀（已深度解析） |
 | - | Ye et al. 2018 (JMIR) - ML + EHR 高血壓預測 | 📌 原 Meeting 20 候選 |
 | - | Sun et al. 2017 (Systematic Review) - 高血壓預測模型回顧 | 📌 深度解析用（寫第二章） |
 
@@ -219,6 +221,27 @@
   - 多指標報告（Sensitivity, Specificity, NPV）
 - **相關文檔**：[Paper_SMOTE_SHAP_2025.md](../memos/Paper_SMOTE_SHAP_2025.md)
 
+#### ✅ Majcherek et al. (2025) - 18 種模型糖尿病風險預測 ⭐⭐⭐⭐【Meeting 20 選定】
+
+- **標題**：AI-driven analysis of diabetes risk determinants in U.S. adults: Exploring disease prevalence and health factors
+- **期刊**：PLoS ONE, 20(9): e0328655
+- **DOI**：[10.1371/journal.pone.0328655](https://doi.org/10.1371/journal.pone.0328655)
+- **PMC**：[PMC12407459](https://pmc.ncbi.nlm.nih.gov/articles/PMC12407459/)
+- **PDF位置**：[Majcherek_PLOSONE_Diabetes_BRFSS_2025.pdf](papers/Majcherek_PLOSONE_Diabetes_BRFSS_2025.pdf)
+- **資料**：美國 BRFSS 2015，253,680 名成人
+- **方法**：18 種 ML 模型（含 LR、NB、LDA、QDA、Ridge、DT、RF、XGBoost 等）
+- **最佳模型**：Extra Trees Classifier (Accuracy 96%, AUC 0.99)
+- **可解釋性**：SHAP（Global + Decision plots）
+- **類別平衡**：ROS / SMOTE / ADASYN 比較
+- **狀態**：✅ 已深度解析
+- **與本研究關聯度**：⭐⭐⭐⭐
+  - **18 種模型同時涵蓋 NB、LDA 等傳統統計方法**，為我們選擇 NB/LDA 提供文獻依據
+  - 糖尿病為我們三高預測之一
+  - 同樣使用 SHAP 可解釋性
+  - 傳統方法（LR/NB/LDA）AUC 0.71–0.73，與我們的結果趨勢可對照
+- **相關文檔**：
+  - [Majcherek_PLOSONE_Diabetes_2025_深度解析.md](reviews/Majcherek_PLOSONE_Diabetes_2025_深度解析.md)
+
 #### 📋 China Prediabetes→Diabetes (2025) - 5 年縱向預測【Meeting 19 備選】
 
 - **標題**：Development of a 5-Year Risk Prediction Model for Transition From Prediabetes to Diabetes Using Machine Learning
@@ -276,6 +299,21 @@
    - 與本研究的關聯性分析
    - 啟示與建議
 
+2. [Dual_2025_深度解析.md](Dual_2025_深度解析.md)
+   - δ-FPG 雙框架，與本研究 Δ 特徵概念相同
+
+3. [Taiwan_MJ_Hypertension_2024_深度解析.md](Taiwan_MJ_Hypertension_2024_深度解析.md)
+   - 多次健檢預測高血壓
+
+4. [Luo_BMJOpen_SUA_CVD_2024_深度解析.md](Luo_BMJOpen_SUA_CVD_2024_深度解析.md)
+   - 資料集原始論文
+
+5. [SMOTE_SHAP_2025_深度解析.md](SMOTE_SHAP_2025_深度解析.md)
+   - SMOTE + SHAP 可解釋性框架
+
+6. [Majcherek_PLOSONE_Diabetes_2025_深度解析.md](Majcherek_PLOSONE_Diabetes_2025_深度解析.md)
+   - 18 種模型比較，NB/LDA 選擇依據（Meeting 20 論文）
+
 ### 演講稿文檔（已完成）
 
 1. [Liu_2024_演講稿_10頁.md](Liu_2024_演講稿_10頁.md)
@@ -324,6 +362,8 @@
 | 16 | Taiwan MTL 2025 - 多任務學習慢性病預測 | ✅ 已簡報 |
 | 17 | Dual Framework 2025 - δ-FPG 雙框架 | ✅ 已簡報 |
 | 18 | Taiwan MJ Hypertension 2024 - 多次健檢預測 | ✅ 已簡報 |
+| 19 | Kanegae 2020 - AI 高精度高血壓預測 | ✅ 已簡報 |
+| 20 | Majcherek 2025 - 18 種模型糖尿病預測（BRFSS） | 📌 選定 |
 
 ### Meeting 19 待完成任務
 
