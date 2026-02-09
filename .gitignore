@@ -92,3 +92,9 @@ logs/
 *.tmp
 *.temp
 nul
+
+# Literature PDFs (copyright)
+docs/02_literature/papers/*.pdf
+
+# Print review (temporary)
+print_review.html
