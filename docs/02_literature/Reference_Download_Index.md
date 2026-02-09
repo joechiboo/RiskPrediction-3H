@@ -1,6 +1,6 @@
 # 參考文獻下載索引
 
-**最後更新**：2026-02-09
+**最後更新**：2026-02-09（Crossref / PDF 核實後修正版）
 **對應**：`docs/00_thesis/chapters/06_參考文獻.md`（31 篇）
 **PDF 存放位置**：`docs/02_literature/papers/`
 
@@ -10,14 +10,16 @@
 
 | 狀態 | 數量 |
 |------|------|
-| 已有 PDF | 13 篇 |
-| 需手動下載（網站擋直連） | 6 篇 |
-| 需付費或學校資料庫 | 6 篇 |
+| 已有正確 PDF | 10 篇 |
+| PDF 內容錯誤（需重新下載） | 2 篇 |
+| 需手動下載（網站擋直連） | 7 篇 |
+| 需付費或學校資料庫 | 5 篇 |
 | 非論文（報告/公告/資料集） | 6 篇 |
+| 待確認是否存在 | 1 篇 |
 
 ---
 
-## 已有 PDF（13 篇）
+## 已有正確 PDF（10 篇）— Crossref/PDF 核實通過
 
 | # | 文獻 | PDF 檔案 |
 |---|------|----------|
@@ -25,24 +27,33 @@
 | 6 | Sun et al. (2017) PLoS ONE | `papers/Sun_Hypertension_SystematicReview_2017.pdf` |
 | 7 | Kanegae et al. (2020) J Clin Hypertension | `papers/Kanegae_Hypertension_2020.pdf` |
 | 8 | Ye et al. (2018) JMIR | `papers/Ye_JMIR_Hypertension_ML_2018.pdf` |
-| 9 | Wang et al. (2024) PLoS ONE | `papers/Wang_PLOSONE_Hypertension_2024.pdf` |
-| 10 | Liu et al. (2024) Diagnostics | `papers/diagnostics-15-00072.pdf` |
-| 11 | Chen et al. (2025) Diagnostics | `papers/diagnostics-15-02507.pdf` |
+| 10 | Liu, Y.-Q. et al. (2024) Diagnostics | `papers/diagnostics-15-00072.pdf` |
 | 13 | Dinh et al. (2019) BMC | `papers/Dinh_BMC_Diabetes_CVD_2019.pdf` |
-| 15 | Hung et al. (2021) Front Cardiovasc Med | `papers/fcvm-08-778306.pdf` |
+| 15 | Hung, M.-H. et al. (2021) Front Cardiovasc Med | `papers/fcvm-08-778306.pdf` |
 | 16 | Tsai et al. (2025) Scientific Reports | `papers/s41598-025-99554-z.pdf` |
 | 19 | Saito & Rehmsmeier (2015) PLoS ONE | `papers/Saito_PLOSONE_PRAUC_2015.pdf` |
-| 28 | Patti et al. (2023) JCDD | `papers/Patti_JCDD_MetS_Hypertension_2023.pdf` |
 | 31 | Majcherek et al. (2025) PLoS ONE | `papers/Majcherek_PLOSONE_Diabetes_BRFSS_2025.pdf` |
 
 ---
 
-## 需手動下載 — Open Access 但網站擋直連（6 篇）
+## PDF 內容錯誤 — 需刪除並重新下載（2 篇）
+
+| # | 文獻 | 現有檔案 | 問題 | 正確 DOI |
+|---|------|----------|------|----------|
+| 9 | Wang, C.-C. et al. (2024) PLoS ONE | `papers/Wang_PLOSONE_Hypertension_2024.pdf` | 下載到 Corbett et al. 早產論文（舊 DOI e0312370 錯誤）| https://doi.org/10.1371/journal.pone.0313658 |
+| 28 | Patti et al. (2023) JCDD | `papers/Patti_JCDD_MetS_Hypertension_2023.pdf` | 下載到 Kauling et al. SCUBA 潛水論文（DOI jcdd10010020 錯誤）| **待確認此論文是否存在** |
+
+> 處理方式：刪除上述 2 個 PDF，用正確 DOI 重新下載 #9；#28 待確認。
+
+---
+
+## 需手動下載 — Open Access 但網站擋直連（7 篇）
 
 | # | 文獻 | 期刊 | DOI（用瀏覽器開） | 建議檔名 |
 |---|------|------|-------------------|----------|
 | 1 | James et al. (2014) JNC 8 | JAMA | https://doi.org/10.1001/jama.2013.284427 (PMC: PMC4575491) | `James_JAMA_JNC8_2014.pdf` |
 | 3 | NCEP ATP III (2002) | Circulation | https://doi.org/10.1161/01.CIR.0000038419.01177.FA | `NCEP_ATPIII_2002.pdf` |
+| 12 | Alaa et al. (2019) | **PLoS ONE**（非 Nature Medicine） | https://doi.org/10.1371/journal.pone.0213653 | `Alaa_PLOSONE_CVD_AutoML_2019.pdf` |
 | 14 | Fisher (1936) | Annals of Eugenics | https://doi.org/10.1111/j.1469-1809.1936.tb02137.x | `Fisher_AnnEugenics_LDA_1936.pdf` |
 | 18 | Chawla et al. (2002) | JAIR | https://doi.org/10.1613/jair.953 | `Chawla_JAIR_SMOTE_2002.pdf` |
 | 24 | Ohira & Iso (2013) | Circulation Journal | https://doi.org/10.1253/circj.CJ-13-0702 | `Ohira_CircJ_CVD_Asia_2013.pdf` |
@@ -51,16 +62,22 @@
 
 ---
 
-## 待下載 — 可能需付費（6 篇）
+## 待下載 — 可能需付費（5 篇）
 
 | # | 文獻 | 期刊 | DOI | 替代來源 | 建議檔名 |
 |---|------|------|-----|----------|----------|
-| 1 | James et al. (2014) JNC 8 | JAMA | 10.1001/jama.2013.284427 | PMC: PMC4575491 | `James_JAMA_JNC8_2014.pdf` |
 | 2 | ADA (2025) | Diabetes Care | 48(Suppl 1) | ADA 官網可能有 OA 版 | `ADA_Standards_2025.pdf` |
-| 12 | Alaa et al. (2019) | Nature Medicine | 10.1038/s41591-019-0563-7 | 可能有 preprint | `Alaa_NatMed_CVD_AutoML_2019.pdf` |
 | 17 | He & Garcia (2009) | IEEE TKDE | 10.1109/TKDE.2008.239 | 學校 IEEE 資料庫 | `He_IEEE_Imbalanced_2009.pdf` |
-| 26 | Kim et al. (2025) | Nat Rev Endocrinol | — | 學校資料庫 | `Kim_NatRevEndocrinol_EastAsia_2025.pdf` |
+| 26 | Sun, Z. & Zheng, Y. (2025) | **Nat Rev Gastroenterol Hepatol**（非 Endocrinol） | 10.1038/s41575-025-01058-8 | 學校資料庫 | `Sun_NatRevGastro_EastAsia_2025.pdf` |
 | 27 | Jacobs et al. (2005) | Curr Opin Cardiol | 10.1097/01.hco.0000166596.22836.07 | 學校資料庫 | `Jacobs_CurrOpinCardiol_MetS_2005.pdf` |
+
+---
+
+## 待確認（1 篇）
+
+| # | 文獻 | 問題 |
+|---|------|------|
+| 11 | Chen et al. (2025) Diagnostics 15(19), 2507 | DOI 對應到 Yang, C.-C. et al. 不同論文；需確認論文中引用的是 Chen 還是 Yang |
 
 ---
 
@@ -84,3 +101,28 @@
 3. **PDF 統一放在** `docs/02_literature/papers/` 資料夾
 4. **檔名格式**：`第一作者_期刊縮寫_主題_年份.pdf`
 5. 下載完成後在此檔標記 ✅
+
+---
+
+## 核實紀錄（2026-02-09）
+
+以下修正經 Crossref API 或 PDF 文字提取核實：
+
+| 修正項目 | 原始 | 修正後 |
+|----------|------|--------|
+| #4, #5 Luo 作者 | 5 人 (Liao, J., Fan, D.) | 8 人 (Lian, F., Jiang, C., Hu, M., Wang, Y., Ma, H.) |
+| #7 Kanegae 頁碼 | 453-461 | 445-450 |
+| #9 Wang DOI | e0312370 | **e0313658** |
+| #9 Wang 作者 | Wang, H., Chu, Y., Jang, J. | **Wang, C.-C., Chu, T.-W., Jang, J.-S. R.** |
+| #10 Liu 作者 | Liu, C. 等 5 人 | **Liu, Y.-Q.** 等 8 人 |
+| #10 Liu 標題 | "Prediction of Type 2 Diabetes..." | **"Use of ML to Predict the Incidence..."** |
+| #12 Alaa 期刊 | Nature Medicine 25:1477 | **PLoS ONE 14(5):e0213653** |
+| #13 Dinh 末位作者 | Mober | **Mohanty** |
+| #15 Hung 作者 | 8 人（全錯） | 10 人（Hung, M.-H. 等） |
+| #16 Tsai 作者 | 4 人 | 6 人（加 Yang, Wu, Tu） |
+| #16 Tsai 文章號 | 18088 | **15468** |
+| #26 作者/期刊 | Kim, H.S. / Nat Rev Endocrinol | **Sun, Z. & Zheng, Y. / Nat Rev Gastroenterol Hepatol** |
+| #29 Alberti 縮寫 | K. G. | **K. G. M. M.** |
+| #31 Majcherek DOI | e0317676, 20(1) | **e0328655, 20(9)** |
+| #31 Majcherek 作者 | 4 人 | 3 人（Majcherek, Ciesielski, Sobczak） |
+| #31 Majcherek 標題 | "Diabetes prediction..." | **"AI-driven analysis..."** |
