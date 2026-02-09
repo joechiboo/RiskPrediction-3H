@@ -1,7 +1,7 @@
 # 參考文獻下載索引
 
 **最後更新**：2026-02-09（Crossref / PDF 核實後修正版）
-**對應**：`docs/00_thesis/chapters/06_參考文獻.md`（31 篇）
+**對應**：`docs/00_thesis/chapters/06_參考文獻.md`（30 篇）
 **PDF 存放位置**：`docs/02_literature/papers/`
 
 ---
@@ -13,9 +13,9 @@
 | 已有正確 PDF | 10 篇 |
 | PDF 內容錯誤（需重新下載） | 2 篇 |
 | 需手動下載（網站擋直連） | 7 篇 |
-| 需付費或學校資料庫 | 5 篇 |
+| 需付費或學校資料庫 | 3 篇 |
 | 非論文（報告/公告/資料集） | 6 篇 |
-| 待確認是否存在 | 1 篇 |
+| 已移除（無法核實） | 2 篇 |
 
 ---
 
@@ -62,22 +62,22 @@
 
 ---
 
-## 待下載 — 可能需付費（5 篇）
+## 待下載 — 可能需付費（3 篇）
 
 | # | 文獻 | 期刊 | DOI | 替代來源 | 建議檔名 |
 |---|------|------|-----|----------|----------|
 | 2 | ADA (2025) | Diabetes Care | 48(Suppl 1) | ADA 官網可能有 OA 版 | `ADA_Standards_2025.pdf` |
 | 17 | He & Garcia (2009) | IEEE TKDE | 10.1109/TKDE.2008.239 | 學校 IEEE 資料庫 | `He_IEEE_Imbalanced_2009.pdf` |
 | 26 | Sun, Z. & Zheng, Y. (2025) | **Nat Rev Gastroenterol Hepatol**（非 Endocrinol） | 10.1038/s41575-025-01058-8 | 學校資料庫 | `Sun_NatRevGastro_EastAsia_2025.pdf` |
-| 27 | Jacobs et al. (2005) | Curr Opin Cardiol | 10.1097/01.hco.0000166596.22836.07 | 學校資料庫 | `Jacobs_CurrOpinCardiol_MetS_2005.pdf` |
 
 ---
 
-## 待確認（1 篇）
+## 已移除（2 篇）
 
-| # | 文獻 | 問題 |
-|---|------|------|
-| 11 | Chen et al. (2025) Diagnostics 15(19), 2507 | DOI 對應到 Yang, C.-C. et al. 不同論文；需確認論文中引用的是 Chen 還是 Yang |
+| # | 原文獻 | 移除原因 |
+|---|--------|----------|
+| 11 | Chen et al. (2025) Diagnostics 15(19), 2507 | DOI 實為 Yang, C.-C. et al.，已修正為 Yang 並保留（非移除，而是更名） |
+| 27 | Jacobs, M. J., et al. (2005) Curr Opin Cardiol 20(4), 270-274 | DOI 404、PubMed 查無此文，無法核實，已從參考文獻移除 |
 
 ---
 
