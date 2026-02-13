@@ -8,8 +8,8 @@
 
 ```bash
 cd d:\Personal\Project\RiskPrediction-3H\docs\00_thesis\chapters
-pandoc "第三章_研究方法.md" -o "第三章_研究方法.docx" --reference-doc=reference.docx
-pandoc "第四章_實驗結果.md" -o "第四章_實驗結果.docx" --reference-doc=reference.docx
+pandoc "01_第一章_緒論.md" -o "01_第一章_緒論.docx" --reference-doc="03_第三章_研究方法.docx"
+# 其餘章節同理，替換檔名即可
 ```
 
 **模板設定（首次使用需設定一次）**：
@@ -128,13 +128,15 @@ pandoc "第四章_實驗結果.md" -o "第四章_實驗結果.docx" --reference-
 
 | 章節 | Markdown | Word | 狀態 |
 |------|----------|------|------|
-| 第一章 緒論 | 第一章_緒論.md | 第一章_緒論.docx | 待撰寫 |
-| 第二章 文獻探討 | 第二章_問題定義.md | 第二章_問題定義.docx | 待撰寫 |
-| 第三章 研究方法 | 第三章_研究方法.md | 第三章_研究方法.docx | ✅ 已完成 |
-| 第四章 實驗結果 | 第四章_實驗結果.md | 第四章_實驗結果.docx | 60% 初稿 |
-| 第五章 討論 | 第五章_討論.md | 第五章_討論.docx | 待撰寫 |
-| 第六章 結論 | 第六章_結論.md | 第六章_結論.docx | 待撰寫 |
-| 參考文獻 | 參考文獻.md | 參考文獻.docx | 待整理 |
+| 謝辭 | `00a_謝辭.md` | `00a_謝辭.docx` | 待轉換 |
+| 中文摘要 | `00b_中文摘要.md` | `00b_中文摘要.docx` | 待轉換 |
+| 英文摘要 | `00b_英文摘要.md` | `00b_英文摘要.docx` | 待轉換 |
+| 第一章 緒論 | `01_第一章_緒論.md` | `01_第一章_緒論.docx` | ✅ 已轉換 |
+| 第二章 文獻探討 | `02_第二章_文獻探討.md` | `02_第二章_文獻探討.docx` | ✅ 已轉換 |
+| 第三章 研究方法 | `03_第三章_研究方法.md` | `03_第三章_研究方法.docx` | ✅ 已轉換 |
+| 第四章 實驗結果 | `04_第四章_實驗結果.md` | `04_第四章_實驗結果.docx` | ✅ 已轉換 |
+| 第五章 結論與未來研究 | `05_第五章_結論與未來研究.md` | `05_第五章_結論與未來研究.docx` | ✅ 已轉換 |
+| 參考文獻 | `06_參考文獻.md` | `06_參考文獻.docx` | ✅ 已轉換 |
 
 ---
 
@@ -156,16 +158,15 @@ docs/00_thesis/figures/
 
 ## 第四章圖片規劃
 
-| 節 | 圖編號 | 來源檔案 | 說明 |
-|----|--------|----------|------|
-| 4.1 模型性能 | 圖 4-1 | `results/5fold_cv_auc_comparison.png` | 各模型 AUC 比較長條圖 |
-| 4.1 模型性能 | 圖 4-2 | `results/5fold_cv_roc_curves.png` | ROC 曲線比較 |
-| 4.2 特徵重要性 | 圖 4-3 | `results/shap_sliding_window_importance.png` | SHAP 特徵重要性 |
-| 4.2 特徵重要性 | 圖 4-4 | `results/shap_sliding_window_beeswarm.png` | SHAP Beeswarm Plot |
-| 4.3 Δ 特徵消融 | 圖 4-5 | `docs/03_experiments/figures/delta_ablation_comparison.png` | Δ 消融實驗比較 |
-| 4.4 特徵選擇 | 圖 4-6 | `results/feature_selection_ablation.png` | Top-K 特徵效能比較 |
-| 4.5 類別不平衡 | 圖 4-7 | `docs/03_experiments/figures/class_weight_auc_sensitivity.png` | class_weight 影響 |
-| 4.6 符號回歸 | 圖 4-8 | `results/figures/pysr_sliding_window_comparison.png` | PySR 公式效能比較 |
+| 節 | 圖編號 | 說明 |
+|----|--------|------|
+| 4.1 模型性能 | 圖 4-1 | 各模型 ROC 曲線比較（5-Fold CV） |
+| 4.2 特徵重要性 | 圖 4-2 | 三項疾病 SHAP 特徵重要性比較（XGBoost, Top 10） |
+| 4.2 特徵重要性 | 圖 4-3 | 高血壓預測 SHAP Beeswarm 圖（XGBoost） |
+| 4.3 Δ 特徵消融 | 圖 4-4 | Δ 特徵消融實驗結果（Full vs No-Delta） |
+| 4.4 特徵選擇 | 圖 4-5 | 特徵數量與 AUC 關係（LR vs XGBoost） |
+| 4.5 類別不平衡 | 圖 4-6 | 不同 class_weight 設定下的 Sensitivity-Specificity 權衡 |
+| 4.7 健檢次數 | 圖 4-7 | 健檢次數與預測準確度（LR 模型） |
 
 ## Markdown 撰寫規範
 
@@ -218,5 +219,5 @@ docs/00_thesis/figures/
 ---
 
 **建立日期**：2025-12-31
-**最後更新**：2026-01-23
+**最後更新**：2026-02-10
 **參考來源**：資訊科學系碩士班論文編印方式一覽表
