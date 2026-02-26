@@ -51,7 +51,7 @@
 | 檔案 | 位置 | 說明 |
 |------|------|------|
 | **原始資料** | `data/01_primary/SUA/raw/SUA_CVDs_risk_factors.csv` | 25,744 筆縱向記錄 |
-| **寬格式資料** | `data/01_primary/SUA/processed/SUA_CVDs_wide_format.csv` | 6,056 人（T1→T2→T3 固定窗口）|
+| **寬格式資料** | `data/01_primary/SUA/processed/SUA_CVDs_wide_format.csv` | 6,056 人（Y-2→Y-1→Y 固定窗口）|
 | **滑動窗口資料** | `data/01_primary/SUA/processed/SUA_sliding_window.csv` | 13,514 樣本（滑動窗口）⭐ |
 
 - **資料完整度**：✅ 無缺失值（No missing data）
@@ -174,8 +174,8 @@ Window 3: (T3, T4) → T5
 ### 適合的研究設計
 
 1. ✅ **縱向預測模型**
-   - 用 T₁ 和 T₂ 的資料預測 T₃ 的疾病風險
-   - 計算變化量特徵（Δ = T₂ - T₁）
+   - 用 Y-2 和 Y-1 的資料預測 Y 的疾病風險
+   - 計算變化量特徵（Δ = Y-1 - Y-2）
 
 2. ✅ **多疾病預測**
    - 同時預測三高（高血壓、高血糖、高血脂）
@@ -202,13 +202,13 @@ Window 3: (T3, T4) → T5
 ### 研究計畫
 
 **Input 特徵設計**（28 個特徵）：
-- T₁ 特徵（11 項血液檢驗 + BMI + 血壓）
-- T₂ 特徵（11 項血液檢驗 + BMI + 血壓）
-- Δ 變化量（T₂ - T₁）
-- 時間特徵（T₂ - T₁ 的時間間隔）
+- Y-2 特徵（11 項血液檢驗 + BMI + 血壓）
+- Y-1 特徵（11 項血液檢驗 + BMI + 血壓）
+- Δ 變化量（Y-1 - Y-2）
+- 時間特徵（Y-1 - Y-2 的時間間隔）
 
 **Output 目標**：
-- 預測 T₃ 時的三高風險（3 個二元分類）
+- 預測 Y 時的三高風險（3 個二元分類）
 
 ---
 
@@ -264,7 +264,7 @@ df['dyslipidemia_binary'] = (df['dyslipidemia'] == 2).astype(int)
 ### 2. 縱向資料重組
 
 ```python
-# 將資料重組為 T1, T2, T3 格式
+# 將資料重組為 Y-2, Y-1, Y 格式
 # 每一行代表一位參與者的三次檢查記錄
 ```
 
@@ -272,8 +272,8 @@ df['dyslipidemia_binary'] = (df['dyslipidemia'] == 2).astype(int)
 
 ```python
 # 計算變化量
-df['delta_UA'] = df['UA_T2'] - df['UA_T1']
-df['delta_FBG'] = df['FBG_T2'] - df['FBG_T1']
+df['delta_UA'] = df['UA_Y-1'] - df['UA_Y-2']
+df['delta_FBG'] = df['FBG_Y-1'] - df['FBG_Y-2']
 # ... 其他 11 項指標
 ```
 
@@ -325,7 +325,7 @@ df['delta_FBG'] = df['FBG_T2'] - df['FBG_T1']
 
 1. **完成 EDA**：執行完整的探索性分析
 2. **確認資料結構**：驗證每個人確實有多次記錄
-3. **資料重組**：將長格式轉為寬格式（T1, T2, T3）
+3. **資料重組**：將長格式轉為寬格式（Y-2, Y-1, Y）
 4. **特徵工程**：建立 Δ 變化量特徵
 5. **開始建模**：訓練第一個基礎模型
 

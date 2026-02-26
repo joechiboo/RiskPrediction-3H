@@ -322,7 +322,7 @@ shap_nn = explain_model(neural_network, X_test)
 | **預測目標** | 糖尿病、心臟病、中風、高血壓（4 種） | 高血糖、高血壓、高血脂（3 種三高） |
 | **輸入資料** | ICD 診斷代碼序列（10年，180個） | HRS 調查資料（問卷 + 生物標記） |
 | **特徵類型** | 醫療紀錄 + 個人資訊 | 人口統計 + 生活方式 + 生理指標 |
-| **時序結構** | 有（每 2 個月的 ICD 序列） | 有（T₁ → T₂ → T₃ 時間點） |
+| **時序結構** | 有（每 2 個月的 ICD 序列） | 有（Y-2 → Y-1 → Y 時間點） |
 | **資料來源** | 台灣健保資料庫 HWDC | Health and Retirement Study |
 | **樣本數** | 555,124 | 待確認（約 1,155 有 3+ 次記錄） |
 | **MTL 架構** | Hard Parameter Sharing | 可參考 |
@@ -403,15 +403,15 @@ class FeatureAttention(nn.Module):
 **應用範例**：
 ```
 輸入特徵（28 個）：
-- T₁ 特徵（10 個）：SBP, DBP, BMI, Glucose, ...
-- T₂ 特徵（10 個）：SBP, DBP, BMI, Glucose, ...
+- Y-2 特徵（10 個）：SBP, DBP, BMI, Glucose, ...
+- Y-1 特徵（10 個）：SBP, DBP, BMI, Glucose, ...
 - Δ 特徵（8 個）：ΔSBP, ΔDBP, ΔBMI, ...
     ↓
 Feature Attention（學習哪些特徵最重要）
     ↓
 Attention Score：
   - ΔSBP: 0.85 ⭐ 最重要
-  - T₂_SBP: 0.72
+  - Y-1_SBP: 0.72
   - 年齡: 0.68
   - ...
 ```
@@ -458,7 +458,7 @@ class TaskSpecificAttention(nn.Module):
 
 #### 4. Temporal Attention（時序 Attention）
 
-我們有 T₁ → T₂ → T₃ 的時序資料，可以用 Attention 學習哪個時間點最重要：
+我們有 Y-2 → Y-1 → Y 的時序資料，可以用 Attention 學習哪個時間點最重要：
 
 ```python
 class TemporalAttention(nn.Module):
@@ -483,14 +483,14 @@ class TemporalAttention(nn.Module):
 **應用**：
 ```
 患者 A：
-- T₁ Attention: 0.35
-- T₂ Attention: 0.65 ⭐
+- Y-2 Attention: 0.35
+- Y-1 Attention: 0.65 ⭐
 → 模型認為「最近的檢查」更重要
 
 患者 B：
-- T₁ Attention: 0.72 ⭐
-- T₂ Attention: 0.28
-→ 模型認為「早期異常」是警訊（即使 T₂ 改善）
+- Y-2 Attention: 0.72 ⭐
+- Y-1 Attention: 0.28
+→ 模型認為「早期異常」是警訊（即使 Y-1 改善）
 ```
 
 ---
@@ -589,7 +589,7 @@ mean_attention = high_risk_attention.mean(dim=0)
 ```python
 import matplotlib.pyplot as plt
 
-feature_names = ['SBP_T1', 'DBP_T1', 'BMI_T1', ..., 'ΔSBP', 'ΔDBP', ...]
+feature_names = ['SBP_Y-2', 'DBP_Y-2', 'BMI_Y-2', ..., 'ΔSBP', 'ΔDBP', ...]
 attention_scores = mean_attention.cpu().numpy()
 
 plt.figure(figsize=(10, 6))
@@ -645,13 +645,13 @@ print(comparison_df.sort_values('Attention_Score', ascending=False))
 ```
 高血壓模型的 Attention：
   - SBP 變化（ΔSBP）: 0.92 ⭐
-  - T₂ 收縮壓: 0.78
+  - Y-1 收縮壓: 0.78
   - 年齡: 0.65
   - BMI: 0.42
 
 高血糖模型的 Attention：
   - 血糖變化（ΔGlucose）: 0.88 ⭐
-  - T₂ 空腹血糖: 0.82
+  - Y-1 空腹血糖: 0.82
   - BMI: 0.58
   - 年齡: 0.61
 
@@ -710,7 +710,7 @@ print(comparison_df.sort_values('Attention_Score', ascending=False))
 
 1. **Feature-level Attention** - 哪些特徵最重要
 2. **Task-specific Attention** - 不同疾病關注不同特徵
-3. **Temporal Attention** - T₁ vs T₂ 哪個時間點更重要
+3. **Temporal Attention** - Y-2 vs Y-1 哪個時間點更重要
 
 #### ✅ 預期貢獻
 
