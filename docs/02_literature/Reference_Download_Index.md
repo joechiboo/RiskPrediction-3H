@@ -1,6 +1,6 @@
 # 參考文獻下載索引
 
-**最後更新**：2026-02-09（Crossref / PDF 核實後修正版）
+**最後更新**：2026-02-27（補下載 Alaa、Wang 正確版）
 **對應**：`docs/00_thesis/chapters/06_參考文獻.md`（30 篇）
 **PDF 存放位置**：`docs/02_literature/papers/`
 
@@ -10,9 +10,9 @@
 
 | 狀態 | 數量 |
 |------|------|
-| 已有正確 PDF | 10 篇 |
-| PDF 內容錯誤（需重新下載） | 2 篇 |
-| 需手動下載（網站擋直連） | 7 篇 |
+| 已有正確 PDF | 12 篇 |
+| PDF 內容錯誤（需重新下載） | 1 篇 |
+| 需手動下載（網站擋直連） | 6 篇 |
 | 需付費或學校資料庫 | 3 篇 |
 | 非論文（報告/公告/資料集） | 6 篇 |
 | 已移除（無法核實） | 2 篇 |
@@ -33,6 +33,8 @@
 | 16 | Tsai et al. (2025) Scientific Reports | `papers/s41598-025-99554-z.pdf` |
 | 19 | Saito & Rehmsmeier (2015) PLoS ONE | `papers/Saito_PLOSONE_PRAUC_2015.pdf` |
 | 31 | Majcherek et al. (2025) PLoS ONE | `papers/Majcherek_PLOSONE_Diabetes_BRFSS_2025.pdf` |
+| 9 | Wang, C.-C. et al. (2024) PLoS ONE | `papers/Wang_PLOSONE_Hypertension_2024_correct.pdf` |
+| 12 | Alaa et al. (2019) PLoS ONE | `papers/Alaa_PLOSONE_CVD_AutoML_2019.pdf` |
 
 ---
 
@@ -40,10 +42,9 @@
 
 | # | 文獻 | 現有檔案 | 問題 | 正確 DOI |
 |---|------|----------|------|----------|
-| 9 | Wang, C.-C. et al. (2024) PLoS ONE | `papers/Wang_PLOSONE_Hypertension_2024.pdf` | 下載到 Corbett et al. 早產論文（舊 DOI e0312370 錯誤）| https://doi.org/10.1371/journal.pone.0313658 |
 | 28 | Patti et al. (2023) JCDD | `papers/Patti_JCDD_MetS_Hypertension_2023.pdf` | 下載到 Kauling et al. SCUBA 潛水論文（DOI jcdd10010020 錯誤）| **待確認此論文是否存在** |
 
-> 處理方式：刪除上述 2 個 PDF，用正確 DOI 重新下載 #9；#28 待確認。
+> 處理方式：#28 待確認此論文是否存在。
 
 ---
 
@@ -53,7 +54,6 @@
 |---|------|------|-------------------|----------|
 | 1 | James et al. (2014) JNC 8 | JAMA | https://doi.org/10.1001/jama.2013.284427 (PMC: PMC4575491) | `James_JAMA_JNC8_2014.pdf` |
 | 3 | NCEP ATP III (2002) | Circulation | https://doi.org/10.1161/01.CIR.0000038419.01177.FA | `NCEP_ATPIII_2002.pdf` |
-| 12 | Alaa et al. (2019) | **PLoS ONE**（非 Nature Medicine） | https://doi.org/10.1371/journal.pone.0213653 | `Alaa_PLOSONE_CVD_AutoML_2019.pdf` |
 | 14 | Fisher (1936) | Annals of Eugenics | https://doi.org/10.1111/j.1469-1809.1936.tb02137.x | `Fisher_AnnEugenics_LDA_1936.pdf` |
 | 18 | Chawla et al. (2002) | JAIR | https://doi.org/10.1613/jair.953 | `Chawla_JAIR_SMOTE_2002.pdf` |
 | 24 | Ohira & Iso (2013) | Circulation Journal | https://doi.org/10.1253/circj.CJ-13-0702 | `Ohira_CircJ_CVD_Asia_2013.pdf` |
