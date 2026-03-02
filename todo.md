@@ -187,6 +187,23 @@ docs/00_thesis/output/
 ---
 
 
+## 📋 待移除參考文獻（Meeting 後處理）
+
+> 詳見 [待移除參考文獻.md](docs/07_plans/待移除參考文獻.md)
+
+### Sun & Zheng (2025) — 付費，Zhao/Ohira 已覆蓋
+- [ ] 修改 `01_第一章_緒論.md` 第 9 行引用句（改引 Zhao 或 Ohira）
+- [ ] 從 `09_參考文獻.md` 第 60 行移除
+- [ ] 從 `Reference_Download_Index.md` 移除
+- [ ] 從 `參考文獻閱讀進度.md` 移除（36→35篇）
+
+### Patti et al. (2023) #28 — DOI 錯誤，論文可能不存在
+- [ ] 確認 `09_參考文獻.md` 是否還有，有則移除
+- [ ] 刪除錯誤 PDF `papers/Patti_JCDD_MetS_Hypertension_2023.pdf`
+- [ ] 從 `Reference_Download_Index.md` 移除
+
+---
+
 ## ✅ 已完成
 
 ### 實驗（15/15 完成）

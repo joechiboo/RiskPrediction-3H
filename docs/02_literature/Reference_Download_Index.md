@@ -10,10 +10,10 @@
 
 | 狀態 | 數量 |
 |------|------|
-| 已有正確 PDF | 12 篇 |
+| 已有正確 PDF | 20 篇 |
 | PDF 內容錯誤（需重新下載） | 1 篇 |
-| 需手動下載（網站擋直連） | 6 篇 |
-| 需付費或學校資料庫 | 3 篇 |
+| 需手動下載（網站擋直連） | 2 篇 |
+| 需付費或學校資料庫 | 1 篇 |
 | 非論文（報告/公告/資料集） | 6 篇 |
 | 已移除（無法核實） | 2 篇 |
 
@@ -27,14 +27,22 @@
 | 6 | Sun et al. (2017) PLoS ONE | `papers/Sun_Hypertension_SystematicReview_2017.pdf` |
 | 7 | Kanegae et al. (2020) J Clin Hypertension | `papers/Kanegae_Hypertension_2020.pdf` |
 | 8 | Ye et al. (2018) JMIR | `papers/Ye_JMIR_Hypertension_ML_2018.pdf` |
-| 10 | Liu, Y.-Q. et al. (2024) Diagnostics | `papers/diagnostics-15-00072.pdf` |
+| 10 | Liu, Y.-Q. et al. (2024) Diagnostics | `papers/Liu_Diagnostics_Diabetes_2024.pdf` |
 | 13 | Dinh et al. (2019) BMC | `papers/Dinh_BMC_Diabetes_CVD_2019.pdf` |
-| 15 | Hung, M.-H. et al. (2021) Front Cardiovasc Med | `papers/fcvm-08-778306.pdf` |
-| 16 | Tsai et al. (2025) Scientific Reports | `papers/s41598-025-99554-z.pdf` |
+| 15 | Hung, M.-H. et al. (2021) Front Cardiovasc Med | `papers/Hung_FrontCardiovascMed_Hypertension_2021.pdf` |
+| 16 | Tsai et al. (2025) Scientific Reports | `papers/Tsai_SciRep_MTL_2025.pdf` |
 | 19 | Saito & Rehmsmeier (2015) PLoS ONE | `papers/Saito_PLOSONE_PRAUC_2015.pdf` |
 | 31 | Majcherek et al. (2025) PLoS ONE | `papers/Majcherek_PLOSONE_Diabetes_BRFSS_2025.pdf` |
 | 9 | Wang, C.-C. et al. (2024) PLoS ONE | `papers/Wang_PLOSONE_Hypertension_2024_correct.pdf` |
 | 12 | Alaa et al. (2019) PLoS ONE | `papers/Alaa_PLOSONE_CVD_AutoML_2019.pdf` |
+| 17 | He & Garcia (2009) IEEE TKDE | `papers/He_IEEE_Imbalanced_2009.pdf` |
+| 2 | ADA (2025) Diabetes Care | `papers/ADA_Standards_2025.pdf` |
+| 11 | Yang, C.-C. et al. (2025) Diagnostics | `papers/Yang_Diagnostics_Prediabetes_2025.pdf` |
+| 13b | Cranmer (2023) arXiv — PySR | `papers/Cranmer_arXiv_PySR_2023.pdf` |
+| 1 | James et al. (2014) JAMA — JNC 8 | `papers/James_JAMA_JNC8_2014.pdf` |
+| 18 | Chawla et al. (2002) JAIR — SMOTE | `papers/Chawla_JAIR_SMOTE_2002.pdf` |
+| 25 | Zhao (2021) JACC: Asia | `papers/Zhao_JACCAsia_CVD_Epidemiology_2021.pdf` |
+| 29 | Alberti et al. (2009) Circulation — MetS | `papers/Alberti_Circulation_MetS_2009.pdf` |
 
 ---
 
@@ -48,27 +56,21 @@
 
 ---
 
-## 需手動下載 — Open Access 但網站擋直連（7 篇）
+## 需手動下載 — Open Access 但網站擋直連（2 篇）
 
 | # | 文獻 | 期刊 | DOI（用瀏覽器開） | 建議檔名 |
 |---|------|------|-------------------|----------|
-| 1 | James et al. (2014) JNC 8 | JAMA | https://doi.org/10.1001/jama.2013.284427 (PMC: PMC4575491) | `James_JAMA_JNC8_2014.pdf` |
 | 3 | NCEP ATP III (2002) | Circulation | https://doi.org/10.1161/01.CIR.0000038419.01177.FA | `NCEP_ATPIII_2002.pdf` |
 | 14 | Fisher (1936) | Annals of Eugenics | https://doi.org/10.1111/j.1469-1809.1936.tb02137.x | `Fisher_AnnEugenics_LDA_1936.pdf` |
-| 18 | Chawla et al. (2002) | JAIR | https://doi.org/10.1613/jair.953 | `Chawla_JAIR_SMOTE_2002.pdf` |
-| 24 | Ohira & Iso (2013) | Circulation Journal | https://doi.org/10.1253/circj.CJ-13-0702 | `Ohira_CircJ_CVD_Asia_2013.pdf` |
-| 25 | Zhao (2021) | JACC: Asia | https://doi.org/10.1016/j.jacasi.2021.04.007 (PMC: PMC9627928) | `Zhao_JACCAsia_CVD_Epidemiology_2021.pdf` |
 | 29 | Alberti et al. (2009) | Circulation | https://doi.org/10.1161/CIRCULATIONAHA.109.192644 | `Alberti_Circulation_MetS_2009.pdf` |
 
 ---
 
-## 待下載 — 可能需付費（3 篇）
+## 待下載 — 可能需付費（1 篇）
 
 | # | 文獻 | 期刊 | DOI | 替代來源 | 建議檔名 |
 |---|------|------|-----|----------|----------|
-| 2 | ADA (2025) | Diabetes Care | 48(Suppl 1) | ADA 官網可能有 OA 版 | `ADA_Standards_2025.pdf` |
-| 17 | He & Garcia (2009) | IEEE TKDE | 10.1109/TKDE.2008.239 | 學校 IEEE 資料庫 | `He_IEEE_Imbalanced_2009.pdf` |
-| 26 | Sun, Z. & Zheng, Y. (2025) | **Nat Rev Gastroenterol Hepatol**（非 Endocrinol） | 10.1038/s41575-025-01058-8 | 學校資料庫 | `Sun_NatRevGastro_EastAsia_2025.pdf` |
+| 26 | Sun, Z. & Zheng, Y. (2025) | **Nat Rev Gastroenterol Hepatol**（非 Endocrinol） | 10.1038/s41575-025-01058-8 | 學校資料庫（可考慮拔掉，Zhao/Ohira 已覆蓋） | `Sun_NatRevGastro_EastAsia_2025.pdf` |
 
 ---
 
