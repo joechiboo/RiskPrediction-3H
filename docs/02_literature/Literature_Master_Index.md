@@ -1,6 +1,6 @@
 # 文獻總覽索引
 
-**最後更新**：2026-01-29
+**最後更新**：2026-03-04
 **用途**：統整所有已讀論文的狀態與分類
 
 ---
@@ -9,11 +9,10 @@
 
 | 狀態 | 數量 | 說明 |
 |------|------|------|
-| ✅ 已完整分析（有深度解析＋簡報） | 6 | Meeting 15-19 論文 + Luo 2024 |
-| ✅ 已深度解析（尚未簡報） | 2 | SMOTE+SHAP 2025, Majcherek 2025 |
+| ✅ 已完整分析（有深度解析＋簡報） | 6 | Meeting 15-20 論文 |
+| ✅ 已深度解析（尚未簡報） | 11 | Tier 2 全部 + SMOTE+SHAP 2025 |
 | 📋 已閱讀摘要與方法 | 2 | Prediabetes 2024, China Prediabetes 2025 |
-| 📌 待深入分析 | 3 | Hung 2021, Sun 2017, Ye 2018 |
-| 📋 基本資訊已整理 | 多篇 | 見系統性文獻回顧 |
+| 📌 待瀏覽（Tier 3-4） | 20 | 背景文獻+經典方法 |
 
 ### 按 Meeting 進度
 
@@ -27,10 +26,10 @@
 | 19 | Prediabetes TaiwanMJ 2024 (#1) | 📋 已閱讀摘要 |
 | 19 | China Prediabetes→Diabetes 2025 (#2) | 📋 已閱讀（備選論文） |
 | 19 | **Kanegae Hypertension 2020** | ✅ **選定為 Meeting 19 論文** |
-| 20 | **Majcherek et al. 2025 (PLOS ONE) - 18 種模型糖尿病風險預測** | ✅ **選定為 Meeting 20 論文** |
-| - | Luo et al. 2024 (BMJ Open) - SUA 與心血管風險因子（資料集原始論文） | 📌 待讀（已深度解析） |
-| - | Ye et al. 2018 (JMIR) - ML + EHR 高血壓預測 | 📌 原 Meeting 20 候選 |
-| - | Sun et al. 2017 (Systematic Review) - 高血壓預測模型回顧 | 📌 深度解析用（寫第二章） |
+| 20 | **Majcherek et al. 2025 (PLOS ONE) - 18 種模型糖尿病風險預測** | ✅ **已簡報** |
+| - | Luo et al. 2024 (BMJ Open) - 資料集原始論文 | ✅ 已深度解析 |
+| - | Ye et al. 2018 (JMIR) - ML + EHR 高血壓預測 | ✅ 已深度解析 |
+| - | Sun et al. 2017 (Systematic Review) - 高血壓預測模型回顧 | ✅ 已深度解析 |
 
 ---
 
@@ -57,10 +56,11 @@
   - 肥胖族群中關聯不顯著
 - **排除條件**：基線已有高血壓、高血糖、高血脂者
 - **限制**：缺乏吸菸、飲酒、運動、飲食資料；單中心設計
-- **狀態**：📌 已下載，待深度解析
+- **狀態**：✅ 已深度解析
 - **與本研究關聯度**：⭐⭐⭐⭐⭐ (最高)
   - **本研究使用的資料集即來自此論文**
   - 確診定義包含用藥者（見 [Memo 22](../06_memos/22_資料集確診定義包含用藥者.md)）
+- **相關文檔**：[Luo_BMJOpen_SUA_CVD_2024_深度解析.md](reviews/Luo_BMJOpen_SUA_CVD_2024_深度解析.md)
 
 ---
 
@@ -103,7 +103,7 @@
   - [Meeting_18_Notes.md](../meeting_notes/Meeting_18_Notes.md)
   - [論文候選清單 #5](../memos/論文候選清單_從Dual2025延伸.md)
 
-#### 📌 Sun et al. (2017) - 高血壓預測模型系統性回顧【深度解析 → 第二章】
+#### ✅ Sun et al. (2017) - 高血壓預測模型系統性回顧【Ch2 綜述基礎】
 
 - **標題**：Recent development of risk-prediction models for incident hypertension: An updated systematic review
 - **期刊**：PLoS ONE (SCIE, IF 2.6, Q1/Q2)
@@ -113,11 +113,11 @@
 - **內容**：系統性回顧 26 篇研究、48 個高血壓預測模型
 - **常見風險因子**：BMI, Age, 血壓, 吸菸, 家族史, 生化指標
 - **統計方法**：Logistic (12篇), COX (7篇), Weibull (6篇)
-- **狀態**：📌 已下載，待深度解析
+- **狀態**：✅ 已深度解析
 - **用途**：寫第二章文獻探討的重要參考
-- **來源**：Kanegae 2020 參考文獻 #12
+- **相關文檔**：[Sun_PLOSONE_HypertensionSR_2017_深度解析.md](reviews/Sun_PLOSONE_HypertensionSR_2017_深度解析.md)
 
-#### 📌 Ye et al. (2018) - ML + EHR 高血壓預測【Meeting 20 候選】
+#### ✅ Ye et al. (2018) - ML + EHR 高血壓預測
 
 - **標題**：Prediction of Incident Hypertension Within the Next Year: Prospective Study Using Statewide Electronic Health Records and Machine Learning
 - **期刊**：JMIR (SCIE, IF 5.8, Q1)
@@ -128,20 +128,19 @@
 - **方法**：XGBoost（特徵選擇 + 模型建構）
 - **最佳結果**：AUC 0.917（回顧）/ 0.870（前瞻）
 - **注意**：有後續評論指出可能存在 data leakage（前 5 重要特徵為降壓藥）
-- **狀態**：📌 已下載，待閱讀
-- **用途**：Meeting 20 報告論文
-- **來源**：Kanegae 2020 參考文獻 #30
+- **狀態**：✅ 已深度解析
+- **相關文檔**：[Ye_JMIR_Hypertension_ML_2018_深度解析.md](reviews/Ye_JMIR_Hypertension_ML_2018_深度解析.md)
 
-#### 📌 Hung et al. (2021) - 隱匿性高血壓預測
+#### ✅ Hung et al. (2021) - 隱匿性高血壓預測
 - **期刊**：Frontiers in Cardiovascular Medicine, 8:778306
 - **DOI**：[10.3389/fcvm.2021.778306](https://doi.org/10.3389/fcvm.2021.778306)
-- **PDF位置**：[fcvm-08-778306.pdf](../references/fcvm-08-778306.pdf)
+- **PDF位置**：[Hung_FrontCardiovascMed_Hypertension_2021.pdf](papers/Hung_FrontCardiovascMed_Hypertension_2021.pdf)
 - **資料**：台灣六家醫學中心 + 台北榮總，970+416人
 - **方法**：LR, RF, XGBoost, ANN + SMOTE-NC
 - **最佳模型**：RF (AUC 0.851/0.837)
 - **關鍵特徵**：DBP, MAP, SBP, PP, beta-blocker, HDL-C
-- **狀態**：📌 有PDF，待深入分析
-- **相關文檔**：[Q2_Taiwan_Literature_Review.md](../research_plans/Q2_Taiwan_Literature_Review.md)
+- **狀態**：✅ 已深度解析
+- **相關文檔**：[Hung_FrontCardiovascMed_MaskedHTN_2021_深度解析.md](reviews/Hung_FrontCardiovascMed_MaskedHTN_2021_深度解析.md)
 
 #### 📋 Lin et al. (2024) - 血清尿酸與高血壓關係
 - **期刊**：Frontiers in Endocrinology
@@ -292,27 +291,33 @@
 
 ## 📂 按文獔類型分類
 
-### 深度解析文檔（已完成）
+### 深度解析文檔（已完成，共 17 篇）
 
-1. [Liu_2024_TCVGH_Diabetes_Prediction_深度解析.md](Liu_2024_TCVGH_Diabetes_Prediction_深度解析.md)
-   - 研究設計、方法、結果、討論的完整分析
-   - 與本研究的關聯性分析
-   - 啟示與建議
+#### Tier 1 核心文獻（7 篇）
 
-2. [Dual_2025_深度解析.md](Dual_2025_深度解析.md)
-   - δ-FPG 雙框架，與本研究 Δ 特徵概念相同
+1. [Luo_BMJOpen_SUA_CVD_2024_深度解析.md](reviews/Luo_BMJOpen_SUA_CVD_2024_深度解析.md) — 資料集原始論文
+2. [Taiwan_MJ_Hypertension_2024_深度解析.md](reviews/Taiwan_MJ_Hypertension_2024_深度解析.md) — 多次健檢預測高血壓
+3. [Liu_2024_TCVGH_Diabetes_Prediction_深度解析.md](reviews/Liu_2024_TCVGH_Diabetes_Prediction_深度解析.md) — 台灣糖尿病預測
+4. [Dual_2025_深度解析.md](reviews/Dual_2025_深度解析.md) — δ-FPG 雙框架
+5. [Majcherek_PLOSONE_Diabetes_2025_深度解析.md](reviews/Majcherek_PLOSONE_Diabetes_2025_深度解析.md) — 18 模型比較
+6. [Kanegae_JClinHypertens_2020_深度解析.md](reviews/Kanegae_JClinHypertens_2020_深度解析.md) — AI 高血壓預測（Δ 特徵）
+7. [Ye_JMIR_Hypertension_ML_2018_深度解析.md](reviews/Ye_JMIR_Hypertension_ML_2018_深度解析.md) — EHR 大規模高血壓預測
 
-3. [Taiwan_MJ_Hypertension_2024_深度解析.md](Taiwan_MJ_Hypertension_2024_深度解析.md)
-   - 多次健檢預測高血壓
+#### Tier 2 重要文獻（9 篇）
 
-4. [Luo_BMJOpen_SUA_CVD_2024_深度解析.md](Luo_BMJOpen_SUA_CVD_2024_深度解析.md)
-   - 資料集原始論文
+8. [Alaa_PLOSONE_AutoML_2019_深度解析.md](reviews/Alaa_PLOSONE_AutoML_2019_深度解析.md) — AutoML CVD 預測
+9. [Dinh_BMC_Diabetes_CVD_2019_深度解析.md](reviews/Dinh_BMC_Diabetes_CVD_2019_深度解析.md) — 糖尿病+CVD 預測
+10. [Hung_FrontCardiovascMed_MaskedHTN_2021_深度解析.md](reviews/Hung_FrontCardiovascMed_MaskedHTN_2021_深度解析.md) — 隱匿性高血壓
+11. [Tsai_SciReports_MTL_2025_深度解析.md](reviews/Tsai_SciReports_MTL_2025_深度解析.md) — MTL 慢性病預測
+12. [Sun_PLOSONE_HypertensionSR_2017_深度解析.md](reviews/Sun_PLOSONE_HypertensionSR_2017_深度解析.md) — 高血壓預測系統性回顧
+13. [Cranmer_arXiv_PySR_2023_深度解析.md](reviews/Cranmer_arXiv_PySR_2023_深度解析.md) — PySR 符號回歸工具
+14. [He_IEEE_ImbalancedLearning_2009_深度解析.md](reviews/He_IEEE_ImbalancedLearning_2009_深度解析.md) — 不平衡學習綜述
+15. [Chawla_JAIR_SMOTE_2002_深度解析.md](reviews/Chawla_JAIR_SMOTE_2002_深度解析.md) — SMOTE 原始論文
+16. [Saito_PLOSONE_PRAUC_2015_深度解析.md](reviews/Saito_PLOSONE_PRAUC_2015_深度解析.md) — PR-AUC vs ROC-AUC
 
-5. [SMOTE_SHAP_2025_深度解析.md](SMOTE_SHAP_2025_深度解析.md)
-   - SMOTE + SHAP 可解釋性框架
+#### 其他
 
-6. [Majcherek_PLOSONE_Diabetes_2025_深度解析.md](Majcherek_PLOSONE_Diabetes_2025_深度解析.md)
-   - 18 種模型比較，NB/LDA 選擇依據（Meeting 20 論文）
+17. [SMOTE_SHAP_2025_深度解析.md](reviews/SMOTE_SHAP_2025_深度解析.md) — SMOTE + SHAP 框架（參考價值有限）
 
 ### 演講稿文檔（已完成）
 
@@ -340,15 +345,17 @@
 
 ---
 
-## 📋 待讀論文清單
+## 📋 待讀論文清單（Tier 3-4）
 
 | 優先度 | 論文 | 原因 |
 |--------|------|------|
-| 🔥 | **Luo 2024 (BMJ Open) - SUA 與心血管風險因子（資料集原始論文）** | **Meeting 20 報告** |
-| 🔶 | Ye 2018 (JMIR) - ML+EHR 高血壓預測 | 原 Meeting 20 候選 |
-| 🔥 | **Sun 2017 (PLoS ONE) - 高血壓預測系統性回顧** | **深度解析 → 第二章** |
-| 🔶 | Dual 2025 前作 (Prediabetes TaiwanMJ 2024) | 了解演進脈絡 |
-| 🔶 | SMOTE + SHAP Framework 2025 | 方法論參考 |
+| 🔶 | James et al. (2014) JNC 8 | 讀高血壓診斷標準段 |
+| 🔶 | ADA (2025) Diabetes Care | 讀糖尿病診斷標準段 |
+| 🔶 | NCEP ATP III (2002) | 讀血脂異常診斷標準段 |
+| 🔶 | Alberti et al. (2009) | 讀代謝症候群定義 |
+| ⚪ | WHO (2023) / WHF (2023) | 讀摘要+亞洲統計 |
+| ⚪ | Ohira & Iso (2013) / Zhao (2021) | 讀東亞段 |
+| ⚪ | Breiman (2001) / Chen & Guestrin (2016) 等 | 讀摘要 |
 
 ---
 
@@ -404,7 +411,7 @@
 
 ### 評估指標（推薦）
 
-- **主要**：AUC-ROC（處理不平衡資料）
+- **主要**：AUC-ROC + **PR-AUC**（Saito 2015 證明不平衡時需並列報告）
 - **次要**：Accuracy, Precision, Recall, F1-Score
 - **臨床**：Sensitivity, Specificity, NPV, PPV
 - **穩定性**：交叉驗證、外部驗證
@@ -445,17 +452,22 @@
 
 ### 按關鍵詞查找
 
-- **縱向研究 / Longitudinal**: Liu 2024, Dual 2025
-- **SHAP**: Dual 2025
-- **台灣資料**: Liu 2024, Dual 2025, Hung 2021
-- **XGBoost**: Liu 2024, Hung 2021, Dual 2025
-- **δ特徵 / Δ特徵**: Dual 2025
-- **類別不平衡 / SMOTE**: Liu 2024, Hung 2021
+- **縱向研究 / Longitudinal**: Liu 2024, Dual 2025, Kanegae 2020, Ye 2018, Wang 2024
+- **SHAP**: Dual 2025, Majcherek 2025
+- **台灣資料**: Liu 2024, Dual 2025, Hung 2021, Tsai 2025, Wang 2024
+- **XGBoost**: Liu 2024, Hung 2021, Dual 2025, Kanegae 2020, Ye 2018
+- **δ特徵 / Δ特徵**: Dual 2025, Kanegae 2020
+- **類別不平衡 / SMOTE**: He & Garcia 2009, Chawla 2002, Hung 2021, Majcherek 2025
+- **評估指標 / PR-AUC**: Saito 2015, He & Garcia 2009
+- **符號回歸 / PySR**: Cranmer 2023
+- **系統性回顧**: Sun 2017, He & Garcia 2009
+- **多任務學習 / MTL**: Tsai 2025
+- **AutoML**: Alaa 2019
 
 ---
 
 **文檔建立日期**：2025-11-13
-**最後更新**：2026-01-29（新增 Sun 2017、Ye 2018，從 Kanegae 2020 參考文獻延伸）
+**最後更新**：2026-03-04（Tier 1 全部完成 + Tier 2 全部深度解析完成，17/36 = 47%）
 **維護者**：紀伯喬
 
 ---
