@@ -1,7 +1,7 @@
 # 參考文獻下載索引
 
-**最後更新**：2026-02-27（補下載 Alaa、Wang 正確版）
-**對應**：`docs/00_thesis/chapters/06_參考文獻.md`（30 篇）
+**最後更新**：2026-03-05（同步至 36 篇，補 5 篇經典 ML 方法）
+**對應**：`docs/00_thesis/chapters/09_參考文獻.md`（36 篇）
 **PDF 存放位置**：`docs/02_literature/papers/`
 
 ---
@@ -11,11 +11,12 @@
 | 狀態 | 數量 |
 |------|------|
 | 已有正確 PDF | 20 篇 |
+| 經典方法（不需 PDF） | 5 篇 |
 | PDF 內容錯誤（需重新下載） | 1 篇 |
 | 需手動下載（網站擋直連） | 2 篇 |
 | 需付費或學校資料庫 | 1 篇 |
 | 非論文（報告/公告/資料集） | 6 篇 |
-| 已移除（無法核實） | 2 篇 |
+| 已移除（無法核實） | 1 篇 |
 
 ---
 
@@ -74,12 +75,25 @@
 
 ---
 
-## 已移除（2 篇）
+## 已移除（1 篇）
 
 | # | 原文獻 | 移除原因 |
 |---|--------|----------|
-| 11 | Chen et al. (2025) Diagnostics 15(19), 2507 | DOI 實為 Yang, C.-C. et al.，已修正為 Yang 並保留（非移除，而是更名） |
 | 27 | Jacobs, M. J., et al. (2005) Curr Opin Cardiol 20(4), 270-274 | DOI 404、PubMed 查無此文，無法核實，已從參考文獻移除 |
+
+> 備註：原 #11 Chen et al. (2025) 經核實為 Yang, C.-C. et al.，已更名保留，非移除。
+
+---
+
+## 經典機器學習方法（5 篇）— 教科書級論文，不需逐篇閱讀
+
+| # | 文獻 | 期刊 | 用於 |
+|---|------|------|------|
+| 33 | Breiman, L. (2001) Random forests | Machine Learning | Ch5 §5.2.3 RF |
+| 34 | Chen, T. & Guestrin, C. (2016) XGBoost | KDD 2016 | Ch5 §5.2.4 XGBoost |
+| 35 | Cortes, C. & Vapnik, V. (1995) Support-vector networks | Machine Learning | Ch5 §5.2.6 SVM |
+| 36 | Ke, G. et al. (2017) LightGBM | NeurIPS 2017 | Ch5 §5.2.5 LightGBM |
+| 37 | Rumelhart, D. E. et al. (1986) Back-propagating errors | Nature | Ch5 §5.2.7 MLP |
 
 ---
 
