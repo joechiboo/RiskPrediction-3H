@@ -1,6 +1,6 @@
 # Notebook 實驗索引
 
-> 最後更新：2026-02-04
+> 最後更新：2026-03-24
 
 ## 使用中的 Notebooks
 
@@ -20,6 +20,9 @@
 | 24 | SMOTE_Comparison | E15 | §4.5 | SMOTE vs class_weight（結論：無差異 <2%） |
 | 25 | PySR_Depth_Experiment | E14 | §4.7 | PySR 樹深度實驗（結論：簡單公式最佳） |
 | 27 | Delta_Ablation_Comprehensive | E02 | §4.3 | **Delta 消融完整版**：兩組框架（Full vs No-Δ、Y-1+Δ vs Y-1 Only） |
+| 28 | Exclusion_Strategy | E07 | §6.6 | 資料篩選策略比較（含/排除 Y-2 已確診） |
+| 29 | SlidingWindow_Ablation | E09 | §6.7 | 滑動窗口消融（13,514 vs 6,056 筆） |
+| 30 | Per_Timepoint_Prediction | E10 | §6.5/§7.5 | **各時間點獨立預測力**：T1~T4 分別預測 T5（Nb14 延伸） |
 
 ## 已封存的 Notebooks（archive/）
 
@@ -45,6 +48,7 @@
 Phase 1 (Nb01-02)：原始資料 → Wide format (T1, T2, T3)
 Phase 2 (Nb03-15)：Wide format 實驗 → 已封存
 Phase 3 (Nb17+)  ：滑動窗口（13,514 筆）+ StratifiedGroupKFold
+Phase 4 (Nb30)   ：Wide format 回用（5次以上健檢者, n=2,526）— Nb14 延伸
 ```
 
 ## 缺少的 Notebooks
