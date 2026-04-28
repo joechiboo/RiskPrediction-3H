@@ -5,18 +5,14 @@
 
 ---
 
-## 投影片 1：英文題目（3 個方案請教授選）
+## 投影片 1：論文題目（已定案）
 
-**中文固定**：三高疾病風險預測：多模型比較研究
+**中文**：三高疾病風險預測：經驗性比較研究
 
-**Option A**（現行，直譯）
-> Risk Prediction of Hypertension, Hyperglycemia, and Dyslipidemia: A Multi-Model Comparative Study
+**英文**：An Empirical Study on Risk Prediction of Hypertension, Hyperglycemia, and Dyslipidemia
 
-**Option B**（強調同時預測）
-> A Multi-Model Comparative Study on Joint Risk Prediction of Hypertension, Hyperglycemia, and Dyslipidemia
-
-**Option C**（強調縱向資料特色）
-> Multi-Model Comparison for Predicting Hypertension, Hyperglycemia, and Dyslipidemia from Longitudinal Health Checkup Data
+**關鍵詞**：高血壓、高血糖、高血脂、機器學習、變化量特徵
+**Keywords**: Hypertension, Hyperglycemia, Dyslipidemia, Machine Learning, Delta Features
 
 ### 注意：題目定案後，全文 7 處都要一致
 
@@ -177,19 +173,19 @@
 
 ## 投影片 11：表 2-2 相關研究實驗涵蓋度比較
 
-| 研究 | 模型數 | 評估指標 | 疾病 | Δ | 次數 | 特徵選擇 | 類別平衡 | 可解釋性 |
+| 研究 | 模型數 | 評估指標 | 多疾病 | Δ | 次數 | 特徵選擇 | 類別平衡 | 可解釋性 |
 |------|:----:|:----:|:----:|:-:|:----:|:------:|:------:|:------:|
-| Ye [11] | 1 | 4 | HTN | | | | | |
-| Alaa [12] | 9 | 4 | CVD | | | | | |
-| Dinh [13] | 5 | 6 | DM | | | | | |
-| Kanegae [9] | 3 | 3 | HTN | ✓ | | | | |
-| Hung [14] | 4 | 7 | HTN | | | | | |
-| Liu [15] | 3 | 5 | DM | | | | | |
-| Wang [16] | 3 | 4 | HTN | | ✓ | | | |
-| Yang [10] | 5 | 8 | DM | ✓ | | | | ✓ |
-| Majcherek [17] | 18 | 6 | DM | | | | | ✓ |
-| Tsai [27] | 6 | 6 | 多疾病 | | | | | |
-| **本研究** | **10** | **4** | **三高** | **✓** | **✓** | **✓** | **✓** | **✓** |
+| Ye [11] | 1 | 4 | | | | | | |
+| Alaa [12] | 9 | 4 | | | | | | |
+| Dinh [13] | 5 | 6 | | | | | | |
+| Kanegae [9] | 3 | 3 | | ✓ | | | | |
+| Hung [14] | 4 | 7 | | | | | | |
+| Liu [15] | 3 | 5 | | | | | | |
+| Wang [16] | 3 | 4 | | | ✓ | | | |
+| Yang [10] | 5 | 8 | | ✓ | | | | ✓ |
+| Majcherek [17] | 18 | 6 | | | | | | ✓ |
+| Tsai [27] | 6 | 6 | ✓ | | | | | |
+| **本研究** | **10** | **4** | **✓** | **✓** | **✓** | **✓** | **✓** | **✓** |
 
 → **目前文獻中實驗覆蓋最完整的三高預測研究**（五項面向全涵蓋）
 
