@@ -98,3 +98,5 @@ docs/02_literature/papers/*.pdf
 
 # Print review (temporary)
 print_review.html
+# 口試申請後資料夾（含 PII：身分證、銀行帳號、地址、教授個資）
+docs/10_口試申請後/
