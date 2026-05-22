@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>口試 Q&A 答案卡</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Helvetica Neue", Arial, sans-serif;
+  max-width: 820px; margin: 0 auto; padding: 16px;
+  line-height: 1.7; color: #1d1d1f;
+  background: #fafafa;
+}
+h1 { color: #1a1a1a; border-bottom: 3px solid #4a90e2; padding-bottom: 8px; }
+h2 { color: #2c3e50; border-bottom: 2px solid #4a90e2; padding-bottom: 4px; margin-top: 36px; }
+h3 { background: linear-gradient(90deg, #e8f3ff 0%, transparent 100%); padding: 10px 14px; border-left: 4px solid #4a90e2; color: #1a1a1a; margin-top: 28px; }
+h4 { color: #34495e; margin-top: 20px; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 0.95em; background: white; }
+th, td { border: 1px solid #d0d7de; padding: 8px 10px; text-align: left; vertical-align: top; }
+th { background: #f1f3f5; font-weight: 600; }
+code { background: #f4f4f4; padding: 2px 6px; border-radius: 4px; font-family: Consolas, Monaco, "Courier New", monospace; font-size: 0.9em; color: #c0392b; }
+pre { background: #2d2d2d; color: #f8f8f2; padding: 12px; border-radius: 6px; overflow-x: auto; }
+pre code { background: none; color: inherit; padding: 0; }
+blockquote { border-left: 4px solid #4a90e2; margin: 14px 0; padding: 8px 16px; background: #f0f7ff; color: #2c3e50; border-radius: 0 4px 4px 0; }
+blockquote p { margin: 6px 0; }
+strong { color: #c0392b; }
+hr { border: none; border-top: 2px dashed #d0d7de; margin: 36px 0; }
+ul, ol { padding-left: 24px; }
+li { margin: 4px 0; }
+a { color: #4a90e2; text-decoration: none; }
+a:hover { text-decoration: underline; }
+@media (max-width: 640px) {
+  body { padding: 12px; font-size: 16px; }
+  table { font-size: 0.85em; display: block; overflow-x: auto; white-space: nowrap; }
+  h2 { font-size: 1.3em; }
+  h3 { font-size: 1.1em; padding: 8px 10px; }
+}
+.toc { background: white; border: 1px solid #d0d7de; border-radius: 6px; padding: 12px 20px; margin: 20px 0; }
+.toc h2 { margin-top: 0; border: none; font-size: 1.1em; }
+.toc ul { list-style: none; padding-left: 0; }
+.toc li { margin: 6px 0; }
+.toc a { font-weight: 500; }
+</style>
+</head>
+<body>
+<nav class="toc">
+<h2>📑 快速跳轉</h2>
+<ul>
+<li><a href="#一概念類">一、概念類 (Q1-2)</a></li>
+<li><a href="#二方法選擇類">二、方法選擇類 (Q3-4)</a></li>
+<li><a href="#三結果解釋類">三、結果解釋類 (Q5-7)</a></li>
+<li><a href="#四限制與部署類">四、限制與部署類 (Q8-9, Q15)</a></li>
+<li><a href="#五內部一致性類自我揭露型">五、內部一致性類 (Q10)</a></li>
+<li><a href="#六評估指標類">六、評估指標類 (Q11, Q14, Q12)</a></li>
+<li><a href="#七醫學基礎類">七、醫學基礎類 (Q13, Q16)</a></li>
+</ul>
+</nav>
+<h1>口試 Q&amp;A 答案卡</h1>
+<blockquote>
+<p><strong>建立日期</strong>：2026-05-18（5/19 演練前一日整理）
+<strong>用途</strong>：口試前反覆練習；累積演練中被問到、自己發現、或預判的高風險問題
+<strong>更新原則</strong>：每次演練/Meeting 後補新題、修舊答；正式口試（7/14）前 1 週至少全卡跑 3 遍</p>
+</blockquote>
+<hr />
+<h2>一、概念類</h2>
+<h3>Q1. 什麼是泛化（Generalization）？</h3>
+<p><strong>直接答</strong>：模型在「沒見過的資料」上的表現能力。</p>
+<p><strong>白話比喻</strong>：學生背 100 題考古題答案——
+- 考試考同樣 100 題 → 100 分（沒學會）
+- 考試考新題型 → 0 分（沒泛化）
+- 真正學會 = 能把舊知識套用到新案例</p>
+<p><strong>ML 對應</strong>：訓練集是讀過的書、測試集是新題、Test AUC 是泛化能力的量化指標、CV 是把資料切 5 份輪流當測試集做多次「測泛化」取平均。</p>
+<hr />
+<h3>Q2. CV 不是預防過擬合嗎？</h3>
+<p><strong>直接答</strong>：<strong>否</strong>。CV 是體溫計（量過擬合），不是退燒藥（防過擬合）。</p>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>交叉驗證 (CV)</td>
+<td><strong>測量</strong>模型在未見資料的表現</td>
+</tr>
+<tr>
+<td>正則化 / 剪枝 / Early Stopping</td>
+<td><strong>降低</strong>過擬合的「治療手段」</td>
+</tr>
+</tbody>
+</table>
+<p><strong>完整論述</strong>：CV 能誠實估計 Test AUC，但模型本身的記憶傾向不會改變。RF 過擬合的話，做 CV 只是讓你「<strong>看到</strong>」它過擬合，不會讓它停止過擬合。要降低過擬合得改模型容量（複雜度、正則化、early stopping）。</p>
+<p><strong>關鍵記憶句</strong>：「<strong>CV 是體溫計、不是退燒藥</strong>」</p>
+<hr />
+<h2>二、方法選擇類</h2>
+<h3>Q3. SHAP 為什麼用 XGBoost 不用 LR？</h3>
+<p><strong>最強論述</strong>（分工框架）：</p>
+<blockquote>
+<p>本研究的設計是「<strong>用 XGBoost+SHAP 找重要特徵，用 LR 部署</strong>」這個分工：</p>
+<ol>
+<li><strong>XGBoost+SHAP</strong> = 特徵排序引擎，能捕捉非線性互動，挑出的 Top 特徵是經過嚴格篩選的 robust 特徵</li>
+<li><strong>LR</strong> = 部署模型，簡單、可解釋、不過擬合，特徵選擇實驗（§6.4 表 6-11）驗證用這些 Top 特徵在 LR 上也有效（Top 2 達 AUC 0.743，與全特徵幾乎一樣）</li>
+</ol>
+<p>這個分工讓特徵重要性判斷不依賴單一模型，邏輯鏈閉合。</p>
+</blockquote>
+<p><strong>4 個可辯護理由</strong>：
+1. SHAP 在樹模型有 TreeExplainer（精確、快速）；LR 的 SHAP 要 KernelExplainer（慢、近似）
+2. LR 係數本身就可解釋，不需要 SHAP 機制
+3. XGBoost 是「非線性壓力測試」——能捕捉互動的模型挑出的特徵更 robust
+4. 方法論慣例（Lundberg &amp; Lee 2017 原始論文主要 demo 樹模型）</p>
+<p><strong>⚠️ 追問風險</strong>：「XGBoost SHAP 排序 vs LR 係數排序是否一致？」→ 演練前最好實際驗證一下，準備備援。</p>
+<hr />
+<h3>Q4. Logistic Regression 跟 Linear Regression 差在哪？</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Linear Regression</th>
+<th><strong>Logistic Regression</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>任務</td>
+<td>回歸（連續值）</td>
+<td><strong>分類</strong>（0/1 或機率）</td>
+</tr>
+<tr>
+<td>輸出</td>
+<td>任意實數</td>
+<td><strong>機率 (0,1)</strong> ← sigmoid 壓縮</td>
+</tr>
+<tr>
+<td>公式</td>
+<td>$y = \beta_0 + \beta_1 x_1$</td>
+<td>$P(y=1) = \frac{1}{1+e^{-(\beta_0+\beta_1 x_1)}}$</td>
+</tr>
+<tr>
+<td>本研究</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「為什麼叫 Regression 卻是 Classification？」</strong>：因為它在 <strong>log-odds 空間</strong>做的是線性回歸 $\log \frac{P}{1-P} = \beta_0 + \beta_1 x_1$。歷史上是先有「對 logit 做線性回歸」這個方法才得名 Logistic Regression。</p>
+<p><strong>係數解讀</strong>：
+- β &gt; 0 → 該特徵增加 → 患病機率增加
+- exp(β) = <strong>Odds Ratio</strong>：特徵 +1 單位時患病勝算的倍數</p>
+<p><strong>⚠️ 口語用詞</strong>：講「邏輯斯迴歸」最安全；「邏輯回歸」可接受；<strong>不可以</strong>說「線性回歸」。</p>
+<hr />
+<h2>三、結果解釋類</h2>
+<h3>Q5. 高血壓 AUC 為什麼比血糖血脂低？</h3>
+<p><strong>標準答</strong>：<strong>不是模型不行，是標籤本身難預測</strong>。</p>
+<p><strong>根因不是量測，是生理本質</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>指標</th>
+<th>變異本質</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>血壓</strong></td>
+<td><strong>瞬時訊號</strong>——24 小時可變動 30-40 mmHg，受姿勢、情緒、活動、咖啡因、白袍效應影響</td>
+</tr>
+<tr>
+<td><strong>血糖（FBG）</strong></td>
+<td>經 8 小時禁食<strong>消除餐後波動</strong>，已標準化</td>
+</tr>
+<tr>
+<td><strong>血脂（TC）</strong></td>
+<td>慢變化指標（週為單位），單次測就有代表性</td>
+</tr>
+</tbody>
+</table>
+<p><strong>臨床側面證據</strong>：AHA 指引要求高血壓診斷至少 2 次門診、每次 2 個讀數；<strong>ABPM</strong>（24 小時動態血壓）和家用血壓儀的存在，就是因為<strong>單次門診血壓被公認不可靠</strong>——連標準化臨床量測都這樣，何況研究用的健檢數據。</p>
+<p><strong>結論一句話</strong>：血壓的訊號雜訊比本質就低，所有模型都受限於這個物理天花板。</p>
+<hr />
+<h3>Q6. 過擬合分析怎麼做？為什麼要做？</h3>
+<p><strong>【做法】</strong>（30 秒）：</p>
+<blockquote>
+<p>在 5-fold StratifiedGroupKFold 架構下，每折除了測試集 AUC，<strong>同時記錄訓練集 AUC</strong>。5 折取平均後，並列比較 Train vs Test，計算 Gap。Gap 大 → 模型在訓練集學得好但推不到測試集 → 過擬合證據。</p>
+</blockquote>
+<p><strong>【為什麼做】</strong>（45 秒，3 個理由）：</p>
+<ol>
+<li><strong>CV 本身不防過擬合，只測泛化</strong>——很多人誤以為做了 CV 就不會過擬合，但 CV 是體溫計、不是退燒藥</li>
+<li><strong>支持「為什麼選 LR 當主模型」</strong>——表 6-5 顯示樹模型 Gap 0.06-0.25，傳統統計 ≤ 0.01，LR 泛化最穩定，後續主實驗用 LR 有方法學依據</li>
+<li><strong>學術誠信</strong>——只報告 Test AUC 不夠誠實，揭露 Gap 是負責任的報告方式</li>
+</ol>
+<p><strong>關鍵記憶句</strong>：「<strong>CV 是體溫計、不是退燒藥</strong>」</p>
+<hr />
+<h3>Q7. 你的實驗數據都是 5-fold 平均嗎？</h3>
+<p><strong>直接答</strong>：<strong>是</strong>，主要實驗都是 5-fold StratifiedGroupKFold 測試集平均。<strong>3 個例外要記住</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>例外</th>
+<th>出現位置</th>
+<th>為什麼</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PySR 公式發現（表 6-17）</td>
+<td>Slide 21 上方 AUC 0.943</td>
+<td><strong>單次跑</strong>最佳結果</td>
+</tr>
+<tr>
+<td>PySR 穩定性驗證（表 6-18）</td>
+<td>Slide 21 下方備註</td>
+<td>才是 5-fold CV（0.918 ± 0.016）</td>
+</tr>
+<tr>
+<td>§6.7.3 各時間點獨立</td>
+<td>Slide 17</td>
+<td><strong>StratifiedKFold</strong>（無 Group），因為每人只 1 筆</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>四、限制與部署類</h2>
+<h3>Q8. UA（尿酸）不是公費健檢項目，模型在基層健檢站能用嗎？</h3>
+<p><strong>標準答</strong>（用 Slide 15 結論反守為攻）：</p>
+<blockquote>
+<p>本研究 §6.4 特徵選擇實驗顯示，<strong>Top 2 特徵即可達 95% 以上的全特徵效能</strong>——而這 Top 2 通常是同一指標的兩個時間點（如 SBP_Y-2 + SBP_Y-1、FBG_Y-1 + FBG_Y-2、TC_Y-1 + TC_Y-2），<strong>都是公費健檢必含項目</strong>。UA 雖在 SHAP Top 10，邊際貢獻 &lt; 0.5%，移除不影響臨床可用性。</p>
+</blockquote>
+<p><strong>台灣公費健檢覆蓋</strong>：SBP、DBP、BMI、FBG、TC、Cr、eGFR 都必有；<strong>只有 UA 要自費或勞工健檢才有</strong>。</p>
+<hr />
+<h3>Q9. 個人健檢 Demo 算效度分析嗎？</h3>
+<p><strong>直接答</strong>：<strong>不算</strong>。是<strong>個案 sanity check</strong>（n=1），不是正式效度分析。</p>
+<p><strong>主動承認限制</strong>：
+- 內部 5-fold CV ✓ 做了
+- 個案 sanity check ✓ 做了
+- 正式 face validity（多筆臨床專家評估）❌ 沒做
+- Calibration plot / Hosmer-Lemeshow ❌ 沒做（§8.2 已列 limitation）
+- 外部驗證資料集 ❌ 沒做（<a href="docs/00_thesis/chapters/08_第八章_結論與建議.md#L77">§8.3 列入未來工作</a>）</p>
+<p><strong>講法</strong>：「<strong>正式 calibration plot 和外部驗證屬於 SCI 階段</strong>，是論文 §8 已列的 limitation 與未來工作。」</p>
+<hr />
+<h3>Q15. 為什麼要做效度分析？還差什麼？</h3>
+<p><strong>為什麼要做</strong>：模型的「準」不只 AUC 高一個維度，至少 <strong>5 個面向</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>效度面向</th>
+<th>量測方法</th>
+<th>本研究</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>鑑別力</strong> (Discrimination)</td>
+<td>AUC-ROC</td>
+<td>✅ 完整做了</td>
+</tr>
+<tr>
+<td><strong>校準度</strong> (Calibration)</td>
+<td>Calibration plot, Hosmer-Lemeshow, Brier</td>
+<td>❌ 未做（§8 限制）</td>
+</tr>
+<tr>
+<td><strong>外部效度</strong> (External validity)</td>
+<td>跨資料集驗證</td>
+<td>❌ 未做（§8 限制）</td>
+</tr>
+<tr>
+<td><strong>臨床效用</strong> (Clinical utility)</td>
+<td>DCA, NRI, IDI</td>
+<td>❌ 未做（§8 限制）</td>
+</tr>
+<tr>
+<td><strong>面向效度</strong> (Face validity)</td>
+<td>多筆臨床專家評估</td>
+<td>⚠️ 只有 n=1 個案 demo</td>
+</tr>
+</tbody>
+</table>
+<p><strong>還差什麼</strong>（口試問到時主動列出）：</p>
+<ol>
+<li><strong>Calibration plot</strong> + Hosmer-Lemeshow test + Brier score</li>
+<li><strong>外部驗證資料集</strong>（跨健檢中心 / 地區 / 族群）</li>
+<li><strong>Decision Curve Analysis (DCA)</strong> —— 臨床淨效益</li>
+<li><strong>Subgroup analysis</strong> —— 年齡、性別、BMI 分層</li>
+<li><strong>臨床專家評估的 face validity</strong> —— 多筆典型案例</li>
+</ol>
+<p><strong>口試講法</strong>：</p>
+<blockquote>
+<p>本研究目前完整做了<strong>鑑別力</strong>這一面向（AUC + 5-fold CV），但完整的效度分析至少還有<strong>校準度、外部效度、臨床效用</strong>三大塊未做，論文 §8 已明確列為 limitation。<strong>SCI 階段優先補 calibration plot 和時間切分驗證</strong>（替代外部驗證的折衷方案），其他列入未來工作。</p>
+</blockquote>
+<hr />
+<h2>五、內部一致性類（自我揭露型）</h2>
+<h3>Q10. Slide 11 寫六大實驗，論文表 4-3 寫十項實驗，為什麼？</h3>
+<p><strong>標準答</strong>：</p>
+<blockquote>
+<p>Slide 11 是<strong>主敘事的 6 大實驗</strong>，另 4 項分配到其他 slide：SHAP 在 Slide 15、各時間點獨立在 Slide 17、符號回歸在 Slide 21；資料篩選策略（編號 6）屬於方法驗證性質、不對應特定 Q，所以不放主敘事但論文 §6.6 完整呈現。</p>
+</blockquote>
+<hr />
+<hr />
+<h2>六、評估指標類</h2>
+<h3>Q11. Sensitivity / Specificity / Precision / Recall 的關係？</h3>
+<table>
+<thead>
+<tr>
+<th>英文</th>
+<th>中文</th>
+<th>公式</th>
+<th>白話</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sensitivity = Recall</strong></td>
+<td>敏感度</td>
+<td>TP/(TP+FN)</td>
+<td>真正患病者中<strong>抓出多少</strong></td>
+</tr>
+<tr>
+<td>Specificity</td>
+<td>特異度</td>
+<td>TN/(TN+FP)</td>
+<td>真正健康者中<strong>正確排除多少</strong></td>
+</tr>
+<tr>
+<td>Precision (PPV)</td>
+<td>精確度（陽性預測值）</td>
+<td>TP/(TP+FP)</td>
+<td>預測患病者中<strong>真的患病多少</strong></td>
+</tr>
+<tr>
+<td>AUC-ROC</td>
+<td>曲線下面積</td>
+<td>(積分)</td>
+<td>整體鑑別力</td>
+</tr>
+</tbody>
+</table>
+<p><strong>易混點</strong>：
+- Sensitivity ≠ Precision（分母不同：真實陽性 vs 預測陽性）
+- Recall = Sensitivity（同公式，只是 ML 圈 vs 醫學圈用詞）
+- 你論文用 Sensitivity 是醫學慣用法</p>
+<p><strong>為什麼重 AUC + Sensitivity 不重 Accuracy</strong>：類別不平衡（陽性率 5-17%）時 Accuracy 會誤導；Sensitivity 直接量「抓得到多少病人」是篩檢核心。</p>
+<hr />
+<h3>Q14. Slide 19 類別不平衡中，Sens 低會有什麼影響？</h3>
+<p><strong>直接答</strong>：Sens 低 = <strong>漏診率高</strong>，篩檢工具最忌諱的失敗模式。</p>
+<p><strong>具體數字影響</strong>（<a href="docs/04_meetings/口試演練_簡報.md">Slide 19</a> 高血壓為例）：</p>
+<table>
+<thead>
+<tr>
+<th>處理方式</th>
+<th>Sens</th>
+<th>1000 個真實高血壓患者中...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>無處理</td>
+<td>0.041</td>
+<td>只抓出 41 個，<strong>漏掉 959 個</strong></td>
+</tr>
+<tr>
+<td><code>class_weight='balanced'</code></td>
+<td>0.698</td>
+<td>抓出 698 個，漏掉 302 個</td>
+</tr>
+</tbody>
+</table>
+<p><strong>對篩檢應用的意義</strong>：
+- <strong>篩檢 (Screening) vs 診斷 (Diagnosis) 是不同任務</strong>
+- 篩檢工具優先 Sens：寧可後續再確認，不能漏
+- 診斷工具優先 Spec：寧可漏也不能誤
+- 三高預測屬篩檢 → class_weight='balanced' 把 Sens 從 4-34% 拉到 70-86%</p>
+<p><strong>Trade-off 老實講</strong>：
+- Sens ↑ 通常伴隨 Spec ↓（誤警告變多）
+- 但 <strong>AUC 沒變</strong>（差異 ≤ 0.2%）→ 整體鑑別力沒損失，只是把閾值調到偏陽性方向</p>
+<hr />
+<h3>Q12. 為何評估標準選用 AUC？</h3>
+<p><strong>直接答</strong>（4 個理由）：</p>
+<ol>
+<li><strong>閾值無關</strong>——AUC 反映模型在<strong>所有可能閾值</strong>下的整體排序能力，不受單一 cutoff 影響，<strong>適合跨模型比較</strong>（論文 <a href="docs/00_thesis/chapters/04_第四章_研究設計.md#L143">§4.4</a>）</li>
+<li><strong>抗類別不平衡</strong>——三高陽性率 5-17%，<strong>Accuracy 會誤導</strong>（全預測為陰性也有 83-95% accuracy）；AUC 不受類別比例直接影響，仍能穩定評估</li>
+<li><strong>跨研究可比較</strong>——文獻幾乎都報 AUC（你的<a href="docs/00_thesis/chapters/02_第二章_文獻探討.md">表 2-1</a>9 篇相關研究<strong>全部用 AUC</strong>），用同樣指標才能說「本研究與 Kanegae 0.881、Wang 0.889 是同量級」</li>
+<li><strong>醫學標準</strong>——TRIPOD 指引、AHA/ACC 風險預測模型評估<strong>推薦 AUC 為主要指標</strong></li>
+</ol>
+<p><strong>機率詮釋</strong>（被深問時的學術級答案）：</p>
+<blockquote>
+<p>AUC = <strong>隨機抽一個正樣本與一個負樣本，模型把正樣本排在前面的機率</strong>。AUC = 0.85 意指模型在 85% 的隨機正負樣本對中能正確排序——這是純粹的「鑑別力」，與診斷閾值無關。</p>
+</blockquote>
+<p><strong>判讀基準</strong>（<a href="docs/00_thesis/chapters/04_第四章_研究設計.md#L145">§4.4</a> 已列）：
+- &lt; 0.7：不佳
+- 0.7-0.8：可接受
+- 0.8-0.9：良好
+- &gt; 0.9：優秀</p>
+<p><strong>主動承認 AUC 的限制</strong>（避免被反問）：
+- ❌ 不反映 <strong>calibration</strong>（預測機率是否準確對應實際發生率）
+- ❌ 不反映<strong>特定閾值下的臨床效用</strong>
+- ❌ 不反映<strong>決策曲線分析 (DCA)</strong> 的淨效益</p>
+<p><strong>所以本研究輔以 Sensitivity / Specificity 報告</strong>，未來 SCI 階段會補 calibration plot 和 DCA。</p>
+<p><strong>⚠️ 追問風險</strong>：「AUC 0.9 是否代表機率輸出準確？」→ <strong>否</strong>，AUC 高只代表<strong>排序</strong>準，<strong>絕對機率值需要 calibration 才能保證</strong>。這也是 Slide 22 demo 的 37.2% 不能當成「真實機率」的原因。</p>
+<hr />
+<h2>七、醫學基礎類</h2>
+<h3>Q13. SBP 是舒張壓還是收縮壓？</h3>
+<p><strong>直接答</strong>：
+- <strong>SBP</strong> = <strong>S</strong>ystolic Blood Pressure = <strong>收縮壓</strong>（高的那個）
+- <strong>DBP</strong> = <strong>D</strong>iastolic Blood Pressure = <strong>舒張壓</strong>（低的那個）
+- 例：120/80 mmHg → <strong>120 = SBP</strong>（收縮）、<strong>80 = DBP</strong>（舒張）</p>
+<p><strong>記憶法</strong>：
+- <strong>S</strong>ystolic → 心臟 <strong>S</strong>queeze（收縮、擠壓）時的壓力 → 比較高
+- <strong>D</strong>iastolic → 心臟 <strong>D</strong>ilate（舒張、放鬆）時的壓力 → 比較低</p>
+<p><strong>論文裡的重要事實</strong>：
+- 高血壓主要驅動特徵是 <strong>SBP_Y-1、SBP_Y-2（收縮壓）</strong>，不是 DBP
+- PySR 高血壓公式：<code>0.130 × exp(SBP_Y-2)</code>（收縮壓）</p>
+<p><strong>⚠️ 簡報待修筆誤</strong>：
+- Slide 9 「範例：舒張壓 125→140」→ 應為<strong>收縮壓</strong>（舒張壓 125 在臨床上極端異常，125→140 不合理；收縮壓 125→140 才是 prehypertension → hypertension 的典型變化）
+- Slide 21 「0.130 × exp(舒張壓_Y-2)」→ 應為 <strong>SBP/收縮壓</strong></p>
+<hr />
+<h3>Q16. 代糖跟胰島素分泌的關係？（呼應 Slide 24 DGA）</h3>
+<p><strong>用戶原始假設核對</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>你的說法</th>
+<th>證據評估</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>代糖減少血糖上升</td>
+<td>✅ <strong>正確</strong>——代糖不含可吸收熱量、不直接升血糖</td>
+</tr>
+<tr>
+<td>代糖欺騙身體分泌過多胰島素</td>
+<td>⚠️ <strong>證據薄弱</strong>——這是 cephalic phase insulin response (CPIR) 假說，<strong>動物實驗有、人類研究不一致</strong></td>
+</tr>
+<tr>
+<td>對糖尿病不利</td>
+<td>⚠️ <strong>方向對但機制不對</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>較穩的機制論述</strong>（口試講這個版本）：</p>
+<blockquote>
+<p>代糖確實不會直接升血糖，但近年研究發現它可能透過<strong>改變腸道菌相、影響葡萄糖耐受性</strong>對代謝產生負面影響（<strong>Suez et al. 2014 Nature</strong>）。<strong>WHO 2023</strong> 建議不要使用非營養性甜味劑控制體重；<strong>DGA 2025-2030</strong> 也<strong>首度明確反對阿斯巴甜、蔗糖素</strong>——跟本研究 Slide 24 提到的觀察一致。</p>
+</blockquote>
+<p><strong>⚠️ 為什麼避免講「胰島素過度分泌」</strong>：
+- Cephalic phase 假說在人類證據弱（多為動物研究）
+- 蕭老師臨床經驗強，可能精準指出「機轉是什麼？」
+- 改用「<strong>腸道菌相 + 葡萄糖耐受性</strong>」論述，引用 Suez et al. 2014 Nature 是頂級期刊，站得住腳</p>
+<p><strong>Slide 24 補強建議</strong>：</p>
+<p>如果你打算在演練時口頭提到代糖機制，把「<strong>胰島素過度</strong>」改成「<strong>腸道菌相改變、葡萄糖耐受性下降</strong>」，引用 Suez et al. 2014 Nature 或 WHO 2023 指引。</p>
+<hr />
+<h2>演練後補充區</h2>
+<blockquote>
+<p>每次演練、Meeting、跟同學討論後，把新問到的點補進來</p>
+</blockquote>
+<h3>5/19 演練：</h3>
+<ul>
+<li><em>待補</em></li>
+</ul>
+<h3>5/27 觀摩同學口試：</h3>
+<ul>
+<li><em>待補</em></li>
+</ul>
+<h3>7/14 正式口試前最後練：</h3>
+<ul>
+<li><em>待補</em></li>
+</ul>
+<hr />
+<p><strong>維護者</strong>：紀伯喬
+<strong>最後更新</strong>：2026-05-18</p>
+</body>
+</html>

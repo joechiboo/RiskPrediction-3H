@@ -116,4 +116,94 @@
 
 ---
 
+## Q2/Q3 期刊策略補充（2026-05-18 規劃）
+
+**目標定位**：Q2 中段（IF 3-4），不衝 Q1。理由是降低方法學門檻、縮短準備時程、與在職論文延伸的合理目標相稱。
+
+### 推薦目標期刊
+
+| 期刊 | Quartile | IF | 為何適合 |
+|------|---------|---|---------|
+| **BMC Medical Informatics and Decision Making** | Q2 | ~3.5 | 接受單一 cohort + limitation 寫清楚 |
+| **JMIR Medical Informatics** | Q2 | ~3-4 | 重視臨床應用價值 |
+| **Diagnostics (MDPI)** | Q2 | ~3-4 | 審稿快（2-3 個月），對方法寬鬆 |
+| **PLOS ONE** | Q2 | ~3 | 不要求 novelty，要求方法 sound |
+
+### 避免
+
+- IEEE TPAMI/TKDE 等純 CS 期刊（不收醫學應用）
+- Computers in Biology and Medicine（Q1，會 demand 外部驗證）
+- 已被 WoS 除名的期刊（如 Computational Intelligence and Neuroscience，2023 被踢出）
+
+### Q2/Q3 門檻重新分類
+
+**🔴 必補（不補會被打槍）**：
+- 全部 AUC 加 **Bootstrap 95% CI**（1-2 天）
+- **個人 Demo (n=1) 拿掉**（n=1 在 SCI 是大忌，0 工時）
+- 英文寫作（AI 草稿 + 人工潤稿，2-3 週）
+- 資料/程式可重現性（Dryad ✓ + GitHub repo）
+
+**🟡 強烈建議補（加分）**：
+- Calibration plot + Brier score（3-5 天）
+- TRIPOD 簡化版對照表（2 天）
+- **時間切分驗證**（同資料前後切，1 週）—— 替代外部驗證的折衷
+
+**🟢 寫進 limitation 即可**：
+- 外部驗證資料集 → future work
+- 與 Framingham 等臨床評分比較 → limitation
+- DCA / Subgroup analysis → future work
+- DeLong test → 用 CI 重疊與否替代
+
+### 壓縮時程（目標 Q2/Q3）
+
+| 階段 | 時間 |
+|------|------|
+| 教授確認目標期刊 | 1 週 |
+| 補必補項（CI + 時間切分驗證 + 刪 demo）| 2-3 週 |
+| 英文撰寫 | 4-6 週 |
+| 圖表重製 + 格式調整 | 1-2 週 |
+| 教授內審 + 修改 | 2-3 週 |
+| **送投** | **總計 2.5-3.5 個月** |
+| 第一輪審稿 + Revision | 2-3 個月 |
+| **接受** | **6-8 個月內可期** |
+
+### MVP 最小可行版本
+
+1. 刪掉 n=1 demo
+2. AUC 加 Bootstrap CI
+3. 補 Calibration plot
+4. 主動承認外部驗證缺失（Limitations 一段）
+5. 教授過稿 → 送 BMC MIDM 或 Diagnostics
+
+---
+
+## 期刊 Survey 比較表（待填，建議 5/26 那週做完）
+
+> **產出目標**：帶到 Meeting 1 / 2 跟教授討論決定目標期刊
+
+| 期刊 | IF | Quartile | Scope 契合 | OA 費用 (USD) | 審稿時間 | 接受率 | 格式 | 是否強要求外部驗證 | 近期類似論文 |
+|------|:--:|:--:|:--:|:--:|:--:|:--:|------|:--:|:--:|
+| BMC Medical Informatics and Decision Making | ~3.5 | Q2 | | | | | | | |
+| JMIR Medical Informatics | ~3-4 | Q2 | | | | | | | |
+| Diagnostics (MDPI) | ~3-4 | Q2 | | | | | | | |
+| PLOS ONE | ~3 | Q2 | | | | | | | |
+| Healthcare (MDPI) | ~2-3 | Q2-Q3 | | | | | | | |
+| Applied Sciences (MDPI) | ~2-3 | Q2-Q3 | | | | | | | |
+
+**估時**：2-3 小時（網站可查）
+
+---
+
+## Paper 閱讀方向（教授指示「繼續看」）
+
+| 方向 | 用途 | 數量 | 優先 |
+|------|------|:--:|:--:|
+| **目標期刊近期收的「ML 三高」論文** | 學寫作風格、找引用、確認 fit | 3-5 篇 | 🔴 高 |
+| **2024-2026 縱向健檢 ML 新論文** | 補充文獻、口試應答 | 2-3 篇 | 🟡 中 |
+| **Calibration / external validation 方法論文** | SCI 階段補實驗用 | 1-2 篇 | 🟢 低 |
+
+**閱讀紀錄請寫到** [docs/02_literature/](../02_literature/) 既有結構。
+
+---
+
 **維護者**：紀伯喬

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>口試 Q&A 速記卡 (A4)</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+  max-width: 780px; margin: 0 auto; padding: 12px 16px;
+  line-height: 1.45; color: #1a1a1a; font-size: 14px;
+}
+h1 { font-size: 1.4em; color: #1a1a1a; border-bottom: 2px solid #4a90e2; padding-bottom: 4px; margin: 0 0 6px; }
+h2 { font-size: 1.05em; color: #2c3e50; margin: 14px 0 6px; padding: 3px 8px; background: #e8f3ff; border-left: 3px solid #4a90e2; }
+p { margin: 4px 0 8px; }
+ul { margin: 4px 0; padding-left: 20px; }
+li { margin: 1px 0; }
+strong { color: #c0392b; font-weight: 600; }
+hr { border: none; border-top: 1px dashed #ccc; margin: 10px 0; }
+blockquote { border-left: 3px solid #aaa; margin: 6px 0; padding: 4px 12px; background: #f8f9fa; color: #555; font-size: 0.9em; }
+code { background: #f4f4f4; padding: 1px 4px; border-radius: 3px; font-family: Consolas, monospace; font-size: 0.9em; color: #c0392b; }
+a { color: #4a90e2; text-decoration: none; }
+
+/* 列印優化 */
+@media print {
+  body { font-size: 10pt; line-height: 1.35; padding: 10mm 12mm; max-width: none; }
+  h1 { font-size: 1.2em; }
+  h2 { font-size: 0.95em; background: #f0f0f0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  p { margin: 2px 0 5px; }
+  blockquote { font-size: 0.85em; padding: 3px 8px; }
+  hr { margin: 4px 0; }
+}
+
+/* 手機優化 */
+@media (max-width: 640px) {
+  body { font-size: 15px; padding: 10px; }
+  h1 { font-size: 1.25em; }
+  h2 { font-size: 1.05em; }
+}
+</style>
+</head>
+<body>
+<h1>口試 Q&amp;A 速記卡（A4 雙面版）</h1>
+<blockquote>
+<p>2026-05-18｜每題 ≤ 5 行｜路上反覆背｜詳版見 <a href="口試Q&amp;A答案卡.md">口試Q&amp;A答案卡.md</a></p>
+</blockquote>
+<hr />
+<h2>概念</h2>
+<p><strong>Q1. 泛化 (Generalization)</strong> = 模型在沒見過資料上的表現能力。比喻：學生背考古題 vs 考新題型。</p>
+<p><strong>Q2. CV 不防過擬合？</strong> 對。CV 是<strong>體溫計</strong>（測過擬合）、不是<strong>退燒藥</strong>（防過擬合）。要防靠正則化/剪枝/early stopping。</p>
+<p><strong>Q3. 過擬合分析怎麼做、為什麼？</strong> 5-fold CV 同時記錄 Train/Test AUC 並列比較。三理由：① CV 不防過擬合 ② 支持選 LR（Gap ≤ 0.01 最穩） ③ 學術誠信。</p>
+<p><strong>Q4. 為什麼選 LR 當主模型？</strong> §6.1.5 表 6-5：樹模型 Gap 0.06-0.25 過擬合明顯；LR 泛化最穩。</p>
+<hr />
+<h2>方法選擇</h2>
+<p><strong>Q5. SHAP 為什麼用 XGBoost 不用 LR？</strong> 分工：<strong>XGBoost+SHAP 找特徵、LR 部署</strong>。SHAP 在樹模型有 TreeExplainer 精確快速；LR 係數本就可解釋。</p>
+<p><strong>Q6. Logistic vs Linear Regression</strong> Logistic = <strong>分類</strong>（sigmoid 壓成機率）；Linear = 連續值回歸。本研究是分類用 Logistic。⚠️ <strong>口語別說「線性回歸」</strong>。係數解讀：exp(β) = Odds Ratio。</p>
+<hr />
+<h2>結果解釋</h2>
+<p><strong>Q7. 高血壓 AUC 為何比血糖血脂低？</strong> 血壓是<strong>瞬時訊號</strong>（24h 變動 30-40 mmHg）；血糖經 8h 禁食標準化、血脂慢變化。ABPM 存在就是因為單次門診血壓不可靠。</p>
+<p><strong>Q8. 全部都是 5-fold 平均嗎？</strong> 主實驗是。例外：① PySR 表 6-17 單次跑 ② Slide 17 (§6.7.3) 用 StratifiedKFold（無 Group，每人 1 筆）。</p>
+<hr />
+<h2>評估指標</h2>
+<p><strong>Q9. 為什麼選 AUC 當主指標？</strong> ① 閾值無關 ② 抗類別不平衡 ③ 跨研究可比較（表 2-1 全用 AUC） ④ TRIPOD 標準。詮釋：隨機抽正負樣本，模型把正排前的機率。</p>
+<p><strong>Q10. Accuracy ≠ Recall！</strong> Accuracy = 全部答對 % (TP+TN)/all；Recall = Sens = TP/(TP+FN) = 真病人抓到 %。陽性率 17% 時全預測健康，Accuracy 83% 但 <strong>Recall = 0</strong>——這就是不用 Accuracy 的理由。</p>
+<p><strong>Q11. Sens / Spec / Precision 對照</strong>
+- <strong>Sens = Recall</strong>：TP/(TP+FN) — 真病人中抓出 %（篩檢核心）
+- <strong>Spec</strong>：TN/(TN+FP) — 真健康中排除 %
+- <strong>Precision</strong>：TP/(TP+FP) — 預測病人中真病人 %</p>
+<p><strong>Q12. Sens 低有什麼影響？</strong> 漏診率高。Slide 19 高血壓無處理 Sens 0.041 → 1000 病人只抓 41 個、漏 959 個；<code>class_weight='balanced'</code> 拉到 0.698。AUC 沒變，整體鑑別力沒損失。</p>
+<hr />
+<h2>限制與部署</h2>
+<p><strong>Q13. 個人 Demo 算效度分析？</strong> <strong>不算</strong>，是個案 sanity check (n=1)。正式 calibration plot + 外部驗證屬 SCI 階段，§8 已列 limitation。</p>
+<p><strong>Q14. 效度分析還差什麼？</strong> 5 面向：鑑別力✅、校準度❌、外部效度❌、臨床效用(DCA)❌、面向效度⚠️。SCI 階段優先補 <strong>calibration + 時間切分驗證</strong>（替代外部）。</p>
+<p><strong>Q15. UA 不是公費健檢項目，模型能用？</strong> Slide 15 顯示 <strong>Top 2 特徵已達 95% 全特徵效能</strong>，這 2 個都是公費必含（SBP/FBG/TC）。UA 移除不影響核心可用性。</p>
+<p><strong>Q16. Slide 11 寫 6 大實驗、論文寫 10 項？</strong> Slide 11 是主敘事 6 項；另 4 項分到 Slide 15 (SHAP)、Slide 17 (各時間點)、Slide 21 (符號回歸)；資料篩選策略 §6.6 內含。</p>
+<hr />
+<h2>醫學基礎</h2>
+<p><strong>Q17. SBP / DBP</strong> <strong>SBP = Systolic = 收縮</strong>壓（高，120）；<strong>DBP = Diastolic = 舒張</strong>壓（低，80）。記憶：<strong>S</strong>queeze = 收縮。論文高血壓主驅動是 SBP_Y-1/SBP_Y-2。</p>
+<p><strong>Q18. 代糖 → 糖尿病？</strong> 不直接升血糖 ✓，但可能透過 <strong>腸道菌相改變、葡萄糖耐受性下降</strong> 對代謝不利（Suez 2014 Nature；WHO 2023 反對；DGA 2025-2030 反對阿斯巴甜）。⚠️ <strong>別講「胰島素過度分泌」</strong>——人類證據弱。</p>
+<hr />
+<p><strong>口試前一週至少跑 3 遍｜現場若忘詞抓粗體字記憶句</strong></p>
+</body>
+</html>
