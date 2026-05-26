@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>碩士論文路線圖 (A4 雙面)</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+  max-width: 780px; margin: 0 auto; padding: 10px 14px;
+  line-height: 1.35; color: #1a1a1a; font-size: 13px;
+}
+h1 { font-size: 1.25em; color: #1a1a1a; border-bottom: 2px solid #4a90e2; padding-bottom: 3px; margin: 0 0 4px; }
+h2 { font-size: 0.98em; color: #2c3e50; margin: 8px 0 4px; padding: 2px 6px; background: #e8f3ff; border-left: 3px solid #4a90e2; }
+p { margin: 3px 0 4px; }
+ul { margin: 2px 0 4px; padding-left: 18px; }
+li { margin: 0; }
+strong { color: #c0392b; font-weight: 600; }
+hr { border: none; border-top: 1px dashed #ccc; margin: 6px 0; }
+blockquote { border-left: 3px solid #aaa; margin: 4px 0; padding: 3px 10px; background: #f8f9fa; color: #555; font-size: 0.88em; }
+code { background: #f4f4f4; padding: 0 3px; border-radius: 2px; font-family: Consolas, monospace; font-size: 0.88em; color: #c0392b; }
+
+table.stages { border-collapse: collapse; width: 100%; margin: 4px 0 6px; font-size: 0.86em; line-height: 1.3; }
+table.stages th, table.stages td { border: 1px solid #c8d0d8; padding: 3px 5px; text-align: left; vertical-align: top; }
+table.stages th { background: #e8f3ff; font-weight: 600; }
+table.stages td:first-child { white-space: nowrap; font-weight: 600; color: #2c3e50; }
+table.stages td:nth-child(2) { white-space: nowrap; color: #555; font-size: 0.92em; }
+
+.timeline {
+  background: #f8f9fa; border: 1px solid #d0d7de; border-radius: 3px;
+  padding: 4px 8px; margin: 4px 0 6px; font-family: Consolas, monospace;
+  font-size: 0.72em; line-height: 1.4; white-space: pre; overflow-x: auto;
+}
+
+.do-tag, .pit-tag, .tip-tag { font-weight: 600; }
+.do-tag { color: #28a745; }
+.pit-tag { color: #d9534f; }
+.tip-tag { color: #4a90e2; }
+
+@media print {
+  body { font-size: 9pt; line-height: 1.28; padding: 7mm 9mm; max-width: none; }
+  h1 { font-size: 1.1em; }
+  h2 { font-size: 0.92em; background: #efefef !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  blockquote { font-size: 0.82em; }
+  table.stages { font-size: 0.78em; }
+  table.stages th { background: #efefef !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .timeline { background: #f5f5f5 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 0.68em; }
+  hr { margin: 3px 0; }
+}
+</style>
+</head>
+<body>
+
+<h1>碩士論文路線圖（給即將升二年級的學弟妹）</h1>
+<blockquote>2026-05｜以二年級全年為主軸｜<span class="do-tag">●做</span> <span class="pit-tag">●坑</span> <span class="tip-tag">●我可給</span></blockquote>
+
+<h2>兩個鐵則</h2>
+<ul>
+  <li><strong>1 月底 = 初稿（Ch1-Ch9）全部寫完</strong>，二月才有辦法開始排版。</li>
+  <li><strong>12 月底 = 實驗收斂</strong>，之後只剩小調整，不再開新實驗。</li>
+</ul>
+<div class="timeline">[二上暑假 7-8月]  [二上 9-10月]  [二上 11-12月]  [寒假 1月]  [二下 2月]  [二下 3-4月]  [二下 5月]   [6-7月]        [8月]
+      ↓              ↓             ↓             ↓          ↓          ↓            ↓            ↓             ↓
+  題目/資料定案  文獻+方法    實驗主體      初稿定稿   Word排版   教授修訂     提口試申請  印刷/簡報/口試  離校+SCI</div>
+
+<h2>九階段速覽</h2>
+<table class="stages">
+<thead><tr><th>階段</th><th>時點</th><th>內容</th></tr></thead>
+<tbody>
+
+<tr><td>1. 題目/資料</td><td>暑假 7-8月</td>
+<td>
+<span class="do-tag">●</span> 跟教授對齊「預測什麼/用什麼資料/用什麼方法」三件事；資料下載下來、跑通最小 pipeline；建 GitHub repo。<br>
+<span class="pit-tag">●</span> 題目太大、資料拿不到才發現要倫審、<strong>只看論文沒寫 code</strong> 方向會飄、跟教授見面太少（≥ 兩週一次）。<br>
+<span class="tip-tag">●</span> Luo (2024) Dryad 資料集怎麼挑、三 target 一起做的取捨、跟教授 onboarding 節奏。
+</td></tr>
+
+<tr><td>2. 文獻+方法</td><td>9-10月</td>
+<td>
+<span class="do-tag">●</span> 建文獻索引總表（作者/年份/資料/方法/結論/能引用在哪）；邊讀邊寫 Ch2；明確寫出 research gap。<br>
+<span class="pit-tag">●</span> 只讀不整理；<strong>et al. 名字被 LLM 補錯</strong>（我 15 篇錯 13）→ 用 Crossref API 驗 <code>api.crossref.org/works/{DOI}</code>；Reference 拖到最後才整理。<br>
+<span class="tip-tag">●</span> Reference 索引格式、et al. 展開血淚史、文獻 cluster 分法。
+</td></tr>
+
+<tr><td>3. 實驗主體</td><td>11-12月</td>
+<td>
+<span class="do-tag">●</span> 跑完整實驗（所有模型 × 所有 target）；結果全存 csv/notebook，每個數字能追回 commit；邊跑邊寫 Ch3-5；<strong>12 月底死線</strong>。<br>
+<span class="pit-tag">●</span> <strong>Data leakage</strong>（時序資料用 <code>StratifiedGroupKFold(groups=patient_id)</code>，不能用一般 KFold）；資料格式定不下來反覆重跑；seed/版本沒存無法重現；AUC 跨表不一致 → 最後重跑一次「定版實驗」。<br>
+<span class="tip-tag">●</span> Sliding window T1/T2→T3 設計、PySR 接法、Notebook 命名規則、<code>target=2→1</code> 編碼坑。
+</td></tr>
+
+<tr><td>4. 初稿撰寫</td><td>寒假 1月</td>
+<td>
+<span class="do-tag">●</span> <strong>1 月底 Ch1-9 全寫完</strong>（Markdown 內容定稿）；Ch3-5 暑假已草稿，一月主攻 Ch1/2/6/7/8；每週給教授看一章；同步準備中英摘要、目錄。<br>
+<span class="pit-tag">●</span> 邊寫邊改實驗、章節風格不一、IEEE 參考文獻拖到 Ch9 才弄、<strong>拖到 2 月才寫</strong>後面全部塞車。<br>
+<span class="tip-tag">●</span> 章節結構模板、Markdown 寫論文工作流、Ch1-9 各章該回答什麼。
+</td></tr>
+
+<tr><td>5. 排版+修訂</td><td>2-4月</td>
+<td>
+<span class="do-tag">●</span> 2 月寒假：Markdown → Word 排版；3-4 月教授給回饋反覆改（我跑了初稿 I→II→III→IV 四版）；4 月底要到「給口委看不丟臉」狀態。<br>
+<span class="pit-tag">●</span> <strong>Word 排版至少吃兩週</strong>（首行縮排/書籤/圖表編號/IEEE/目錄頁碼）；Markdown vs Word 雙版本不同步（選一個當 source of truth）；教授 2-3 週才回（先丟、別等）。<br>
+<span class="tip-tag">●</span> Markdown→Word 轉檔的雷、系上 115.04.02 版懶人包（<strong>邊界以懶人包為準</strong>）、初稿版本控管。
+</td></tr>
+
+<tr><td>6. 提口試</td><td>5月</td>
+<td>
+<span class="do-tag">●</span> 5 月中提口試申請（表單、口委名單、論文摘要）；<strong>助教格式審</strong>（這時才碰到助教，意見當天改完）；聯絡口委、借場地。<br>
+<span class="pit-tag">●</span> <strong>摘要寫了論文題目</strong>會被退；目錄不能列封面/摘要/誌謝；口委敲時間要提前 1.5 個月；場地早申請；<strong>助教 vs 教授偶有張力</strong>，訊息要過誰先問清楚。<br>
+<span class="tip-tag">●</span> 口試申請表單範本、助教審稿意見、跟教授敲時間的信件範本。
+</td></tr>
+
+<tr><td>7. 印刷+簡報</td><td>6-7月</td>
+<td>
+<span class="do-tag">●</span> 6/15 論文定版；6/20 膠裝 ×4（指導+2 口委+備份）；6/23 寄出；6 月底簡報定版（25 頁、20-25 分）；7 月初練習計時+預演 Q&amp;A。<br>
+<span class="pit-tag">●</span> 印太早改不了（最終版 = 印刷版 + 口試後修訂版，分清楚）；印刷規格錯（先印 1 本試樣）；簡報塞太滿；<strong>Q&amp;A 沒準備</strong>（口委問題有套路）。<br>
+<span class="tip-tag">●</span> 印刷指南（規格/店家/價格）、寄送 SOP、簡報擴充思路、Q&amp;A 速記卡架構。
+</td></tr>
+
+<tr><td>8. 口試</td><td>7月</td>
+<td>
+<span class="do-tag">●</span> 前一天場地測投影、印備用講稿；當天早到 30 分鐘；報告 20-25 分 + Q&amp;A 30-40 分；<strong>口委每個意見都寫下來</strong>。<br>
+<span class="pit-tag">●</span> 設備沒測（HDMI/USB-C 經典悲劇）；緊張漏內容（講稿當小抄、<strong>穩比順重要</strong>）；被質疑就慌（承認限制+說後續可改進，比硬辯好）。<br>
+<span class="tip-tag">●</span> F408 場地細節、口委風格筆記（口試後補）、教授簡報偏好。
+</td></tr>
+
+<tr><td>9. 離校+SCI</td><td>7-8月</td>
+<td>
+<span class="do-tag">●</span> 2 週內改完最終版；送圖書館+系辦+電子授權；<strong>8/15 前離校</strong>；SCI 投稿可提前佈局。<br>
+<span class="pit-tag">●</span> 修訂版拖太久會忘細節；離校系統漏項要再跑一趟（列 checklist）；SCI ≠ 學位論文，要重寫刪 80%。<br>
+<span class="tip-tag">●</span> SCI 轉換計畫、離校 checklist（口試後補）、口委意見追蹤表。
+</td></tr>
+
+</tbody>
+</table>
+
+<h2>三句話總結</h2>
+<ul>
+  <li><strong>行政流程比技術花時間</strong>。寫程式你會，但申請/印刷/寄送/場地是新東西，要排進日程。</li>
+  <li><strong>資產化你的工作</strong>。每個 notebook/文獻/meeting note 都當「會用第二次」來整理。</li>
+  <li><strong>不要單打獨鬥</strong>。卡住就問教授、問同學。一個下午問來的答案，自己 google 要找一週。</li>
+</ul>
+
+<h2>我可以直接給你的資產</h2>
+<p>資料處理 pipeline（wide+sliding window 兩版）｜11 個模型 notebook 模板｜Reference 索引格式（IEEE+APA）｜論文章節模板｜口試 Q&amp;A 速記卡架構｜印刷流程+店家｜教授偏好筆記（口頭交接）。<strong>需要哪一塊就跟我說。</strong></p>
+
+</body>
+</html>
