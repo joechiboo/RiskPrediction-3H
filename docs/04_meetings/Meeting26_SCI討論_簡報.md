@@ -53,8 +53,8 @@
 | 期刊 | IF | Quartile | APC (USD) | NT$ | 審稿 | 備註 |
 | --- | :---: | :---: | :---: | :---: | :---: | --- |
 | **Diagnostics (MDPI)** | ~3.5 | Q2 | $3,000 | 96,000 | 4-6 週 | 三高 ML 多、scope 高度契合 |
-| **IEEE Access** | ~3.4 | Q2 | $1,950 | 62,000 | 4-6 週 | 便宜、scope 超廣（學術圈看法保留）|
-| **Int. J. Medical Informatics**（Elsevier）| ~4.0 | **Q1** | **$0** | **$0** | 3-4 個月 | **訂閱制免費**、能見度較低 |
+| **IEEE Access** | ~3.4 | Q2 | $1,950 | 62,000 | 4-6 週 | 便宜、scope 超廣（學術圈看法保留） |
+| **Int. J. Medical Informatics**（Elsevier） | ~4.0 | **Q1** | **$0** | **$0** | 3-4 個月 | **訂閱制免費**、能見度較低 |
 
 ### 三本各自的「為什麼選」
 
@@ -120,14 +120,16 @@
 
 ## Slide 6：Novelty 校正 — 4 篇相關研究
 
-### 既有文獻定位（剛 WebSearch 補的）
+### 既有文獻定位（WebSearch 6 篇）
 
 | 論文 | 預測疾病 | 資料 modality | 跟本研究重疊處 |
 | --- | --- | --- | --- |
-| **Zhang et al. 2020 PLOS One** | **三高（HTN+HG+DL）** | **視網膜照片** | 重疊「三高 simultaneous」，但 modality 不同 |
-| Wang Lin et al. 2010 | HTN + 高血脂（2/3） | 健檢資料 | 缺高血糖 + 資料探勘舊方法 |
-| DHDIP 2022 | HTN + 高血脂（2/3） | EMR | 缺高血糖 + EMR ≠ 健檢 |
-| Tsai et al. 2024 ✓ 已引用 [27] | DM + 心臟病 + 中風 + HTN（4 病不含高血脂） | 健保資料 | 缺高血脂；論文 §7.6 MTL 已對比 |
+| **Zhang et al. 2020 PLOS One** | **三高（HTN+HG+DL）** | **視網膜照片** N=625 | 重疊「三高 simultaneous」，但 modality 不同 |
+| **Chang, Wang, Jiang 2011** 🎯 台灣 | HTN + 高血脂（2/3） | **台灣健檢中心** N=2,048 | 缺高血糖 + MARS 方法 + cross-sectional |
+| **Liao (DHDIP) 2022** | HTN + 高血脂（2/3） | EMR | 缺高血糖 + EMR ≠ 健檢 |
+| **Tsai et al. 2025** ✓ 已引用 [27] | 糖+心+中風+高血壓（4 病不含高血脂） | 健保 ICD N=555K | 缺高血脂 + ICD ≠ 健檢 |
+| **Razavian 2016 MLHC** | 廣譜 133 conditions | claims data 18 lab tests | 太廣不聚焦三高；claims ≠ 健檢 |
+| **Sghaireen 2022 Diagnostics (MDPI)** 🎯 | **MetS 綜合 1 輸出** | 健檢 + 資料增強 | 預測 MetS 而非三高分開；**已發在你目標期刊** |
 
 ### Novelty Framing 校正
 
@@ -150,13 +152,15 @@
 - Ch7 討論
 - Ch8 結論
 
-並在 Ch2 / Ch9 引用 Tang 2020 [新編號]
+並在 Ch2 / Ch9 引用 Zhang 2020 + Razavian 2016 + Sghaireen 2022 [新編號]
 
-### 講稿（45 秒）
+### 講稿（60 秒）
 
-> 第五個問題：我剛查了文獻，發現**三高 simultaneous prediction 其實已經有人做過** — Zhang et al. 2020 PLOS One 用**視網膜照片**做了三高深度學習預測。所以原本「首次三高預測」的說法要校正。
+> 第五個問題：我深入查了 6 篇相關研究，發現 niche 比想像中乾淨：
 >
-> 我們的 novelty 應該是「**整合性**」：縱向健檢資料、Δ 三重角色、11 模型、符號回歸，這四個元素的**組合**是首創，但個別元素都有前人做過。論文 Ch1/Ch2/Ch7/Ch8 要做小校正。**老師您 OK 嗎？SCI 投稿時 reviewer 一定會問跟 Tang 2020 的差異。**
+> Zhang 2020 PLOS One 用視網膜照片做三高 — modality 完全不同；Tsai 2025 用健保 ICD 碼做 4 病但缺高血脂；Chang 2011 台灣團隊用健檢但只做 2 病；Razavian 2016 用 lab tests 但廣譜 133 conditions；Liao 2022 用 EMR 做 2 病；最重要的 — **Sghaireen 2022 已經發在 Diagnostics 期刊**做 MetS，但是預測 MetS 綜合 1 輸出、不是三高分開 3 輸出。
+>
+> 所以本研究 niche 是**「縱向健檢血液 + Δ + 11 模型 + 三高分開預測」這個組合**，6 個維度全 ✓ 的唯一研究。「首次三高預測」要校正成這個 framing。Sghaireen 也證明 **Diagnostics 是合適投稿目標**。**老師您 OK 嗎？論文 Ch1/Ch2/Ch7/Ch8 需要小修。**
 
 ---
 
