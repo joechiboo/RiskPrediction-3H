@@ -20,7 +20,7 @@ thesis Ch4/Ch6 tables — no fabricated values.
 
 # Simultaneous machine-learning prediction of hypertension, hyperglycemia, and dyslipidemia from longitudinal health-checkup data: a comprehensive model comparison with interpretable symbolic regression
 
-**Running title:** Predicting the "three highs" from longitudinal checkups
+**Running title:** Predicting cardiometabolic risk from longitudinal checkups
 
 **Po-Chiao Chi¹, Yang Syu¹** *(author order/corresponding author TBD)*
 ¹ Department of Computer Science, College of Science, National Taipei University of Education, Taipei, Taiwan
@@ -29,7 +29,7 @@ thesis Ch4/Ch6 tables — no fabricated values.
 
 ## Abstract
 
-**Background.** Hypertension, hyperglycemia, and dyslipidemia—collectively the "three highs"—are the principal modifiable risk factors for cardiovascular disease and frequently co-occur. Conventional risk scores rely on a single time point and do not exploit the dynamic information embedded in repeated health checkups. Existing machine-learning studies typically target a single disease, compare few models, and seldom address interpretability. We aimed to build and systematically evaluate a longitudinal framework that predicts all three conditions simultaneously, while quantifying the value of change (delta) features and exploring interpretable models.
+**Background.** Hypertension, hyperglycemia, and dyslipidemia—collectively cardiometabolic risk factors—are the principal modifiable contributors to cardiovascular disease and frequently co-occur. Conventional risk scores rely on a single time point and do not exploit the dynamic information embedded in repeated health checkups. Existing machine-learning studies typically target a single disease, compare few models, and seldom address interpretability. We aimed to build and systematically evaluate a longitudinal framework that predicts all three conditions simultaneously, while quantifying the value of change (delta) features and exploring interpretable models.
 
 **Methods.** We used a publicly available longitudinal community health-checkup cohort (Luo et al., Dryad; Hangzhou, China, 2010–2018; adults aged ≥40). After excluding participants with fewer than three checkups, 6,056 individuals remained. A three-time-point design (Y−2, Y−1, Y0) with a sliding-window expansion produced 13,514 modeling records. Twenty-six features were derived: demographics, biomarkers at Y−2 and Y−1, and eight delta features (Y−1 − Y−2). Ten classifiers (logistic regression [LR], naïve Bayes [NB], linear discriminant analysis [LDA], k-nearest neighbors [KNN], decision tree [DT], random forest [RF], XGBoost, LightGBM, support vector machine [SVM], multilayer perceptron [MLP]) plus symbolic regression (PySR) were evaluated with stratified group 5-fold cross-validation (grouping on patient identity to prevent leakage). The primary metric was AUC-ROC; sensitivity, specificity, and F1 were also reported. Ablation, class-imbalance, data-filtering, checkup-frequency, multi-task-learning, and interpretability (SHAP, symbolic regression) experiments were conducted.
 
@@ -37,13 +37,13 @@ thesis Ch4/Ch6 tables — no fabricated values.
 
 **Conclusions.** Longitudinal checkup data combined with simple feature engineering and a linear model achieve clinically useful, well-generalizing, and interpretable prediction of all three conditions. A two-feature model or a one-variable formula suffices for several tasks, supporting low-cost early-warning deployment in primary care.
 
-**Keywords:** hypertension; hyperglycemia; dyslipidemia; machine learning; delta features
+**Keywords:** cardiometabolic risk; hypertension; hyperglycemia; dyslipidemia; machine learning; delta features
 
 ---
 
 ## 1. Background
 
-### 1.1 The public-health burden of the "three highs"
+### 1.1 The public-health burden of cardiometabolic conditions
 
 Hypertension, hyperglycemia, and dyslipidemia are the dominant modifiable contributors to cardiovascular disease, stroke, and chronic kidney disease. Cardiovascular disease causes roughly 20 million deaths each year, close to one-third of global mortality [1]. The burden is especially heavy in Asia: more than a quarter of adults in the WHO Western Pacific region are hypertensive [2], and a small group of Asian countries accounts for nearly half of the world's diabetes cases [3]. Metabolic disease in East Asia has risen sharply in recent decades, driven by genetic susceptibility, distinctive body-fat distribution, and rapid dietary westernization [4]. In Taiwan, the prevalence among adults aged ≥40 is 38.3% for hypertension, 34.1% for dyslipidemia, and 16.4% for hyperglycemia, yet 40–70% of affected individuals are unaware of their condition [5].
 
@@ -51,15 +51,15 @@ The three conditions are mutually correlated and co-occur as the core of the met
 
 ### 1.2 The clinical value of early, longitudinal prediction
 
-The three highs are typically asymptomatic early on and are often detected only at routine checkups or after complications arise. Because progression from health to disease usually passes through a multi-year prodromal phase—during which lifestyle change can still reverse risk—identifying high-risk individuals early is key to reducing the burden. The trend toward younger onset has prompted Taiwan to lower the eligibility age for adult preventive-health services from 40 to 30 years in 2025 [8], extending the demand for screening to younger adults.
+These cardiometabolic conditions—commonly referred to as the "three highs" in East Asian clinical practice—are typically asymptomatic early on and are often detected only at routine checkups or after complications arise. Because progression from health to disease usually passes through a multi-year prodromal phase—during which lifestyle change can still reverse risk—identifying high-risk individuals early is key to reducing the burden. The trend toward younger onset has prompted Taiwan to lower the eligibility age for adult preventive-health services from 40 to 30 years in 2025 [8], extending the demand for screening to younger adults.
 
 As checkups have become routine, large volumes of *longitudinal* checkup data have accumulated, recording how biomarkers evolve within an individual. Because health-status changes often precede a clinical diagnosis, longitudinal data are uniquely valuable for early prediction. Yet conventional risk-assessment tools rely on a single time point and do not exploit this dynamic information—the gap this study addresses.
 
 ### 1.3 Related work and gaps
 
-Machine learning has been applied widely to single-disease checkup prediction. For hypertension, Kanegae et al. built an XGBoost/ensemble model on Japanese occupational checkups (n=18,258, AUC 0.881) and, notably, used longitudinal change features across three years [9]; Ye et al. predicted one-year incident hypertension from statewide US electronic health records (n=823,627, AUC 0.917), though the top features were antihypertensive drugs, raising leakage concerns [10]; and Wang et al. showed on large-scale Taiwanese checkups (n=207,488) that more checkups improve accuracy (AUC 0.889) [11]. For diabetes/hyperglycemia, Liu et al. reached AUC 0.93 over a 10-year Taiwanese cohort [12], and Yang et al. introduced a dual framework predicting glucose change and prediabetes risk, finding baseline fasting glucose overwhelmingly dominant [13]. Broader cardiovascular and diabetes models include Alaa et al. (UK Biobank AutoML, AUC 0.774) [14], Dinh et al. (NHANES, AUC 0.862) [15], Hung et al. (masked hypertension, AUC 0.851) [16], and Majcherek et al. (BRFSS survey data) [17].
+Machine learning has been applied widely to single-disease checkup prediction. For hypertension, Kanegae et al. built an XGBoost/ensemble model on Japanese occupational checkups (n=18,258, AUC 0.881) and, notably, used longitudinal change features across three years [9]; Ye et al. predicted one-year incident hypertension from statewide US electronic health records (n=823,627, AUC 0.917); their feature set included antihypertensive medications, which warrants careful interpretation in a prospective screening context and underscores the importance of strict temporal feature exclusion [10]; and Wang et al. showed on large-scale Taiwanese checkups (n=207,488) that more checkups improve accuracy (AUC 0.889) [11]. For diabetes/hyperglycemia, Liu et al. reached AUC 0.93 over a 10-year Taiwanese cohort [12], and Yang et al. introduced a dual framework predicting glucose change and prediabetes risk, finding baseline fasting glucose overwhelmingly dominant [13]. Broader cardiovascular and diabetes models include Alaa et al. (UK Biobank AutoML, AUC 0.774) [14], Dinh et al. (NHANES, AUC 0.862) [15], Hung et al. (masked hypertension, AUC 0.851) [16], and Majcherek et al. (BRFSS survey data) [17].
 
-Three gaps recur across this literature. First, almost all studies predict a *single* disease, despite the strong comorbidity of the three highs. Second, model comparisons are usually narrow (a systematic review of hypertension models found logistic and Cox regression dominant, with few cross-family comparisons) [18], leaving clinicians without comprehensive model-selection evidence. Third, interpretability—essential for clinical adoption—is rarely addressed; high-accuracy black-box models are difficult to deploy. Multi-task learning has been proposed for joint chronic-disease prediction (e.g., Tsai et al., who found multi-task and single-task performance comparable with far fewer parameters [19]) but has not been studied for the three highs with delta features.
+Three gaps recur across this literature. First, almost all studies predict a *single* disease, despite the strong comorbidity of these three cardiometabolic conditions. Second, model comparisons are usually narrow (a systematic review of hypertension models found logistic and Cox regression dominant, with few cross-family comparisons) [18], leaving clinicians without comprehensive model-selection evidence. Third, interpretability—essential for clinical adoption—is rarely addressed; high-accuracy black-box models are difficult to deploy. Multi-task learning has been proposed for joint chronic-disease prediction (e.g., Tsai et al., who found multi-task and single-task performance comparable with far fewer parameters [19]) but has not been studied for the joint cardiometabolic outcomes considered here with delta features.
 
 ### 1.4 Objectives and contributions
 
@@ -73,13 +73,21 @@ We build a longitudinal framework that predicts hypertension, hyperglycemia, and
 
 We used the longitudinal community health-checkup dataset published by Luo et al. on the Dryad repository [20,21]. The cohort was drawn from community health surveys in Hangzhou, Zhejiang Province, China, collected between 2010 and 2018, enrolling adults aged ≥40 (6,119 participants, 25,744 checkup records), most with three or more checkups. The dataset records checkup ordinal (visit number) rather than calendar date; intervals were inferred from age differences. About 90% of participants kept a fixed 2-year interval and 9.6% a 1-year interval, with a mean interval of 1.90 years (SD 0.36). Because intervals are highly consistent, delta features are directly comparable without time correction.
 
-Although the original authors restricted the cohort to participants with ≥3 checkups, we found 63 individuals (1.03%) with fewer than three valid records and excluded them, leaving **6,056 participants** (98.97% retention). The disease labels follow international thresholds [22–24]: hypertension as systolic blood pressure (SBP) ≥140 or diastolic blood pressure (DBP) ≥90 mmHg (or diagnosed and on antihypertensive medication); hyperglycemia as fasting blood glucose (FBG) ≥7.0 mmol/L (or self-reported diabetes); dyslipidemia as total cholesterol (TC) ≥6.22 mmol/L. Labels were converted to a binary 0/1 (healthy/affected) encoding.
+Although the original authors restricted the cohort to participants with ≥3 checkups, we found 63 individuals (1.03%) with fewer than three valid records and excluded them, leaving **6,056 participants** (98.97% retention; Figure 1). The disease labels follow international thresholds [22–24]: hypertension as systolic blood pressure (SBP) ≥140 or diastolic blood pressure (DBP) ≥90 mmHg (or diagnosed and on antihypertensive medication); hyperglycemia as fasting blood glucose (FBG) ≥7.0 mmol/L (or self-reported diabetes); dyslipidemia as total cholesterol (TC) ≥6.22 mmol/L. Labels were converted to a binary 0/1 (healthy/affected) encoding.
+
+**Figure 1.** Cohort selection and modeling-record expansion. Flow from the original Hangzhou community cohort through inclusion criteria (≥3 checkups, no baseline disease) to the analytic cohort (n=6,056) and sliding-window expansion yielding 13,514 modeling records.
+
+⚠️ *[Figure to be created — no existing flow diagram in thesis; recommend constructing a standard cohort flow diagram (boxes + arrows + N at each step) for SCI submission. CONSORT-style template.]*
 
 ### 2.2 Study design and sliding window
 
 We adopted a three-time-point longitudinal design, naming time points relative to the prediction target year Y0: Y−2 (≈4 years prior), Y−1 (≈2 years prior), and Y0 (target). The model inputs are the biomarkers at Y−2 and Y−1 plus their changes; the target is disease status at Y0. Predicting Y0 (rather than Y−1) avoids leakage—using Y−1 as the target would let the model "see" the answer from the same visit—and provides a clinically meaningful ~2-year warning window.
 
-To exploit participants with many checkups, we used a sliding window: a participant with N checkups yields (N−2) records (e.g., 5 checkups → 3 windows). This expanded the 6,056 participants to **13,514 modeling records**. Because one participant can contribute multiple records, the cross-validation must keep all of a participant's records in the same fold (Section 2.5).
+To exploit participants with many checkups, we used a sliding window: a participant with N checkups yields (N−2) records (e.g., 5 checkups → 3 windows). This expanded the 6,056 participants to **13,514 modeling records** (Figure 2). Because one participant can contribute multiple records, the cross-validation must keep all of a participant's records in the same fold (Section 2.5).
+
+**Figure 2.** Three-time-point longitudinal study design with sliding-window expansion. Y−2 and Y−1 biomarkers and their changes (Δ) predict disease status at Y0; the sliding window enables N−2 modeling records per N-checkup participant while preserving leakage control via patient-level grouping in cross-validation.
+
+*[Figure file: figure2_study_design.png — to be re-exported at journal-standard resolution from thesis Figure 4-1]*
 
 ### 2.3 Feature engineering
 
@@ -120,7 +128,7 @@ Ten experiments were designed: (1) model comparison; (2) SHAP feature importance
 
 ### 3.1 Model comparison
 
-Table 2 reports test AUC for all ten models. LR achieved the highest AUC for hyperglycemia (0.938) and dyslipidemia (tied, 0.867); RF was best for hypertension (0.743). Hyperglycemia was the easiest task (all models except KNN >0.83), dyslipidemia intermediate, and hypertension hardest (0.630–0.743), consistent with the larger short-term variability of blood pressure.
+Table 2 and Figure 3 report test AUC for all ten models. LR achieved the highest AUC for hyperglycemia (0.938) and dyslipidemia (tied, 0.867); RF was best for hypertension (0.743). Hyperglycemia was the easiest task (all models except KNN >0.83), dyslipidemia intermediate, and hypertension hardest (0.630–0.743), consistent with the larger short-term variability of blood pressure.
 
 **Table 2. Test AUC by model (mean ± SD, 5-fold CV).** *[Bootstrap 95% CI to be added before submission.]*
 
@@ -137,9 +145,13 @@ Table 2 reports test AUC for all ten models. LR achieved the highest AUC for hyp
 | SVM | 0.726 ± 0.011 | 0.919 ± 0.012 | 0.845 ± 0.012 |
 | MLP | 0.703 ± 0.033 | 0.919 ± 0.021 | 0.742 ± 0.136 |
 
+**Figure 3.** Test AUC of ten classifiers across three diseases. Bars show mean from stratified group 5-fold cross-validation; error bars indicate SD. LR, NB, and LDA achieved competitive AUC with the lowest variance; KNN and DT lagged on all three tasks.
+
+*[Figure file: figure3_model_auc.png — to be re-exported at journal-standard resolution from thesis Figure 6-1]*
+
 AUC alone is misleading under imbalance. With balanced class weights, LR maintained a strong sensitivity/specificity balance (e.g., hypertension sensitivity 0.697/specificity 0.638; hyperglycemia 0.858/0.882; dyslipidemia 0.799/0.775). In contrast, LDA, MLP, and KNN behaved extremely conservatively despite competitive AUC—LDA reached hyperglycemia AUC 0.936 but sensitivity only 0.484, and dyslipidemia sensitivity 0.118 versus LR's 0.799 at the *same* AUC (0.867)—illustrating why a single metric is insufficient for screening.
 
-**Generalization.** Comparing train and test AUC (Table 3), statistical models (LR, NB, LDA) showed near-zero overfitting (gap ≤0.010), whereas tree ensembles overfit heavily (RF reached train AUC 0.997 for hypertension, gap 0.254; LightGBM reached train AUC 1.000 for hyperglycemia). Thus tree models' apparent edge derives partly from greater fitting capacity rather than better generalization. For clinical deployment, where stability on unseen patients matters most, LR's low-variance behavior is advantageous.
+**Generalization.** Comparing train and test AUC (Table 3, Figure 4), statistical models (LR, NB, LDA) showed near-zero overfitting (gap ≤0.010), whereas tree ensembles overfit heavily (RF reached train AUC 0.997 for hypertension, gap 0.254; LightGBM reached train AUC 1.000 for hyperglycemia). Thus tree models' apparent edge derives partly from greater fitting capacity rather than better generalization. For clinical deployment, where stability on unseen patients matters most, LR's low-variance behavior is advantageous.
 
 **Table 3. Train AUC and generalization gap (train − test).**
 
@@ -156,9 +168,13 @@ AUC alone is misleading under imbalance. With balanced class weights, LR maintai
 | SVM | 0.863 / 0.137 | 0.983 / 0.063 | 0.946 / 0.101 |
 | MLP | 0.712 / 0.009 | 0.935 / 0.015 | 0.763 / 0.021 |
 
+**Figure 4.** Train versus test AUC by model family across three diseases. Statistical models (LR/NB/LDA) and MLP cluster near the diagonal (negligible overfitting); tree ensembles (RF/XGBoost/LightGBM) sit far below the diagonal, particularly for hypertension where training AUC approaches 1.0.
+
+*[Figure file: figure4_overfitting.png — to be re-exported at journal-standard resolution from thesis Figure 6-3]*
+
 ### 3.2 Feature importance (SHAP)
 
-SHAP analysis of the XGBoost model produced disease-specific, clinically coherent rankings (Table 4): hypertension was led by SBP (both time points) and age; hyperglycemia by FBG; and dyslipidemia by TC and ΔeGFR. The two time points of the same biomarker usually appeared together, indicating the model uses both the recent value and the historical trend. ΔeGFR was the only delta feature in the top 10 of all three diseases, suggesting renal-function change as a shared early marker of metabolic abnormality. Delta features comprised 30% (hypertension), 40% (hyperglycemia), and 30% (dyslipidemia) of the top-10—evidence that nonlinear models split on change directly, even though (Section 3.3) deltas add no AUC when both raw values are present.
+SHAP analysis of the XGBoost model produced disease-specific, clinically coherent rankings (Table 4, Figure 5): hypertension was led by SBP (both time points) and age; hyperglycemia by FBG; and dyslipidemia by TC and ΔeGFR. The two time points of the same biomarker usually appeared together, indicating the model uses both the recent value and the historical trend. Delta features comprised 30% (hypertension), 40% (hyperglycemia), and 30% (dyslipidemia) of the top-10—evidence that nonlinear models split on change directly, even though (Section 3.3) deltas add no AUC when both raw values are present.
 
 **Table 4. Top-5 SHAP features per disease (XGBoost).**
 
@@ -169,6 +185,10 @@ SHAP analysis of the XGBoost model produced disease-specific, clinically coheren
 | 3 | Age | ΔTC | ΔeGFR |
 | 4 | ΔDBP | BMI_(Y−1) | Age |
 | 5 | DBP_(Y−1) | BMI_(Y−2) | eGFR_(Y−2) |
+
+**Figure 5.** SHAP top-10 feature importance per disease (XGBoost). Disease-specific rankings confirm that the dominant biomarker for each condition (SBP for hypertension, FBG for hyperglycemia, TC for dyslipidemia) accounts for the bulk of predictive contribution, with both time points of the same biomarker consistently co-appearing.
+
+*[Figure file: figure5_shap_top10.png — to be re-exported at journal-standard resolution from thesis Figure 6-2]*
 
 ### 3.3 Delta-feature ablation
 
@@ -194,7 +214,7 @@ However, when only the most recent visit (Y−1) was available, adding delta fea
 
 ### 3.4 Feature-count ablation
 
-Predictive power concentrated in very few features (Table 7). Using only the top two SHAP features—the two time points of the same core biomarker (SBP, FBG, or TC)—retained AUC within ~0.8% of the full model (hypertension 0.715, hyperglycemia 0.933, dyslipidemia 0.861). A single feature already sufficed for hyperglycemia (0.920). Beyond five features, AUC differences were ≤0.005. This supports a low-cost screening scheme requiring only two measurements of a single core biomarker.
+Predictive power concentrated in very few features (Table 7, Figure 6). Using only the top two SHAP features—the two time points of the same core biomarker (SBP, FBG, or TC)—retained AUC within ~0.8% of the full model (hypertension 0.715, hyperglycemia 0.933, dyslipidemia 0.861). A single feature already sufficed for hyperglycemia (0.920). Beyond five features, AUC differences were ≤0.005. This supports a low-cost screening scheme requiring only two measurements of a single core biomarker.
 
 **Table 7. Feature-count ablation, AUC (LR).**
 
@@ -205,6 +225,10 @@ Predictive power concentrated in very few features (Table 7). Using only the top
 | 5 | 0.716 | 0.935 | 0.864 |
 | 10 | 0.717 | 0.937 | 0.864 |
 | 26 (all) | 0.721 | 0.938 | 0.867 |
+
+**Figure 6.** Predictive performance versus feature count (LR). AUC plateaus rapidly: two features already retain ≥99% of the full-model AUC for all three diseases, and gains beyond five features are negligible. This supports parsimonious deployment using as few as two routine biomarker measurements.
+
+*[Figure file: figure6_feature_count.png — to be re-exported at journal-standard resolution from thesis Figure 6-6]*
 
 ### 3.5 Robustness: class imbalance and data filtering
 
@@ -262,7 +286,7 @@ The conclusions are stable across analytic choices: imbalance-handling methods d
 
 ### 4.5 Limitations
 
-Several limitations temper the findings. (1) *Selection bias*: the cohort comprises voluntary checkup attendees, who may be healthier and more health-conscious than the general population, limiting generalizability. (2) *No external validation*: lacking a comparable external dataset, we relied on internal cross-validation; an attempt using Synthea-generated records [37] failed because of data-quality issues (e.g., 99.4% positivity for hyperglycemia, 72% missing TC), and the only feasible hypertension test showed an expected drop (LR AUC 0.718→0.625) attributable to cohort differences. A temporal-split validation is planned. (3) *Label and medication ambiguity*: labels behave as per-visit physiological snapshots rather than persistent disease states (≈24.8% of positive individuals reverted to negative at a later visit), and the absence of medication records means the model predicts whether the next checkup will breach a threshold rather than strict persistent disease—this also underlies the unverified blood-pressure-treatment hypothesis for hypertension's atypical time-point pattern. (4) *No lifestyle data*: diet, exercise, and smoking—strongly linked to the three highs [36]—were unavailable and would likely improve both accuracy and actionability. (5) *Limited time points*: with only three visits, deep sequence models (LSTM, GRU, Transformer) were not explored.
+Several limitations temper the findings. (1) *Selection bias*: the cohort comprises voluntary checkup attendees, who may be healthier and more health-conscious than the general population, limiting generalizability. (2) *No external validation*: lacking a comparable external dataset, we relied on internal cross-validation; an attempt using Synthea-generated records [37] failed because of data-quality issues (e.g., 99.4% positivity for hyperglycemia, 72% missing TC), and the only feasible hypertension test showed an expected drop (LR AUC 0.718→0.625) attributable to cohort differences. A temporal-split validation is planned. (3) *Label and medication ambiguity*: labels behave as per-visit physiological snapshots rather than persistent disease states (≈24.8% of positive individuals reverted to negative at a later visit), and the absence of medication records means the model predicts whether the next checkup will breach a threshold rather than strict persistent disease—this also underlies the unverified blood-pressure-treatment hypothesis for hypertension's atypical time-point pattern. (4) *No lifestyle data*: diet, exercise, and smoking—strongly linked to cardiometabolic risk [36]—were unavailable and would likely improve both accuracy and actionability. (5) *Limited time points*: with only three visits, deep sequence models (LSTM, GRU, Transformer) were not explored.
 
 ### 4.6 Future work
 
@@ -272,7 +296,7 @@ Priorities are a temporal-split (and eventually external) validation, calibratio
 
 ## 5. Conclusions
 
-Using a public longitudinal checkup cohort, we showed that simple feature engineering and a linear model predict hypertension, hyperglycemia, and dyslipidemia with clinically useful, well-generalizing, and interpretable performance (LR AUC 0.721/0.938/0.867). Delta features are predictively redundant when raw time points are present but interpretively valuable; two features—or, for hyperglycemia, a single-variable formula (AUC 0.943)—suffice for near-complete accuracy; and the results are robust to imbalance handling, data filtering, and multi-task versus single-task design. These findings support deploying low-cost, interpretable early-warning screening in primary care, and provide comprehensive model-selection evidence for longitudinal three-highs prediction.
+Using a public longitudinal checkup cohort, we showed that simple feature engineering and a linear model predict hypertension, hyperglycemia, and dyslipidemia with clinically useful, well-generalizing, and interpretable performance (LR AUC 0.721/0.938/0.867). Delta features are predictively redundant when raw time points are present but interpretively valuable; two features—or, for hyperglycemia, a single-variable formula (AUC 0.943)—suffice for near-complete accuracy; and the results are robust to imbalance handling, data filtering, and multi-task versus single-task design. These findings support deploying low-cost, interpretable early-warning screening in primary care, and provide comprehensive model-selection evidence for longitudinal cardiometabolic risk prediction.
 
 ---
 

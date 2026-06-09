@@ -8,9 +8,9 @@
 
 > **以縱向健檢資料同時預測高血壓、高血糖與高血脂：結合可解釋符號回歸的機器學習模型全面比較**
 
-**Running title:** Predicting the "three highs" from longitudinal checkups
+**Running title:** Predicting cardiometabolic risk from longitudinal checkups
 
-> **短題名：** 以縱向健檢資料預測「三高」
+> **短題名：** 以縱向健檢資料預測心血管代謝風險
 
 **Po-Chiao Chi¹ (紀伯喬), Yang Syu¹ (許揚)** *(作者順序/通訊作者待定)*
 ¹ Department of Computer Science, College of Science, National Taipei University of Education, Taipei, Taiwan（國立臺北教育大學理學院資訊科學系）
@@ -21,9 +21,9 @@
 
 > ## 摘要
 
-**Background.** Hypertension, hyperglycemia, and dyslipidemia—collectively the "three highs"—are the principal modifiable risk factors for cardiovascular disease and frequently co-occur. Conventional risk scores rely on a single time point and do not exploit the dynamic information embedded in repeated health checkups. Existing machine-learning studies typically target a single disease, compare few models, and seldom address interpretability. We aimed to build and systematically evaluate a longitudinal framework that predicts all three conditions simultaneously, while quantifying the value of change (delta) features and exploring interpretable models.
+**Background.** Hypertension, hyperglycemia, and dyslipidemia—collectively cardiometabolic risk factors—are the principal modifiable contributors to cardiovascular disease and frequently co-occur. Conventional risk scores rely on a single time point and do not exploit the dynamic information embedded in repeated health checkups. Existing machine-learning studies typically target a single disease, compare few models, and seldom address interpretability. We aimed to build and systematically evaluate a longitudinal framework that predicts all three conditions simultaneously, while quantifying the value of change (delta) features and exploring interpretable models.
 
-> **背景。** 高血壓、高血糖與高血脂（合稱「三高」）是心血管疾病的主要可控風險因子，且常共病發生。傳統風險評分僅依賴單一時間點，未利用重複健檢中蘊含的動態資訊。現有機器學習研究多聚焦單一疾病、比較模型數量有限、且少有探討可解釋性。本研究旨在建立並系統性評估一個同時預測三高的縱向框架，量化變化量（Δ）特徵的價值，並探索可解釋模型。
+> **背景。** 高血壓、高血糖與高血脂（合稱心血管代謝風險因子）是心血管疾病的主要可控因子，且常共病發生。傳統風險評分僅依賴單一時間點，未利用重複健檢中蘊含的動態資訊。現有機器學習研究多聚焦單一疾病、比較模型數量有限、且少有探討可解釋性。本研究旨在建立並系統性評估一個同時預測此三項疾患的縱向框架，量化變化量（Δ）特徵的價值，並探索可解釋模型。
 
 **Methods.** We used a publicly available longitudinal community health-checkup cohort (Luo et al., Dryad; Hangzhou, China, 2010–2018; adults aged ≥40). After excluding participants with fewer than three checkups, 6,056 individuals remained. A three-time-point design (Y−2, Y−1, Y0) with a sliding-window expansion produced 13,514 modeling records. Twenty-six features were derived: demographics, biomarkers at Y−2 and Y−1, and eight delta features (Y−1 − Y−2). Ten classifiers plus symbolic regression (PySR) were evaluated with stratified group 5-fold cross-validation. The primary metric was AUC-ROC.
 
@@ -35,11 +35,11 @@
 
 **Conclusions.** Longitudinal checkup data combined with simple feature engineering and a linear model achieve clinically useful, well-generalizing, and interpretable prediction of all three conditions. A two-feature model or a one-variable formula suffices for several tasks, supporting low-cost early-warning deployment in primary care.
 
-> **結論。** 縱向健檢資料結合簡單特徵工程與線性模型，即可對三高達到臨床可用、泛化良好且可解釋的預測。雙特徵模型或單變數公式在多項任務已足夠，支持在基層醫療部署低成本早期預警系統。
+> **結論。** 縱向健檢資料結合簡單特徵工程與線性模型，即可對心血管代謝風險達到臨床可用、泛化良好且可解釋的預測。雙特徵模型或單變數公式在多項任務已足夠，支持在基層醫療部署低成本早期預警系統。
 
-**Keywords:** hypertension; hyperglycemia; dyslipidemia; machine learning; delta features
+**Keywords:** cardiometabolic risk; hypertension; hyperglycemia; dyslipidemia; machine learning; delta features
 
-> **關鍵詞：** 高血壓；高血糖；高血脂；機器學習；變化量特徵
+> **關鍵詞：** 心血管代謝風險；高血壓；高血糖；高血脂；機器學習；變化量特徵
 
 ---
 
@@ -47,9 +47,9 @@
 
 > ## 1. 背景
 
-### 1.1 The public-health burden of the "three highs"
+### 1.1 The public-health burden of cardiometabolic conditions
 
-> ### 1.1 「三高」的公共衛生負擔
+> ### 1.1 心血管代謝疾患的公共衛生負擔
 
 Hypertension, hyperglycemia, and dyslipidemia are the dominant modifiable contributors to cardiovascular disease, stroke, and chronic kidney disease. Cardiovascular disease causes roughly 20 million deaths each year, close to one-third of global mortality [1]. The burden is especially heavy in Asia: more than a quarter of adults in the WHO Western Pacific region are hypertensive [2], and a small group of Asian countries accounts for nearly half of the world's diabetes cases [3]. Metabolic disease in East Asia has risen sharply, driven by genetic susceptibility, distinctive body-fat distribution, and rapid dietary westernization [4]. In Taiwan, the prevalence among adults aged ≥40 is 38.3% (hypertension), 34.1% (dyslipidemia), and 16.4% (hyperglycemia), yet 40–70% of affected individuals are unaware of their condition [5].
 
@@ -57,15 +57,15 @@ Hypertension, hyperglycemia, and dyslipidemia are the dominant modifiable contri
 
 The three conditions are mutually correlated and co-occur as the core of the metabolic syndrome: over 70% of patients with diabetes also have hypertension or dyslipidemia [6]. Metabolic-syndrome patients carry roughly twice the cardiovascular risk and five times the risk of type 2 diabetes [7]. This comorbidity argues for predicting the three conditions jointly rather than in isolation.
 
-> 三者相互關聯，並共同構成代謝症候群核心：逾 70% 糖尿病患者同時合併高血壓或高血脂 [6]。代謝症候群患者的心血管風險約為兩倍、第二型糖尿病風險約為五倍 [7]。此共病性說明應同時（而非個別）預測三高。
+> 三者相互關聯，並共同構成代謝症候群核心：逾 70% 糖尿病患者同時合併高血壓或高血脂 [6]。代謝症候群患者的心血管風險約為兩倍、第二型糖尿病風險約為五倍 [7]。此共病性說明應同時（而非個別）預測此三項疾患。
 
 ### 1.2 The clinical value of early, longitudinal prediction
 
 > ### 1.2 早期縱向預測的臨床價值
 
-The three highs are typically asymptomatic early on and are often detected only at routine checkups or after complications arise. Because progression from health to disease usually passes through a multi-year prodromal phase—during which lifestyle change can still reverse risk—identifying high-risk individuals early is key. The trend toward younger onset prompted Taiwan to lower the eligibility age for adult preventive-health services from 40 to 30 in 2025 [8], extending screening demand to younger adults.
+These cardiometabolic conditions—commonly referred to as the "three highs" in East Asian clinical practice—are typically asymptomatic early on and are often detected only at routine checkups or after complications arise. Because progression from health to disease usually passes through a multi-year prodromal phase—during which lifestyle change can still reverse risk—identifying high-risk individuals early is key. The trend toward younger onset prompted Taiwan to lower the eligibility age for adult preventive-health services from 40 to 30 in 2025 [8], extending screening demand to younger adults.
 
-> 三高初期多無症狀，常於例行健檢或併發症出現後才發現。由於從健康到發病通常歷經數年「前驅期」，期間透過生活型態調整仍可逆轉風險，因此及早辨識高風險者至關重要。疾病年輕化趨勢促使台灣於 2025 年將成人預防保健服務年齡由 40 歲下修至 30 歲 [8]，將篩檢需求延伸至青壯年。
+> 上述心血管代謝疾患——東亞臨床俗稱「三高」——初期多無症狀，常於例行健檢或併發症出現後才發現。由於從健康到發病通常歷經數年「前驅期」，期間透過生活型態調整仍可逆轉風險，因此及早辨識高風險者至關重要。疾病年輕化趨勢促使台灣於 2025 年將成人預防保健服務年齡由 40 歲下修至 30 歲 [8]，將篩檢需求延伸至青壯年。
 
 As checkups have become routine, large volumes of *longitudinal* checkup data have accumulated, recording how biomarkers evolve within an individual. Because health-status changes often precede a clinical diagnosis, longitudinal data are uniquely valuable for early prediction. Yet conventional risk-assessment tools rely on a single time point and do not exploit this dynamic information—the gap this study addresses.
 
@@ -75,21 +75,21 @@ As checkups have become routine, large volumes of *longitudinal* checkup data ha
 
 > ### 1.3 相關研究與缺口
 
-Machine learning has been applied widely to single-disease checkup prediction. For hypertension, Kanegae et al. used XGBoost on Japanese occupational checkups (n=18,258, AUC 0.881) with longitudinal change features [9]; Ye et al. predicted one-year incident hypertension from US EHRs (n=823,627, AUC 0.917), though top features were antihypertensive drugs, raising leakage concerns [10]; Wang et al. showed on Taiwanese checkups (n=207,488) that more checkups improve accuracy (AUC 0.889) [11]. For diabetes, Liu et al. reached AUC 0.93 over a 10-year cohort [12], and Yang et al. found baseline fasting glucose overwhelmingly dominant [13]. Broader work includes Alaa et al. (UK Biobank, AUC 0.774) [14], Dinh et al. (NHANES, AUC 0.862) [15], Hung et al. (masked hypertension, AUC 0.851) [16], and Majcherek et al. (BRFSS) [17].
+Machine learning has been applied widely to single-disease checkup prediction. For hypertension, Kanegae et al. used XGBoost on Japanese occupational checkups (n=18,258, AUC 0.881) with longitudinal change features [9]; Ye et al. predicted one-year incident hypertension from US EHRs (n=823,627, AUC 0.917); their feature set included antihypertensive medications, which warrants careful interpretation in a prospective screening context and underscores the importance of strict temporal feature exclusion [10]; Wang et al. showed on Taiwanese checkups (n=207,488) that more checkups improve accuracy (AUC 0.889) [11]. For diabetes, Liu et al. reached AUC 0.93 over a 10-year cohort [12], and Yang et al. found baseline fasting glucose overwhelmingly dominant [13]. Broader work includes Alaa et al. (UK Biobank, AUC 0.774) [14], Dinh et al. (NHANES, AUC 0.862) [15], Hung et al. (masked hypertension, AUC 0.851) [16], and Majcherek et al. (BRFSS) [17].
 
-> 機器學習已廣泛用於單一疾病的健檢預測。高血壓方面，Kanegae 等人以 XGBoost 處理日本職場健檢（n=18,258，AUC 0.881）並使用縱向變化量特徵 [9]；Ye 等人以美國 EHR 預測一年內新發高血壓（n=823,627，AUC 0.917），但前幾名特徵為降壓藥物，有資料洩漏疑慮 [10]；Wang 等人在台灣健檢（n=207,488）證實健檢次數越多準確度越高（AUC 0.889）[11]。糖尿病方面，Liu 等人於十年世代達 AUC 0.93 [12]，Yang 等人發現基線空腹血糖具壓倒性重要性 [13]。其他研究包括 Alaa 等人（UK Biobank，AUC 0.774）[14]、Dinh 等人（NHANES，AUC 0.862）[15]、Hung 等人（隱匿性高血壓，AUC 0.851）[16] 與 Majcherek 等人（BRFSS）[17]。
+> 機器學習已廣泛用於單一疾病的健檢預測。高血壓方面，Kanegae 等人以 XGBoost 處理日本職場健檢（n=18,258，AUC 0.881）並使用縱向變化量特徵 [9]；Ye 等人以美國 EHR 預測一年內新發高血壓（n=823,627，AUC 0.917），其特徵集包含降壓藥物，於前瞻性篩檢情境下需謹慎詮釋，亦凸顯前瞻性預測中嚴格時序特徵排除的重要性 [10]；Wang 等人在台灣健檢（n=207,488）證實健檢次數越多準確度越高（AUC 0.889）[11]。糖尿病方面，Liu 等人於十年世代達 AUC 0.93 [12]，Yang 等人發現基線空腹血糖具壓倒性重要性 [13]。其他研究包括 Alaa 等人（UK Biobank，AUC 0.774）[14]、Dinh 等人（NHANES，AUC 0.862）[15]、Hung 等人（隱匿性高血壓，AUC 0.851）[16] 與 Majcherek 等人（BRFSS）[17]。
 
-Three gaps recur. First, almost all studies predict a *single* disease, despite strong comorbidity. Second, model comparisons are narrow, leaving clinicians without comprehensive model-selection evidence [18]. Third, interpretability—essential for clinical adoption—is rarely addressed. Multi-task learning has been proposed for joint chronic-disease prediction (Tsai et al. found multi-task and single-task comparable with fewer parameters [19]) but not for the three highs with delta features.
+Three gaps recur. First, almost all studies predict a *single* disease, despite strong comorbidity. Second, model comparisons are narrow, leaving clinicians without comprehensive model-selection evidence [18]. Third, interpretability—essential for clinical adoption—is rarely addressed. Multi-task learning has been proposed for joint chronic-disease prediction (Tsai et al. found multi-task and single-task comparable with fewer parameters [19]) but not for the joint cardiometabolic outcomes considered here with delta features.
 
-> 三個缺口反覆出現。其一，儘管共病性強，幾乎所有研究僅預測*單一*疾病。其二，模型比較範圍狹窄，臨床端缺乏完整的模型選擇依據 [18]。其三，對臨床採用至關重要的可解釋性少被探討。多任務學習雖被提出用於慢性病聯合預測（Tsai 等人發現多任務與單任務效能相當但參數更少 [19]），但尚未用於結合 Δ 特徵的三高預測。
+> 三個缺口反覆出現。其一，儘管共病性強，幾乎所有研究僅預測*單一*疾病。其二，模型比較範圍狹窄，臨床端缺乏完整的模型選擇依據 [18]。其三，對臨床採用至關重要的可解釋性少被探討。多任務學習雖被提出用於慢性病聯合預測（Tsai 等人發現多任務與單任務效能相當但參數更少 [19]），但尚未用於結合 Δ 特徵的心血管代謝風險預測。
 
 ### 1.4 Objectives and contributions
 
 > ### 1.4 研究目標與貢獻
 
-We build a longitudinal framework predicting the three highs simultaneously, evaluated comprehensively. Contributions: (1) a systematic comparison of ten classifiers plus symbolic regression across the three conditions, with leakage-controlled validation; (2) a complete ablation disentangling the predictive versus interpretive roles of delta features; (3) interpretability analysis combining SHAP and symbolic regression, including single-variable formulas with clinically useful accuracy; and (4) robustness experiments (class imbalance, data filtering, checkup frequency, multi-task vs single-task) establishing the stability of the findings. All data are public, making the study fully reproducible.
+We build a longitudinal framework predicting these three conditions simultaneously, evaluated comprehensively. Contributions: (1) a systematic comparison of ten classifiers plus symbolic regression across the three conditions, with leakage-controlled validation; (2) a complete ablation disentangling the predictive versus interpretive roles of delta features; (3) interpretability analysis combining SHAP and symbolic regression, including single-variable formulas with clinically useful accuracy; and (4) robustness experiments (class imbalance, data filtering, checkup frequency, multi-task vs single-task) establishing the stability of the findings. All data are public, making the study fully reproducible.
 
-> 本研究建立同時預測三高的縱向框架並全面評估。貢獻包括：(1) 跨三項疾病系統性比較十種分類器加符號回歸，並以無洩漏驗證；(2) 完整消融實驗釐清 Δ 特徵在「預測」與「解釋」上的不同角色；(3) 結合 SHAP 與符號回歸的可解釋性分析，含具臨床可用準確度的單變數公式；(4) 多組穩健性實驗（類別不平衡、資料篩選、健檢次數、多任務 vs 單任務）確立發現的穩定性。所有資料公開，研究完全可重現。
+> 本研究建立同時預測此三項心血管代謝疾患的縱向框架並全面評估。貢獻包括：(1) 跨三項疾病系統性比較十種分類器加符號回歸，並以無洩漏驗證；(2) 完整消融實驗釐清 Δ 特徵在「預測」與「解釋」上的不同角色；(3) 結合 SHAP 與符號回歸的可解釋性分析，含具臨床可用準確度的單變數公式；(4) 多組穩健性實驗（類別不平衡、資料篩選、健檢次數、多任務 vs 單任務）確立發現的穩定性。所有資料公開，研究完全可重現。
 
 ---
 
@@ -101,7 +101,13 @@ We build a longitudinal framework predicting the three highs simultaneously, eva
 
 > ### 2.1 資料來源與世代
 
-We used the longitudinal community health-checkup dataset published by Luo et al. on Dryad [20,21]: community health surveys in Hangzhou, China, 2010–2018, enrolling adults aged ≥40 (6,119 participants, 25,744 records), most with three or more checkups. The dataset records visit number rather than calendar date; intervals were inferred from age differences. About 90% kept a fixed 2-year interval (mean 1.90 years, SD 0.36), so delta features are directly comparable. We excluded 63 individuals (1.03%) with fewer than three valid records, leaving **6,056 participants** (98.97% retention). Disease labels follow international thresholds [22–24]: hypertension SBP ≥140 or DBP ≥90 mmHg; hyperglycemia FBG ≥7.0 mmol/L; dyslipidemia TC ≥6.22 mmol/L, recoded to binary 0/1.
+We used the longitudinal community health-checkup dataset published by Luo et al. on Dryad [20,21]: community health surveys in Hangzhou, China, 2010–2018, enrolling adults aged ≥40 (6,119 participants, 25,744 records), most with three or more checkups. The dataset records visit number rather than calendar date; intervals were inferred from age differences. About 90% kept a fixed 2-year interval (mean 1.90 years, SD 0.36), so delta features are directly comparable. We excluded 63 individuals (1.03%) with fewer than three valid records, leaving **6,056 participants** (98.97% retention; Figure 1). Disease labels follow international thresholds [22–24]: hypertension SBP ≥140 or DBP ≥90 mmHg; hyperglycemia FBG ≥7.0 mmol/L; dyslipidemia TC ≥6.22 mmol/L, recoded to binary 0/1.
+
+**Figure 1.** Cohort selection and modeling-record expansion. Flow from the original Hangzhou community cohort through inclusion criteria (≥3 checkups, no baseline disease) to the analytic cohort (n=6,056) and sliding-window expansion yielding 13,514 modeling records.
+
+> **圖 1.** 世代篩選與建模紀錄擴增流程。由原始杭州社區世代經納入準則（≥3 次健檢、無基線疾病）至分析世代（n=6,056），再經滑動窗口擴增為 13,514 筆建模紀錄。
+
+*[Figure file: figure1_cohort_flow.png — to be re-exported at journal-standard resolution from thesis Figure 4-2]*
 
 > 使用 Luo 等人公開於 Dryad 的縱向社區健檢資料 [20,21]：中國杭州 2010–2018 年社區健康調查，納入 ≥40 歲成人（6,119 人、25,744 筆紀錄），多數有三次以上健檢。資料僅記錄「第幾次健檢」而非日期，間隔以年齡差推算。約 90% 維持固定 2 年間隔（平均 1.90 年、標準差 0.36），故 Δ 特徵可直接比較。本研究排除 63 位（1.03%）有效紀錄不足三次者，保留 **6,056 人**（保留率 98.97%）。疾病標記依國際閾值 [22–24]：高血壓 SBP ≥140 或 DBP ≥90 mmHg；高血糖 FBG ≥7.0 mmol/L；高血脂 TC ≥6.22 mmol/L，並重新編碼為二元 0/1。
 
@@ -109,7 +115,13 @@ We used the longitudinal community health-checkup dataset published by Luo et al
 
 > ### 2.2 研究設計與滑動窗口
 
-We adopted a three-time-point design, naming time points relative to target year Y0: Y−2 (≈4 years prior), Y−1 (≈2 years prior), Y0 (target). Inputs are biomarkers at Y−2 and Y−1 plus their changes; the target is disease status at Y0. Predicting Y0 rather than Y−1 avoids leakage and provides a ~2-year warning window. A sliding window (a participant with N checkups yields N−2 records) expanded 6,056 participants to **13,514 records**. Because one participant contributes multiple records, cross-validation must keep all of a participant's records in the same fold.
+We adopted a three-time-point design, naming time points relative to target year Y0: Y−2 (≈4 years prior), Y−1 (≈2 years prior), Y0 (target). Inputs are biomarkers at Y−2 and Y−1 plus their changes; the target is disease status at Y0. Predicting Y0 rather than Y−1 avoids leakage and provides a ~2-year warning window. A sliding window (a participant with N checkups yields N−2 records) expanded 6,056 participants to **13,514 records** (Figure 2). Because one participant contributes multiple records, cross-validation must keep all of a participant's records in the same fold.
+
+**Figure 2.** Three-time-point longitudinal study design with sliding-window expansion. Y−2 and Y−1 biomarkers and their changes (Δ) predict disease status at Y0; the sliding window enables N−2 modeling records per N-checkup participant while preserving leakage control via patient-level grouping in cross-validation.
+
+> **圖 2.** 三時間點縱向研究設計與滑動窗口擴增。以 Y−2 與 Y−1 的生物標記及其變化量（Δ）預測 Y0 疾病狀態；滑動窗口讓 N 次健檢者貢獻 N−2 筆紀錄，並透過患者層級分組於交叉驗證中防止資料洩漏。
+
+*[Figure file: figure2_study_design.png — to be re-exported at journal-standard resolution from thesis Figure 4-1]*
 
 > 採三時間點設計，相對於目標年 Y0 命名：Y−2（約四年前）、Y−1（約兩年前）、Y0（目標）。輸入為 Y−2 與 Y−1 的生物標記及其變化量；目標為 Y0 的疾病狀態。以 Y0（而非 Y−1）為目標可避免洩漏，並提供約兩年的預警窗口。滑動窗口（N 次健檢者產生 N−2 筆紀錄）將 6,056 人擴增為 **13,514 筆**。由於同一人貢獻多筆紀錄，交叉驗證須將同一人所有紀錄留在同一折。
 
@@ -183,11 +195,17 @@ LR achieved the highest AUC for hyperglycemia (0.938) and dyslipidemia (tied, 0.
 | SVM | 0.726 ± 0.011 | 0.919 ± 0.012 | 0.845 ± 0.012 |
 | MLP | 0.703 ± 0.033 | 0.919 ± 0.021 | 0.742 ± 0.136 |
 
+**Figure 3.** Test AUC of ten classifiers across three diseases. Bars show mean from stratified group 5-fold cross-validation; error bars indicate SD. LR, NB, and LDA achieved competitive AUC with the lowest variance; KNN and DT lagged on all three tasks.
+
+> **圖 3.** 十種分類器於三項疾病的測試集 AUC。長條為分層分組 5 折交叉驗證的平均值，誤差棒為標準差。LR、NB、LDA 達競爭性 AUC 且變異最低；KNN 與 DT 於三項疾病均落後。
+
+*[Figure file: figure3_model_auc.png — to be re-exported at journal-standard resolution from thesis Figure 6-1]*
+
 With balanced class weights, LR kept a strong sensitivity/specificity balance (e.g., hyperglycemia 0.858/0.882), whereas LDA, MLP, and KNN behaved extremely conservatively despite competitive AUC—LDA reached dyslipidemia AUC 0.867 but sensitivity only 0.118 versus LR's 0.799 at the same AUC—illustrating why a single metric is insufficient for screening.
 
 > 採平衡類別權重時，LR 維持良好的敏感度/特異度平衡（如高血糖 0.858/0.882）；而 LDA、MLP、KNN 雖 AUC 不差卻極度保守——LDA 在高血脂達 AUC 0.867，但敏感度僅 0.118，相同 AUC 下 LR 為 0.799——凸顯單一指標不足以評估篩檢用途。
 
-Comparing train and test AUC (Table 3), statistical models showed near-zero overfitting (gap ≤0.010), whereas tree ensembles overfit heavily (RF train AUC 0.997 for hypertension, gap 0.254; LightGBM train AUC 1.000 for hyperglycemia). Tree models' apparent edge derives partly from greater fitting capacity rather than better generalization; LR's low-variance behavior is advantageous for deployment.
+Comparing train and test AUC (Table 3, Figure 4), statistical models showed near-zero overfitting (gap ≤0.010), whereas tree ensembles overfit heavily (RF train AUC 0.997 for hypertension, gap 0.254; LightGBM train AUC 1.000 for hyperglycemia). Tree models' apparent edge derives partly from greater fitting capacity rather than better generalization; LR's low-variance behavior is advantageous for deployment.
 
 > 比較訓練與測試 AUC（表 3），統計模型幾乎無過擬合（差距 ≤0.010），樹集成則嚴重過擬合（RF 高血壓訓練 AUC 0.997、差距 0.254；LightGBM 高血糖訓練 AUC 1.000）。樹模型的表面優勢部分源於更強的擬合能力而非更佳泛化；LR 的低變異特性對部署有利。
 
@@ -206,13 +224,19 @@ Comparing train and test AUC (Table 3), statistical models showed near-zero over
 | SVM | 0.863 / 0.137 | 0.983 / 0.063 | 0.946 / 0.101 |
 | MLP | 0.712 / 0.009 | 0.935 / 0.015 | 0.763 / 0.021 |
 
+**Figure 4.** Train versus test AUC by model family across three diseases. Statistical models (LR/NB/LDA) and MLP cluster near the diagonal (negligible overfitting); tree ensembles (RF/XGBoost/LightGBM) sit far below the diagonal, particularly for hypertension where training AUC approaches 1.0.
+
+> **圖 4.** 三項疾病下各模型族訓練 vs 測試 AUC。傳統統計模型（LR/NB/LDA）與 MLP 落於對角線附近（過擬合可忽略）；樹模型（RF/XGBoost/LightGBM）遠離對角線，尤以高血壓最顯著（訓練 AUC 近 1.0）。
+
+*[Figure file: figure4_overfitting.png — to be re-exported at journal-standard resolution from thesis Figure 6-3]*
+
 ### 3.2 Feature importance (SHAP)
 
 > ### 3.2 特徵重要性（SHAP）
 
-SHAP rankings (XGBoost) were disease-specific and clinically coherent (Table 4): hypertension led by SBP and age; hyperglycemia by FBG; dyslipidemia by TC and ΔeGFR. Two time points of the same biomarker usually co-appeared, indicating the model uses both recent value and historical trend. ΔeGFR was the only delta in the top 10 of all three diseases, suggesting renal-function change as a shared early marker. Deltas made up 30%/40%/30% of the top-10, showing nonlinear models split on change directly.
+SHAP rankings (XGBoost) were disease-specific and clinically coherent (Table 4, Figure 5): hypertension led by SBP and age; hyperglycemia by FBG; dyslipidemia by TC and ΔeGFR. Two time points of the same biomarker usually co-appeared, indicating the model uses both recent value and historical trend. Deltas made up 30%/40%/30% of the top-10, showing nonlinear models split on change directly.
 
-> SHAP 排序（XGBoost）具疾病特異性且符合臨床直覺（表 4）：高血壓由 SBP 與年齡主導；高血糖由 FBG；高血脂由 TC 與 ΔeGFR。同一標記的兩個時間點常同時出現，顯示模型兼用近期值與歷史趨勢。ΔeGFR 是唯一同時進入三疾病前十的 Δ 特徵，暗示腎功能變化為共通早期指標。Δ 在前十中佔 30%/40%/30%，顯示非線性模型直接以變化量分裂。
+> SHAP 排序（XGBoost）具疾病特異性且符合臨床直覺（表 4）：高血壓由 SBP 與年齡主導；高血糖由 FBG；高血脂由 TC 與 ΔeGFR。同一標記的兩個時間點常同時出現，顯示模型兼用近期值與歷史趨勢。Δ 在前十中佔 30%/40%/30%，顯示非線性模型直接以變化量分裂。
 
 **Table 4. Top-5 SHAP features per disease (XGBoost). 表 4　各疾病前五 SHAP 特徵（XGBoost）**
 
@@ -223,6 +247,12 @@ SHAP rankings (XGBoost) were disease-specific and clinically coherent (Table 4):
 | 3 | Age | ΔTC | ΔeGFR |
 | 4 | ΔDBP | BMI_(Y−1) | Age |
 | 5 | DBP_(Y−1) | BMI_(Y−2) | eGFR_(Y−2) |
+
+**Figure 5.** SHAP top-10 feature importance per disease (XGBoost). Disease-specific rankings confirm that the dominant biomarker for each condition (SBP for hypertension, FBG for hyperglycemia, TC for dyslipidemia) accounts for the bulk of predictive contribution, with both time points of the same biomarker consistently co-appearing.
+
+> **圖 5.** 各疾病前十名 SHAP 特徵重要性（XGBoost）。疾病專屬排名顯示主導生物標記（高血壓 SBP、高血糖 FBG、高血脂 TC）貢獻絕大多數預測力，且同一標記的兩個時間點通常同時出現。
+
+*[Figure file: figure5_shap_top10.png — to be re-exported at journal-standard resolution from thesis Figure 6-2]*
 
 ### 3.3 Delta-feature ablation
 
@@ -252,7 +282,7 @@ With both Y−2 and Y−1 present, removing deltas changed AUC by essentially ze
 
 > ### 3.4 特徵數量消融
 
-Predictive power concentrated in very few features (Table 7). The top two SHAP features—two time points of one core biomarker—retained AUC within ~0.8% of the full model (HTN 0.715, HG 0.933, DL 0.861). A single feature sufficed for hyperglycemia (0.920). Beyond five features, differences were ≤0.005. This supports a low-cost scheme needing only two measurements of one core biomarker.
+Predictive power concentrated in very few features (Table 7, Figure 6). The top two SHAP features—two time points of one core biomarker—retained AUC within ~0.8% of the full model (HTN 0.715, HG 0.933, DL 0.861). A single feature sufficed for hyperglycemia (0.920). Beyond five features, differences were ≤0.005. This supports a low-cost scheme needing only two measurements of one core biomarker.
 
 > 預測力高度集中於少數特徵（表 7）。前兩大 SHAP 特徵——同一核心標記的兩個時間點——即可保留 AUC 在完整模型 ~0.8% 內（高血壓 0.715、高血糖 0.933、高血脂 0.861）。單一特徵對高血糖已足夠（0.920）。超過五個特徵後差異 ≤0.005。此支持只需量測單一核心標記兩次的低成本方案。
 
@@ -265,6 +295,12 @@ Predictive power concentrated in very few features (Table 7). The top two SHAP f
 | 5 | 0.716 | 0.935 | 0.864 |
 | 10 | 0.717 | 0.937 | 0.864 |
 | 26 (all 全部) | 0.721 | 0.938 | 0.867 |
+
+**Figure 6.** Predictive performance versus feature count (LR). AUC plateaus rapidly: two features already retain ≥99% of the full-model AUC for all three diseases, and gains beyond five features are negligible. This supports parsimonious deployment using as few as two routine biomarker measurements.
+
+> **圖 6.** AUC 隨特徵數的變化（LR）。三項疾病皆在 2 個特徵時迅速達到平台（≥99% 完整模型 AUC），超過 5 個特徵後改善幅度極小，支持以少量例行生物標記量測進行精簡部署。
+
+*[Figure file: figure6_feature_count.png — to be re-exported at journal-standard resolution from thesis Figure 6-6]*
 
 ### 3.5 Robustness: class imbalance and data filtering
 
@@ -374,9 +410,9 @@ Priorities are a temporal-split (and eventually external) validation, calibratio
 
 > ## 5. 結論
 
-Using a public longitudinal checkup cohort, we showed that simple feature engineering and a linear model predict the three highs with clinically useful, well-generalizing, and interpretable performance (LR AUC 0.721/0.938/0.867). Delta features are predictively redundant when raw time points are present but interpretively valuable; two features—or, for hyperglycemia, a single-variable formula (AUC 0.943)—suffice for near-complete accuracy; and the results are robust to imbalance handling, data filtering, and multi-task versus single-task design. These findings support deploying low-cost, interpretable early-warning screening in primary care, and provide comprehensive model-selection evidence for longitudinal three-highs prediction.
+Using a public longitudinal checkup cohort, we showed that simple feature engineering and a linear model predict cardiometabolic risk with clinically useful, well-generalizing, and interpretable performance (LR AUC 0.721/0.938/0.867). Delta features are predictively redundant when raw time points are present but interpretively valuable; two features—or, for hyperglycemia, a single-variable formula (AUC 0.943)—suffice for near-complete accuracy; and the results are robust to imbalance handling, data filtering, and multi-task versus single-task design. These findings support deploying low-cost, interpretable early-warning screening in primary care, and provide comprehensive model-selection evidence for longitudinal cardiometabolic risk prediction.
 
-> 以公開縱向健檢世代，我們證明簡單特徵工程與線性模型即可對三高達到臨床可用、泛化良好且可解釋的預測（LR AUC 0.721/0.938/0.867）。Δ 特徵在原始時間點存在時於預測上冗餘，但具解釋價值；雙特徵——或對高血糖而言，單變數公式（AUC 0.943）——即足以達到近乎完整的準確度；且結果對不平衡處理、資料篩選、多任務 vs 單任務設計皆穩健。這些發現支持在基層醫療部署低成本、可解釋的早期預警篩檢，並為縱向三高預測提供完整的模型選擇依據。
+> 以公開縱向健檢世代，我們證明簡單特徵工程與線性模型即可對心血管代謝風險達到臨床可用、泛化良好且可解釋的預測（LR AUC 0.721/0.938/0.867）。Δ 特徵在原始時間點存在時於預測上冗餘，但具解釋價值；雙特徵——或對高血糖而言，單變數公式（AUC 0.943）——即足以達到近乎完整的準確度；且結果對不平衡處理、資料篩選、多任務 vs 單任務設計皆穩健。這些發現支持在基層醫療部署低成本、可解釋的早期預警篩檢，並為縱向心血管代謝風險預測提供完整的模型選擇依據。
 
 ---
 
